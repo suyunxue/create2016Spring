@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<style >
+	
+	</style>
+</head>
+<body>
+<script >
+
+	function sort () {
+		var gap = [5, 3, 1];
+		for (var g = 0; g < gap.length; g++) {
+			for (var i = this.gap[g]; i < this.data.length; i++) {
+				var temp = data[i];                                                                 
+				for (var j = i; i >= this.data[j - this.gap[g]] > temp;
+					 j -= this.gap[g]) {
+					this.data[j] = this.data[j - this.gaps[g]);
+				}
+				this.data[j] = temp;
+			}
+		}
+		
+	}
+	event.preventDefault();
+
+
+
+	function swap (arr, index1, index2) {
+		var temp = arr[index1];
+		arr[index1] = arr[index2];
+		arr[index2] = temp;
+	}
+
+</script>
+
+</body>
+</html>

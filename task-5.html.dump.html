@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>零基础任务及其编码</title>
+	<style >
+		body {
+			margin:0;
+			padding: 0;
+			background: #aaa;
+		}
+		header {
+			padding: 10px 20px 10px 35px;
+			background: #333;
+			overflow: hidden;
+		}
+		header img {
+			float: left;
+			width: 130px;
+			height: 45px;
+		}
+		header ul {
+			position: absolute;
+			top: 8px;
+			right: 20px;
+			list-style-position: inside;
+		}
+		.nav {
+			float: left;
+			margin-left: 20px;
+
+		}
+		.nav a {
+			color: #fff;
+			font-family: "Microsoft YaHei";
+			text-decoration: none;
+		}	
+		a:hover {
+			color: #999 !important; 
+		}
+		.body {
+			position: relative;
+		}
+		article img {
+			width: 300px;
+			height: 250px;
+		}
+		.box img {
+			width: 300px;
+			height: 250px;
+		}
+		article,
+		.picture {
+			width: 830px;
+			margin: 20px;
+			padding: 30px;
+			box-shadow: 2px 2px 12px #333;
+			background: #fff;
+		}
+		article h1 {
+			font-size: 18px;
+			font-family: "Microsoft YaHei";
+		}
+		article h2 {
+			font-size: 16px;
+			font-family: "Microsoft YaHei";
+			color: #646464;
+		}
+		article h4 {
+			font-size: 14px;
+			font-family: "Microsoft YaHei";
+			color: #999;
+		}
+		article p {
+			font-family: "Microsoft YaHei";
+			font-size: 14px;
+			text-shadow: 0 0 1px #ccc;
+			text-indent: 2em;
+		}
+		article li {
+			margin-left: -15px;
+			margin-bottom: 5px;
+			list-style-type: none;
+			font-family: "Microsoft YaHei";
+			font-size: 14px;
+			text-shadow: 0 0 1px #ccc;
+		}
+		.box {
+			display: inline-block;
+			width: 140px;
+			height: 140px;
+			margin-bottom: 20px;
+			padding-bottom: 10px;
+			font-family: "Microsoft YaHei";
+			font-size: 8px;
+			text-align: center;
+			border: 1px solid #ccc;
+
+		}
+		.box img {
+			width: 70%;
+			height: 70%;
+		}
+		.table h1{
+			font-family: "Microsoft YaHei";
+			font-size: 16px;
+		}
+		.table table {
+			width: 100%;
+			text-align: left;
+			font-family: "Microsoft YaHei";
+			font-size: 14px;
+			background: #ccc;
+		}	
+		.table th {
+			padding: 2px;
+			color: #fff;
+			text-shadow: 0 0 1px #ccc;
+			background: #000;
+		}
+	    td {
+			color: #000;
+			background: #fff;
+		}
+		.last-td {
+			font-weight: 700;
+			background: #ccc;
+		}
+		aside {
+			position: absolute;
+			top: 0;
+			right: 30px;
+			padding: 30px;
+			background: #fff;
+		}
+		aside h1 {
+			height: 40px;
+			padding-left: 20px;
+			line-height: 40px;
+			font-family: "Microsoft YaHei";
+			font-size: 18px;
+			border-left: 3px solid #ccc;
+		}
+		form {
+			padding-left: 20px;
+			font-family: "Microsoft YaHei";
+			font-size: 14px;
+		}
+	/*	.input {
+			width: 100%;
+			border: 1px solid red;
+		}*/
+		.input {
+			margin-bottom: 10px;
+		}
+		.input label{
+			display: inline-block;
+			width: 35%;
+			margin-right: 1%;	
+			text-align: right;
+			vertical-align: top;
+		}
+		.require {
+			margin-top: 10px;
+			margin-left: 36%;
+			margin-bottom: 10px;
+		}
+		textarea {
+			height: 100px;
+		}
+		.submit {
+			width: 100%;
+			height: 50px;
+			margin-top: 20px;
+			font-family: "Microsoft YaHei";
+			font-size: 18px;
+			color: #fff;
+			background: #0000FF;
+			border-radius: 10px;
+			box-shadow: 0 0 5px #ccc;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<img  src="img/baiduLogo.jpg" alt="logo">
+		<ul>
+			<li class="nav"><a href="#">导航链接1</a></li>
+			<li class="nav"><a href="#">导航链接2</a></li>
+			<li class="nav"><a href="#">导航链接3</a></li>
+			<li class="nav"><a href="#">导航链接4</a></li>
+		</ul>
+	</header>
+	<div class="body">
+			<article>
+				<h1>文章的一级标题</h1>
+				<h2>文章的二级标题</h2>
+				<h4>文章作者 文章发表时间</h4>
+				<p>月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭愣愣如鬼一般；变变的杨柳的稀疏的倩影，<br/>却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲上奏着的名曲。</p>
+				<p>月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭愣愣如鬼一般；变变的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲上奏着的名曲。</p>
+				<p>月光如流水一般，静静地泻在这一片叶子和花上。<a href="http://ife.baidu.com/task/">这是一个链接</a>薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭愣愣如鬼一般；变变的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲上奏着的名曲。</p>
+				<img src="img/picture1.jpg" alt="可爱狗">
+				<p>月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭愣愣如鬼一般；变变的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲上奏着的名曲。</p>
+				<p>月光如流水一般，静静地泻在这一片叶子和花上。<a href="http://ife.baidu.com/task/">这是一个链接</a>薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭愣愣如鬼一般；变变的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲上奏着的名曲。</p>
+			</article>
+			<article>
+				<h1>文章的一级标题</h1>
+				<h2>文章的二级标题</h2>
+				<h4>文章作者 文章发表时间</h4>
+				<p>月光如流水一般，静静地泻在这一片叶子和花上。薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭愣愣如鬼一般；变变的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲上奏着的名曲。</p>
+				<p>月光如流水一般，静静地泻在这一片叶子和花上。<a href="http://ife.baidu.com/task/">这是一个链接</a>薄薄的青雾浮起在荷塘里。叶子和花仿佛在牛乳中洗过一样；又像笼着轻纱的梦。虽然是满月，天上却有一层淡淡的云，所以不能朗照；但我以为这恰是到了好处——酣眠固不可少，小睡也别有风味的。月光是隔了树照过来的，高处丛生的灌木，落下参差的斑驳的黑影，峭愣愣如鬼一般；变变的杨柳的稀疏的倩影，却又像是画在荷叶上。塘中的月色并不均匀；但光与影有着和谐的旋律，如梵婀玲上奏着的名曲。</p>
+				<img src="img/picture1.jpg" alt="可爱狗">
+				<ul>
+					<li>列表项目一</li>
+					<li>列表项目二</li>
+					<li>列表项目三</li>
+				</ul>
+			</article>
+			<div class="picture">
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+				<div class="box">
+					<h1>好看的图片</h1>
+					<img src="img/picture1.jpg" alt="可爱狗">
+				</div>
+			</div>
+			<article class="table">
+				<h1>最后一篇文章一级标题</h1>
+				<h2>文章二级标题</h2>
+				<h4>文章作者 文章发表时间</h4>
+				<ol>
+					<li>1.排名一</li>
+					<li>2.排名二</li>
+					<li>3.排名三</li>
+				</ol>
+				<h1>下面是一个表格，给表格加了一个border="1"，好让你看出这是一个表格。你们写html的时候可以不用加</h1>
+				<table>
+					<tr>
+						<th>表头</th>
+						<th>表头</th>
+						<th>表头</th>
+					</tr>
+					<tr>
+						<td>表内容单元格</td>
+						<td>表内容单元格</td>
+						<td><a href="#">操作</a></td>
+					</tr>
+					<tr>
+						<td>表内容单元格</td>
+						<td>表内容单元格</td>
+						<td><a href="#">操作</a></td>
+					</tr>
+					<tr>
+						<td>表内容单元格</td>
+						<td>表内容单元格</td>
+						<td><a href="#">操作</a></td>
+					</tr>
+					<tr >
+						<td class="last-td">总计</td>
+						<td class="last-td">1000</td>
+					</tr>
+				</table>
+			</article>
+		<aside>
+			<h1>这里以后是一个侧栏，这是侧栏的标题</h1>
+			<form>
+				<div class="input">
+					<label>请输入邮箱地址</label><input placeholder="这是一个文本输入框">
+					<div class="require">邮箱地址请按要求格式输入</div>
+				</div>
+				<div class="input">
+					<label>请输入密码</label><input type="password">
+				</div>
+				<div class="input">
+					<label>请重复输入密码</label><input type="password">
+					<div class="require">密码为6-16为英文数字</div>
+				</div>
+				<div class="input">
+					<label>性别</label>
+					<input type="radio" name="sex" checked>男
+					<input type="radio" name="sex">女
+				</div>	
+				<div class="input">
+					<label>城市</label>
+					<select>
+						<option>北京</option>
+						<option>西安</option>
+						<option>西安</option>
+						<option>西安</option>
+					</select>
+				</div>
+				<div class="input">
+					<label>爱好</label>
+					<input type="checkbox">运动
+					<input type="checkbox">艺术
+					<input type="checkbox">科学
+				</div>
+				<div class="input">
+					<label>个人描述</label>
+					<textarea>这是一个输入框，输入您的个人描述</textarea>
+					<input type="submit" value="确认提交" class="submit">
+				</div>
+			</form>
+		</aside>
+	</div>
+	<footer>版权所有@</footer>
+</body>
+</html>
