@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task-10flex-box布局</title>
+	<style >
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		.container {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
+			align-items: center;
+			padding: 20px;
+		}
+		.item1,
+		.item2,
+		.item3,
+		.item4 {
+			width: 150px;
+			
+		}
+		.item1,
+		.item2,
+		.item3 {
+			border: 2px solid #f00;
+		}
+		.item1 {
+			height: 120px;
+		}
+		.item2 {
+			height: 100px;
+		}
+		.item3 {
+			height: 40px;
+		}
+		.item4 {
+			height: 200px;
+			border: 2px solid #383;
+		}
+		@media (max-width: 640px) {
+			.item4 {
+				order: -1;
+				margin-bottom: 20px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="item1"></div>
+		<div class="item2"></div>
+		<div class="item3"></div>
+		<div class="item4"></div>
+	</div>
+</body>
+</html>

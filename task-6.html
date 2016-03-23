@@ -3,42 +3,119 @@
 <head>
 	<meta charset="UTF-8">
 	<title>通过HTML及CSS模拟报纸排版</title>
-	<style >
-		body {
-			margin: 0;
-		}
-		.wrap {
-			width: 892px;
-			padding: 0 44px;
-			margin: 0 auto;
-		}
-		header {
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" href="css/task-6.css">
+	<style>
+		.tech {
 			position: relative;
+			width: 459px;
+			height: 318px;
+			margin-top: 30px;
+			background: #eeeed6;
 			overflow: hidden;
-			border-bottom: 2px solid #938e8c;
 		}
-		.link {
-			float: left;
-			width: 110px;
-			height: 61px;	
+		.tech ul {
+			margin-top: 30px;
+			list-style-image: url(img/ul.png); 
+			font-size: 16px;
+			font-family: "SimSun";
+			color: #5a5b5b;
+			line-height: 20px;
+		}
+		.ul li {
+			margin-left: 20px;
+			margin-top: 16px;
+		}
+		.ul span {
+			font-size: 12px;
+			color: #5a5b5b;
+			font-family: "宋体";
+			font-style: italic;
+		}
+		.red {
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 260px;
+			height: 160px;
 			background: #d55d5c;
 		}
-		.link a {
-			position: absolute;
-			bottom: 5px;	
-			margin-left: 5px;
-			font: 12px "黑体";
-			text-decoration: none;
+		.zero {
+			float: left;
+			margin-top: 10px;
+			font-size: 110px;
+			font-family: "Microsoft Yahei";
 			color: #fff;
 		}
-		.time {
-			position: absolute;
-			bottom: 5px;
-			right: 5px;
-			font: 12px "黑体";
-			color: #d45d5c;
+		.one {
+			float: left;
+			width: 160px;
+			height: 88px;
+			margin-top: 40px;
+			margin-left: 10px;
+			padding-left: 10px;
+			border-left: 2px solid #fff;
 		}
-
+		.two,
+		.three {
+			font-size: 21px;
+			font-family: 'SimHei';
+			font-style: oblique;
+			color: #fff;
+			line-height: 24px;
+			text-transform: uppercase;
+		}
+		.hello {
+			width: 100%;
+			font-size: 12px;
+			font-family: 'SimHei';
+			color: #fff;
+		}
+		.word {
+			position: relative;
+			float: right;
+			margin-top: 76px;
+			width: 185px;
+			height: 160px;
+			font-size: 14px;
+			color: #5a5a5b;
+			font-family: "SimHei";
+			font-style: oblique;
+		}
+		.sign-left {
+			float: left;
+			margin-top: -10px;
+			margin-left: -45px;
+			margin-right: 20px;
+			height: 30px;
+			font-size: 72px;
+			color: #d45d5c;
+			font-family: "SimHei";
+		}
+		.sign-right {
+			float: right;
+			height: 30px;
+			margin-bottom: -30px;	
+			font-size: 72px;
+			color: #d45d5c;
+			font-family: "SimHei";
+		}
+		footer {
+			position: relative;
+			width: 100%;
+			height: 57px;
+			margin-top: 50px;	
+			border-top: 1px solid #938e8c;
+		}
+		.ife {
+			position: absolute;
+			right: 0;
+			top: 0;
+			margin-top: 6px;
+			font-size: 12px;
+			font-family: "SimHei";
+			color: #d55d5c;
+		}
 	</style>
 </head>
 <body>
@@ -49,70 +126,79 @@
 		</div>
 		<div class="time">2016.03</div>
 	</header>
-	<section>
+	<section >
 		<div class="img">
-			<img src="img/computer.jpg">
+			<img src="img/girl.jpg">
 			<div class="left-cover"></div>
 			<div class="right-cover"></div>
-			<div class="what">
-				<h1>what</h1>
-				<p>前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端</p>
-			</div>
-			<div class="when">
-				<h1>what</h1>
-				<p>前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端</p>
-			</div>
-			<div class="how">
-				<h1>what</h1>
-				<p>前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端</p>
-				<ul>
-					<li>what------40%</li>
-					<li>what------30%</li>
-					<li>what------30%</li>
-				</ul>
-			</div>
 		</div>
-		<div class="introuce">
-			<div class="about"></div>
-			<div class="tech"></div>
-			<div class="detail"></div>
-			<p>700</p>
-			<h1>3.2</h1>
-			<span>css</span>
-			<span>csssssscsssssscssssscccs</span>
+		<div class="introduce">
+			<h2>about</h2>
+			<h2>technologe</h2>
+			<h3 class="detail">About technologe  about technologe about technologe</h3>
+			<h1>700</h1>
+			<h4>3.2</h4>
+			<div class="css">css</div>
+			<span >csssssscsssss</span>
 		</div>
 	</section>
-	<section>
-		<div class="front">
-			<h1><span>THE</span> technologe of front</h1>
-			<p>
-				<h1>前</h1>
-				<p>前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前<img src="img/computer.jpg"></p>
-			</p>
-			<p>前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前</p>
-			<p>前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前</p>
+	<div class="list">
+		<div class="what">
+			<h1>what</h1>
+			<p>前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端</p>
 		</div>
-		<div class="technology">
+		<div class="when">
+			<h1>what</h1>
+			<p>前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端</p>
+		</div>
+		<div class="how">
+			<h1>what</h1>
+			<span>前端前端前端前</span>
+			<span>端前端前端前端前端前端</span>
+			<span>前端前端前端前端前</span>
+			<p>What--------<em>40%</em></p>
+			<p>What--------<em>30%</em></p>
+			<p>What--------<em>30%</em></p>
+		</div>
+	</div>
+	<section >
+		<div class="front">
+			<h1><span class="the">the</span> technologe of front</h1>
+			<h2>前端技术领域</h2>
+			    <span class="top">前</span>
+				<p class="first">前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端<img src="img/girl.jpg">前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前</p>
+				<p>前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端前端前端前端前端前端前端前端前前端前端前端</p>		
+		</div>
+		<div class="technologe">
 			<div class="font-tech">
-				<img src="img/computer.jpg">
-				<h1>前端技术<span>前端技术前端技术</span></h1>
+				<img src="img/girl.jpg">
+				<div class="btm">
+					<p>前端技术<span>前端技术前端技术</span></p>
+				</div>
 			</div>
-			<div class="list">
-				<ul>
-					<li></li>
-					<li></li>
-					<li></li>
+			<div class="tech">
+				<ul class="ul">
+					<li>前端前端前端前...........................<span>前端</span></li>
+					<li>前端.....................................<span>前端<span></li>
+					<li>前端前端.................................<span>前端<span></li>
 				</ul>
-				<img src="img/computer.jpg">
-				<p>
-					<span>“</span>
-					hello world hello world hello world hello world hello world hello world hello world hello world 
-					<span>”</span>
+				<div class="red">
+					<div class="zero">0</div>
+					<div class="one">
+						<div class="two">one two </div>
+						<div class="three">three four five</div>
+						<p class="hello">hello hello hello hello hello hello</p>
+					</div>	
+				</div>
+				<p class="word">
+					<span class="sign-left">“</span>hello world hello world hello world hello world hello world hello world hello world hello world<span  class="sign-right">”</span>
 				</p>
 			</div>
 		</div>
 	</section>
-	<footer></footer>
+	<footer>
+		<div class="ife">ife.baidu.com</div>
+	</footer>
 </div>
 </body>
 </html>
