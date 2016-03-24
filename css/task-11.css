@@ -33,6 +33,23 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+a, img {
+	/*禁止长按链接与图片弹出菜单*/
+	-webkit-touch-callout: none;
+}
+html, 
+body {
+	font-family: "SimSun";
+	font-size: 20px;
+	background: #dedede;
+	/*禁止选中文本，如无文本选中需求，此为必选项*/
+	/*-webkit-user-select: none; 
+	user-select: none;*/
+}
+.container {
+	max-width: 26rem; 
+	margin: 0 auto;	
+}
 .title {
 	position: relative;
 	height: 3.1rem;
@@ -146,5 +163,42 @@ section {
 	line-height: 3.3rem;	
 	margin-bottom: .5rem;
 	background: #f8f8f8;
+}
+
+.item1-img  img {
+	width: 6.7rem;
+	height: 4.7rem;
+}
+.essay-item1,
+.essay-item2 {
+	display: flex;
+	padding: .5rem 1.2rem;  
+	border-bottom: .1rem solid #ecedef;
+}
+.item1-art {
+	margin-left: 1rem;
+}
+.item1-art h3,
+.essay-item3 h3 {
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+.item1-art p {
+	margin-top: 1.5rem;
+}
+.essay-item3 {
+	padding: 1rem;
+}
+.item3-img {
+	display: flex;
+	justify-content: space-around;
+}
+.item3-img img {
+	width: 7rem;
+	height: 4rem;
+	margin-top: 1rem;
+}
+.essay-item3 p {
+	line-height: 2rem;
 }
 
