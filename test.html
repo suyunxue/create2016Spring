@@ -19,16 +19,10 @@
 <body>
 	<div class="box" draggable="true"></div>
 	<script type="text/javascript">
-		window.onload = function  () {
-			var box = document.querySelector('.box');
-			box.ondragover = function  () {
-				console.log(1)
-				this.className = 'hover';
-			}
-			box.ondragleave = function  () {
-				console.log(2);
-				this.className = 'box';
-			}
+		var foo = [];
+		foo[100] = 100;
+		for (var i in foo) {
+			console.log(i)
 		}
 	</script>
 </body>

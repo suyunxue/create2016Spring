@@ -8,7 +8,27 @@
 	</style>
 </head>
 <body>
+	<select>
+		<option></option>
+		<option>squfubo</option>
+		<option value="sdafa"></option>
+		<option></option>
+	</select>
 <script >
+	/**
+	 * 随机生成6个字符拼接到一起
+	 *
+	 * @method     getRandomColor
+	 * @return     {string}  { description_of_the_return_value }
+	 */
+	var getRandomColor = function(){
+	  return  '#' +
+	    (function(color){
+	    return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])
+	      && (color.length == 6) ?  color : arguments.callee(color);
+	  })('');
+	}
+	console.log(getRandomColor())
 
 	function sort () {
 		var gap = [5, 3, 1];
@@ -17,14 +37,14 @@
 				var temp = data[i];                                                                 
 				for (var j = i; i >= this.data[j - this.gap[g]] > temp;
 					 j -= this.gap[g]) {
-					this.data[j] = this.data[j - this.gaps[g]);
+					this.data[j] = this.data[j - this.gaps[g]];
 				}
 				this.data[j] = temp;
 			}
 		}
 		
 	}
-	event.preventDefault();
+	
 
 
 

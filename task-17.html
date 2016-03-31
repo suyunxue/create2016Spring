@@ -1,24 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>task-17</title>
+	<style >
+	   .aqi-chart-wrap{
+	        height: 600px;
+	        width: 100%;
+        }
+        .box{
+            float: left;
+            height: 100%;
+            position: relative;
+        }
+        .day{
+            width: 10px;
+        }
+        .week{
+            width: 40px;
+        }
+        .month{
+            width: 80px;
+        }
+        .aqi-chart-wrap .histogram{
+            position:absolute;
+            bottom: 0;
+            width: 100%;
+        }
+          
+	</style>
 </head>
 <body>
 	<fieldset id="form-gra-time">
-		<legend>ÇëÑ¡ÔñÊ±¼äÁ£¶È</legend>
-		<label>ÈÕ<input name="gra-time" value="day" type="radio" checked="checked"></label>
-		<label>ÔÂ<input name="gra-time" value="week" type="radio"></label>
-		<label>Äê<input name="gra-time" value="year" type="radio"></label>
-	</fieldset>
-	<fieldset>
-		<legend>ÇëÑ¡ÔñÒª²é¿´µÄ³ÇÊÐ</legend>
-		<select id="city-select">
-			<option>±±¾©</option>
-			<option>ÉÏº£</option>
-		</select>
-	</fieldset>
-	<div class="aqi-chart-wrap"></div>
-	<script src="js/task-17.js"></script>
+    <legend>è¯·é€‰æ‹©æ—¥æœŸç²’åº¦ï¼š</legend>
+    <label>æ—¥<input name="gra-time" value="day" type="radio" checked="checked"></label>
+    <label>å‘¨<input name="gra-time" value="week" type="radio"></label>
+    <label>æœˆ<input name="gra-time" value="month" type="radio"></label>
+</fieldset>
+
+<fieldset>
+    <legend>è¯·é€‰æ‹©æŸ¥çœ‹çš„åŸŽå¸‚ï¼š</legend>
+    <select id="city-select">
+    </select>
+</fieldset>
+
+<div class="aqi-chart-wrap">
+</div>
+
+<script src="js/task-17.js"></script>
 </body>
 </html>

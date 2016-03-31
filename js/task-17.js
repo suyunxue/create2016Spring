@@ -1,24 +1,24 @@
 (function  (window, undefined) {
-	"use strict"
+	// "use strict"
 	/**
-	 * Êı¾İÊÇÌáÇ°¸øºÃµÄ
-	 * ²é¿´³ÇÊĞ
-	 * ·ÖÎªÔÂÖÜÈÕ
-	 * ÔÂÍ³¼ÆÖÜÍ³¼ÆÈÕÍ³¼Æ
-	 * »æÖÆdomÖùĞÎÍ¼,ÔÂ×î´Ö£¬ÏÂÀ´ÖÜ£¬ÏÂÀ´ÔÂ	²»Í¬ÑÕÉ«Ê¹ÓÃËæ»úÊı
-	 * Êó±êÒÆ¶¯ÒªÖù×ÓÊ±£¬ÓÃtitleÊôĞÔÌáÊ¾Õâ¸öÖù×ÓµÄ¾ßÌåÈÕÆÚºÍÊı¾İ
+	 * æ•°æ®æ˜¯æå‰ç»™å¥½çš„
+	 * æŸ¥çœ‹åŸå¸‚
+	 * åˆ†ä¸ºæœˆå‘¨æ—¥
+	 * æœˆç»Ÿè®¡å‘¨ç»Ÿè®¡æ—¥ç»Ÿè®¡
+	 * ç»˜åˆ¶domæŸ±å½¢å›¾,æœˆæœ€ç²—ï¼Œä¸‹æ¥å‘¨ï¼Œä¸‹æ¥æœˆ	ä¸åŒé¢œè‰²ä½¿ç”¨éšæœºæ•°
+	 * é¼ æ ‡ç§»åŠ¨è¦æŸ±å­æ—¶ï¼Œç”¨titleå±æ€§æç¤ºè¿™ä¸ªæŸ±å­çš„å…·ä½“æ—¥æœŸå’Œæ•°æ®
 	 */
 	/**
-	 * Êı¾İ¸ñÊ½
+	 * æ•°æ®æ ¼å¼
 	 * var aqiSourceData = {
-	 * 	"±±¾©": {
+	 * 	"åŒ—äº¬": {
 	 * 	 "2016-01-01":10,
 	 * 	 "2016-01-02":10,
 	 * 	 "2016-01-03":10
 	 * 	}
 	 * }
 	 */
-	//ÒÔÏÂÁ½¸öº¯ÊıÓÃÓÚËæ»úÄ£ÄâÉú³ÉËæ»úÊı¾İ
+	//ä»¥ä¸‹ä¸¤ä¸ªå‡½æ•°ç”¨äºéšæœºæ¨¡æ‹Ÿç”Ÿæˆéšæœºæ•°æ®
 	function getDateStr (dat) {
 		var y = dat.getFullYear();
 		var m = dat.getMonth() + 1;
@@ -40,88 +40,133 @@
 		return returnData;
 	}
 	var aqiSourceData = {
-		'±±¾©':randomBuildData(500),
-		'ÉÏº£':randomBuildData(300)
+		'åŒ—äº¬':randomBuildData(500),
+		'ä¸Šæµ·':randomBuildData(300)
 	};
 
-	//ÓÃÓÚäÖÈ¾Í¼±íµÄÊı¾İ
+	//ç”¨äºæ¸²æŸ“å›¾è¡¨çš„æ•°æ®
 	var chartData = {};
 
-	//¼ÇÂ¼µ±Ç°Ò³ÃæµÄ±íµ¥Ñ¡Ïî
+	//è®°å½•å½“å‰é¡µé¢çš„è¡¨å•é€‰é¡¹
 	var pageState = {
 		nowSelectCity: -1,
 		nowGraTime: 'day'
-	}
+	};
 	/**
-	 * äÖÈ¾Í¼±í
+	 * æ¸²æŸ“å›¾è¡¨
 	 */
 	function renderChart () {
-		//Ê¹ÓÃäÖÈ¾Í¼±íµÄÊı¾İ£¬»­Öù×´Í¼
-		//¼ÙÉèchartdata = {12,23,32,431,21};
-		
-		
+		//ä½¿ç”¨æ¸²æŸ“å›¾è¡¨çš„æ•°æ®ï¼Œç”»æŸ±çŠ¶å›¾
+		var str = '';
+		for (var v in chartData) {
+			str += "<div class='box "+pageState['nowGraTime']+"'>";
+			str += "<div class='histogram' style='height:"+chartData[v]+"px;background:"+getRandomColor()+"'title='"+v+":"+chartData[v]+"'></div>";
+			str += '</div>';
+		}
+		var warp = document.querySelector('.aqi-chart-wrap');
+		warp.innerHTML = str;
+		console.log('æˆ‘è´Ÿè´£æ¸²æŸ“æ•°æ®');
 	}
 	/**
-	 * »ñÈ¡µ±Ç°Ñ¡ÖĞµÄÊ±¼ä
+	 * è·å–éšæœºé¢œè‰²å€¼
+	 */
+	/**
+	 * éšæœºç”Ÿæˆ6ä¸ªå­—ç¬¦æ‹¼æ¥åˆ°ä¸€èµ·
+	 *
+	 * @method     getRandomColor
+	 * @return     {string}  { description_of_the_return_value }
+	 */
+	var getRandomColor = function(){
+	  return  '#' +
+	    (function(color){
+	    return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])
+	      && (color.length == 6) ?  color : arguments.callee(color);
+	  })('');
+	}
+	/**
+	 * è·å–å½“å‰é€‰ä¸­çš„æ—¶é—´
 	 */
 	function getTimeNow () {
 		var typeNow = '';
-		var types = document.getElementsByTagName('gra-time');
-		[].foreach.call(types, function  (v) {
+		var types = document.getElementsByName('gra-time');
+		[].forEach.call(types, function  (v) {
 			if (v.checked) {
 				typeNow = v.value;
 			}
-		})
+		});
 		return typeNow;
 	}
 	/**
-	 * ÈÕ£¬ÖÜ£¬ÔÂµÄradioÊÂ¼şµã»÷Ê±µÄ´¦Àíº¯Êı
+	 * æ—¥ï¼Œå‘¨ï¼Œæœˆçš„radioäº‹ä»¶ç‚¹å‡»æ—¶çš„å¤„ç†å‡½æ•°
 	 */
 	function gramTimeChange () {
-		// È·¶¨ÊÇ·ñÑ¡Ïî·¢ÉúÁË±ä»¯
+		// ç¡®å®šæ˜¯å¦é€‰é¡¹å‘ç”Ÿäº†å˜åŒ–
 		var typeNow = getTimeNow();
 		if (typeNow == pageState['nowGraTime']) {
 			return ;
 		} else {
-            //ÉèÖÃ¶ÔÓ¦Êı¾İ
+            //è®¾ç½®å¯¹åº”æ•°æ®
             initAqiChartData();
-            //µ÷ÓÃÍ¼±íäÖÈ¾Êı¾İ
+            //è°ƒç”¨å›¾è¡¨æ¸²æŸ“æ•°æ®
             renderChart();
-		} 
+		} ;
 	}
-
 	/**
-	 * ³õÊ¼»¯ÈÕ¡¢ÖÜ¡¢ÔÂµÄradioÊÂ¼ş£¬µ±µã»÷Ê±£¬µ÷ÓÃº¯ÊıgetTimechange
+	 * selectå‘ç”Ÿæ”¹å˜æ—¶çš„å¤„ç†å‡½æ•°
+	 */
+	function citySelectChange () {
+		//ç¡®å®šé€‰é¡¹æ˜¯å¦å‘ç”Ÿäº†å˜åŒ–
+		var cityNow = document.querySelector('#city-select').value;
+		if (cityNow === pageState["nowSelectCity"]) {
+			return ;
+		} else {
+			//è®¾ç½®å¯¹åº”æ•°æ®
+			initAqiChartData();
+		    //è°ƒç”¨å›¾æ ‡æ¸²æŸ“å‡½æ•°
+		    renderChart();
+		}
+		
+	}
+	/**
+	 * åˆå§‹åŒ–æ—¥ã€å‘¨ã€æœˆçš„radioäº‹ä»¶ï¼Œå½“ç‚¹å‡»æ—¶ï¼Œè°ƒç”¨å‡½æ•°gramTimeChange
 	 */
 	function initGraTimeForm () {
-		//¸øoptionÌí¼ÓÊÂ¼ş£¬Èç¹û±»µã»÷»ñÈ¡Ñ¡ÏîµÄÖµ
-		var types = document.getElementsByTagName('gra-time');
-		Array.foreach.call(types, function  (value) {
-			value.addEventListener('click', getTimechange);
+		//ç»™optionæ·»åŠ äº‹ä»¶ï¼Œå¦‚æœè¢«ç‚¹å‡»è·å–é€‰é¡¹çš„å€¼
+		var types = document.getElementsByName('gra-time');
+		console.log('types:'+types);
+		[].forEach.call(types, function  (value) {
+			value.addEventListener('click', gramTimeChange);
 		})
 	}
 	/**
-	 * ³õÊ¼»¯³ÇÊĞselectÏÂÀ­¿òÖĞµÄÑ¡Ïî
+	 * åˆå§‹åŒ–åŸå¸‚selectä¸‹æ‹‰æ¡†ä¸­çš„é€‰é¡¹
 	 */
 	function initCitySelector () {
-		//¶ÁÈ¡aqiSourceDataÖĞµÄ³ÇÊĞ£¬È»ºóÉèÖÃidÎªcity-selectµÄÏÂÀ­ÁĞ±íÖĞµÄÑ¡Ïî
-		
-		//¸øselectÉèÖÃÊÂ¼ş£¬µ±Ñ¡Ïî·¢Éú±ä»¯Ê±µ÷ÓÃº¯ÊıcitySelectChange
-	
+		//è¯»å–aqiSourceDataä¸­çš„åŸå¸‚ï¼Œç„¶åè®¾ç½®idä¸ºcity-selectçš„ä¸‹æ‹‰åˆ—è¡¨ä¸­çš„é€‰é¡¹
+		var select = document.getElementById('city-select');
+		//ç»™selectè®¾ç½®äº‹ä»¶ï¼Œå½“é€‰é¡¹å‘ç”Ÿå˜åŒ–æ—¶è°ƒç”¨å‡½æ•°citySelectChange
+		var str = '';
+		for (var city in aqiSourceData) {
+			str += '<option value = '+city+'>'+city+'</option>';
+		}
+		console.log(select)
+		select.innerHTML = str;
+		select.addEventListener('change',citySelectChange);
 	}
 	/**
-	 * ³õÊ¼»¯Í¼±íËùĞèÒªµÄÊı¾İ¸ñÊ½
+	 * åˆå§‹åŒ–å›¾è¡¨æ‰€éœ€è¦çš„æ•°æ®æ ¼å¼
 	 */
 	function initAqiChartData () {
-		//½«Ô­Ê¼µÄÔ´Êı¾İ´¦Àí³ÉÍ¼±íËùĞèÒªµÄÔ­Ê¼Êı¾İ¸ñÊ½
-		//´¦ÀíºÃµÄÊı¾İ´æµ½chartDataÖĞ
+		//å°†åŸå§‹çš„æºæ•°æ®å¤„ç†æˆå›¾è¡¨æ‰€éœ€è¦çš„åŸå§‹æ•°æ®æ ¼å¼
+		//å¤„ç†å¥½çš„æ•°æ®å­˜åˆ°chartDataä¸­
 		var type = getTimeNow();
 		var city = document.getElementById('city-select').value;
 		pageState['nowGraTime'] = type;
-		pageStatep['nowSelectCity'] = city;
+		console.log(type)
+		pageState['nowSelectCity'] = city;
 		switch(type) {
 			case 'day':
-				charData = aqiSourceData[city];
+				chartData = aqiSourceData[city];
 				break;
 			case 'week':
 				chartData = {};
@@ -132,43 +177,61 @@
 					if (weekDay == 6) {
 						count++;
 						total += aqiSourceData[city][v];
-						charData['week'+week] = Math.round(total/count);
+						chartData['week'+week] = Math.round(total/count);
 						count = 0;
 						total = 0;
 						week++;
 					} else {
 						count++;
-						//È¡³öÃ¿Ò»¸öÈÕÆÚµÄÖµ
+						//å–å‡ºæ¯ä¸€ä¸ªæ—¥æœŸçš„å€¼
 						total += aqiSourceData[city][v];
 					}
 				}
-				//Ê£ÏÂµÄÌìÊı
+				//å‰©ä¸‹çš„å¤©æ•°
   			    chartData['week'+week] = Math.round(total/count);
   			    break;
-  			case 'mouth':
-  				charData = {};
-  				var count = 0, total = 0, mouth = -1, date;
+  			case 'month':
+  				chartData = {};
+  				var count = 0, total = 0, month = -1, date;
   				for (var v in aqiSourceData[city]) {
   					date = new Date(v);
-  					if (mouth == -1) {
-  						mouth = date.getMouth()+1;
-  					} else if (date.getMouth() + 1 != mouth) {
-  						charData[mouth+'ÔÂ'] = Math.round(total/count);
-  						mouth = data.getMouth+1;
+  					if (month == -1) {
+  						month = date.getMonth()+1;
+  					} else if (date.getMonth() + 1 != month) {
+  						chartData[month+'æœˆ'] = Math.round(total/count);
+  						month = date.getMonth()+1;
   						count=0;
   						total=0;
   					}
   					count++;
   					total += aqiSourceData[city][v];
   				}
-  				charData[mouth+'ÔÂ'] = Math.round(total/count);
+  				console.log("æœˆåˆ†çš„æ•°æ®ï¼š"+JSON.stringify(chartData));
+  				//è¿™æ˜¯åˆ«äººå†™çš„
+  				// chartData={};
+      //           var count= 0,total= 0,month=-1,date;
+      //           for(var v in aqiSourceData[city]){
+      //               date=new Date(v);
+      //               if(month==-1){
+      //                   month=date.getMonth()+1;
+      //               }else if(date.getMonth()+1!=month) {
+      //                   chartData[month+"æœˆ"]=Math.round(total/count);
+      //                   month = date.getMonth()+1;
+      //                   count=0;
+      //                   total=0;
+      //               }
+      //               count++;
+      //               total+=aqiSourceData[city][v];
+      //           }
+
+  				chartData[month+'æœˆ'] = Math.round(total/count);
   				break;
 		}
-		console.log(JSON.stringify(charData));
+		console.log(JSON.stringify(chartData));
 		renderChart();
 	}
 	/**
-	 * ³õÊ¼»¯º¯Êı
+	 * åˆå§‹åŒ–å‡½æ•°
 	 */
 	function init () {
 		initGraTimeForm();
