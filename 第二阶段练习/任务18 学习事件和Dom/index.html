@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟队列</title>
+	<style>
+ 		.divNum{
+ 			margin: 10px 5px;
+ 			padding:5px;
+ 			padding-top: 0;
+ 			background-color: #ccc;
+			float: left;
+			border-radius: 5px;
+			text-align: center;
+ 		}
+	</style>
+</head>
+<body>
+	<div>
+		<input type="text">
+		<span id="btns">
+			<button id="btn1">左侧入</button>
+			<button id="btn2">右侧入</button>
+			<button id="btn3">左侧出</button>
+			<button id="btn4">右侧出</button>
+		</span>
+		<button id="sortdata">排序</button>
+	</div>
+	<div id="container">
+		
+	</div>
+	<script>
+	/*将大的container视为一个对象，他有很多小的div*/
+		function Divbox(){
+			this.child = [];
+			this.html = '';
+		};
+		Divbox.prototype = {
+			constructor : Divbox,
+			rightIn : function(num){
+				this.child.push(num);
+				this.paint();
+			},
+			leftOut : function(){
+				this.child.shift();
+				this.paint();
+			},
+			rightOut : function(){
+				this.child.pop();
+				this.paint();
+			},
+			deleteNum : function(site){
+				this.child.splice(site,1);
+				//console.log(this.child);
+				this.paint();
+			},
+			paint : function(){
+				var _this = this;
+				_this.html='';
+				/*在数组执行forEach时，this指向的是每一个数组中的项，不是DivBox,所以需要提前保存this*/
+				this.child.forEach(function(item,index,arrar){
+					_this.html += '<div class="divNum" style="height:'+item*3+'px;"id="'+index+'">'+item+'</div>';
+				})
+			},
+			leftIn : function(num){
+				this.child.unshift(num);
+				console.log(this.child);
+				this.paint();
+			},
+		};
+		var Divbox1 = new Divbox();
+		var btn1 = document.getElementById('btn1');
+		var text = document.getElementsByTagName('input')[0];
+		var container = document.getElementById('container');
+		var btns = document.querySelector('#btns');
+		function empty(){
+			console.log(Divbox1.child);
+			container.innerHTML = '';
+			container.innerHTML += Divbox1.html;
+			text.value = '';
+		}
+		btns.onclick = function(e){
+			if(container.childNodes.length>59){
+				alert('只能输入60个数字');
+				return;
+			}else if(text.value==''||10>text.value||text.value>100){
+				alert('请输入正确的1-100的数字');
+				text.value = '';
+			}else{
+				e?event:window.event;
+				var target = e.target||event.srcElement;
+				switch(target.id){
+					case 'btn1' : Divbox1.leftIn(text.value);
+								  empty();break;
+					case 'btn2' : Divbox1.rightIn(text.value);
+								  empty();break;
+					case 'btn3' : Divbox1.leftOut();
+								  empty();break;
+					case 'btn4' : Divbox1.rightOut();
+								  empty();break;
+				}
+			}
+		}
+		container.onclick = function(e){
+			e?event:window.event;
+			var target = e.target||event.srcElement;
+			var _index = target.id;
+			Divbox1.child.splice(_index,1);
+			container.removeChild(container.childNodes[_index]);
+			for(var i=0;i<container.childNodes.length;i++){
+				container.childNodes[i].id = i;
+			}
+		}
+
+	</script>
+</body>
+</html>

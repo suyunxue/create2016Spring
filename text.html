@@ -8,53 +8,73 @@
 	</style>
 </head>
 <body>
-	<select>
-		<option></option>
-		<option>squfubo</option>
-		<option value="sdafa"></option>
-		<option></option>
-	</select>
+<div id="stage"></div>
+<input type="password" id="password">
+<button id="btn">dianji</button>
 <script >
-	/**
-	 * 随机生成6个字符拼接到一起
-	 *
-	 * @method     getRandomColor
-	 * @return     {string}  { description_of_the_return_value }
-	 */
-	var getRandomColor = function(){
-	  return  '#' +
-	    (function(color){
-	    return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])
-	      && (color.length == 6) ?  color : arguments.callee(color);
-	  })('');
-	}
-	console.log(getRandomColor())
+ //弹幕的效果其实就是一个舞台剧，先有舞台，有剧本，然后演员，导演，安排什么时候出厂
+function  $ (select) {
+	return document.querySelectorAll(select);
+}
+console.log(socket)
 
-	function sort () {
-		var gap = [5, 3, 1];
-		for (var g = 0; g < gap.length; g++) {
-			for (var i = this.gap[g]; i < this.data.length; i++) {
-				var temp = data[i];                                                                 
-				for (var j = i; i >= this.data[j - this.gap[g]] > temp;
-					 j -= this.gap[g]) {
-					this.data[j] = this.data[j - this.gaps[g]];
-				}
-				this.data[j] = temp;
-			}
-		}
-		
-	}
-	
-
-
-
-	function swap (arr, index1, index2) {
-		var temp = arr[index1];
-		arr[index1] = arr[index2];
-		arr[index2] = temp;
-	}
+//需要有个舞台
+var stage = $('#stage');
+//需要有个剧本
+var playList = [{
+	//从何时开始，
+	time:0,
+	//经过的时间
+	duration:4299,
+	//舞台偏移的高度
+	top:10,
+	//弹幕文字的大小
+	size:16,
+	//弹幕颜色
+	color:'#000',
+	//内容
+	text:'前方高能注意'
+},{
+	//从何时开始，
+	time:100,
+	//经过的时间
+	duration:4192,
+	//舞台偏移的高度
+	top:100,
+	//弹幕文字的大小
+	size:14,
+	//弹幕颜色
+	color:'#333',
+	//内容
+	text:'我就是路过看看'
+},{
+	//从何时开始，
+	time:170,
+	//经过的时间
+	duration:6192,
+	//舞台偏移的高度
+	top:130,
+	//弹幕文字的大小
+	size:16,
+	//弹幕颜色
+	color:'#00ff00',
+	//内容
+	text:'我就静静的看着你装逼'
+},{
+    //从何时开始
+    time:1000,
+    //经过的时间
+    duration:5992,
+    //舞台偏移的高度
+    top:150,
+    //弹幕文字大小
+    size:20,
+    //弹幕颜色
+    color:'#ff0000',
+    //内容
+    text:'我和我的小伙伴都惊呆了～～'
+}];
 
 </script>
-
 </body>
 </html>

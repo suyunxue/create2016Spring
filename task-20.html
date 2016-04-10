@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task-20</title>
+	<style>
+		.select {
+			color: #f00;
+			background: #0f0;
+		}
+
+	</style>
+</head>
+<body>
+	<textarea id="text"></textarea>
+	<input id="input">
+	<button id="get">查询</button>
+	<div id="result"></div>
+	<script>
+		var text = document.getElementById('text');
+		var input = document.getElementById('input');
+		var get = document.getElementById('get');
+		var result = document.getElementById('result');
+		var data = [];
+
+		/**
+		 * 存储数据该怎么分组，要把他按空格作为分隔进行存储，
+		 * 可以是空格，tab，逗号，顿号
+		 * @type       {Array}
+		 */
+		
+		/**
+		 * 从input里面的值，然后进行匹配查询
+		 * 取input的值
+		 * 取text的值
+		 * 进行匹配到的字符串变色
+		 */
+		function getInput () {
+			if (input.value != '') {
+				return input.value;
+			} else {
+				alert('请输入值');
+				return false;
+			}
+			
+		}
+		function getText () {
+			return text.value;
+		}
+		function setData () {
+			var value = getText ();
+			if (getText != '') {
+				data = value.split(/\W/g);
+			} else {
+				alert('请输入要匹配的字符');
+				return false;
+			}
+			
+		}
+		/**
+		 * 找到匹配的字符串颜色改变
+		 *
+		 * @method     render
+		 * @param      {string}  match   { description }
+		 */
+		function render (match) {
+			result.innerHTML = data.map(function(d){
+				console.log('map里面的d：'+d);
+				var r = d;
+				if (match != null && match.length > 0) {
+					r = r.replace(new RegExp(match, "g"), "<span class='select'>"+match+"</span>");
+				}
+				return "<div>"+r+"</div>";
+			}).join('');
+		}
+		function init () {
+			/**
+			 * 现在程序没有加上上一个程序的队列操作，其实都是重复
+			 *
+			 * @method     onclick
+			 */
+			get.onclick = function  () {
+				setData ();
+				render(getInput());
+			}
+		}
+		init();
+	</script>
+</body>
+</html>

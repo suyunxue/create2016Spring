@@ -67,6 +67,7 @@
 		warp.innerHTML = str;
 		console.log('我负责渲染数据');
 	}
+
 	/**
 	 * 获取随机颜色值
 	 */
@@ -77,12 +78,13 @@
 	 * @return     {string}  { description_of_the_return_value }
 	 */
 	var getRandomColor = function(){
-	  return  '#' +
-	    (function(color){
-	    return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])
-	      && (color.length == 6) ?  color : arguments.callee(color);
-	  })('');
+	    return  '#' +
+	      (function test(color){
+	      return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])
+	        && (color.length == 6) ?  color : test(color);
+	    })('');
 	}
+
 	/**
 	 * 获取当前选中的时间
 	 */

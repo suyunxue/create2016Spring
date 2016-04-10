@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task-18</title>
+	<style >
+		.result div {
+			float: left;
+			padding: 10px;
+			color: red;
+		}
+	</style> 
+</head>
+<body>
+	<input>
+	<button>左侧入</button>
+	<button>右侧入</button>
+	<button>左侧出</button>
+	<button>右侧出</button>
+	<div class="result"></div>
+	<script>
+		var input = document.querySelector('input');
+		var button = document.getElementsByTagName('button');
+		var result = document.querySelector('.result');
+		//定义一个公共数据，保存得到的数据,1,2,2121等数据
+		var data = [];
+		//获取输入的值
+		function getValue () {
+			return input.value;
+		}
+		//验证输入的值
+		function validation (str) {
+			return /^\d+$/.test(str);
+		}
+		//渲染页面
+		function render () {
+			result.innerHTML = data.map(function  (d) {
+				return "<div>"+d+"</div>";
+			}).join('');
+		}
+		//左侧入
+		button[0].onclick = function  () {
+			template();
+		}
+		//右侧入
+		button[1].onclick = function  () {
+			template('rightIn');
+		}
+		//左侧出
+		button[2].onclick = function  () {
+			template('leftOut');
+		}
+		//右侧出
+		button[3].onclick = function  () {
+			template('rightOut');
+		}
+		function template (operation) {
+			var value = getValue();
+			if (validation(value)) {
+				if (operation == 'leftIn') {
+					data.unshift(value);
+				} else if (operation == 'rightIn') {
+					data.push(value);
+				} else if (operation == 'leftOut') {
+					data.shift();
+				} else if (operation == 'rightOut') {
+					data.pop();
+				}
+			} else {
+				alert("输入的不是数字，请输入数字");
+				return false;
+			}
+			render();
+		}
+ 	</script>
+</body>
+</html>

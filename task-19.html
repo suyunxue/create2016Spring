@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task-19</title>
+	<style>
+		#chart {
+			display: flex;
+			height: 200px;
+			align-items: flex-end;
+		}
+		#chart > div {
+			width: 20px;
+			margin-left: 10px;
+		}
+	</style>
+</head>
+<body>
+	<input id="number">
+	<button>左侧入</button>
+	<button>右侧入</button>
+	<button>左侧出</button>
+	<button>右侧出</button>
+	<button id="sort">开始排序</button>
+	<div id="chart"></div>
+	<script>
+	/**
+	 * string 删除里面的空格
+	 */
+		
+		var number = document.getElementById('number');
+		var button = document.getElementsByTagName('button');
+		var sort = document.getElementById('sort');
+	    var btnClick = false;
+		var data = [3,5,2,54,23,100,23,32];
+		render();
+		/**
+		 * 这个和上一个任务一样没啥做的，就不做了
+		 */
+		button[0].onclick = function  () {
+			var value = number.value.trim();
+			if (/^[1-9][0-9]+|100$/.test(value)) {
+				list.unshift(number.value);
+			} else {
+				alert("请输入10到100之间的数");
+				return false;
+			}
+		}
+
+		
+		sort.onclick = function  () {
+			console.log('开始排序');
+			sortData ();
+		}
+		/**
+		 * 留一个接口
+		 * 操作都由这里产生
+		 */
+		var list = {
+			push: function  (num) {//左侧入
+				if (btnClick) {
+					alert("正在排序呢");
+					return false;
+				}
+				if (this.queue.length >= 60) {
+					alert("太多了，不能再加了");
+					return false;
+				}
+				data.push(num);
+				render();
+			},
+			unshift: function  (num) {//右侧入
+				if (btnClick) {
+					alert("正在排序呢");
+					return false;
+				}
+				if (data.length >= 60) {
+					alert("太多了，不能再加了");
+					return false;
+				}
+				data.unshift(num);
+				render();
+			},
+			pop: function  () {
+				if (btnClick) {
+					alert("正在排序呢");
+					return false;
+				}
+				if (data.length == 0) {
+					alert('队列里面没有数字');
+					return false;
+				}
+				data.pop();
+				render();
+			},
+			shift: function  () {
+				if (btnClick) {
+					alert("正在排序呢");
+					return false;
+				}
+				if (data.length == 0) {
+					alert('队列里面没有数字');
+					return false;
+				}
+				data.shift();
+				render();
+			}
+		}
+
+	
+
+		console.log(data);
+		console.log(data[0])
+		function sortData () {
+			/**
+			 * 先使用选择排序先实现，后面再改进,只进行一次排序，剩下的交给
+			 */
+			var i = 0;
+			var j = 1;
+			var length = data.length;
+			var time = setInterval(run, 20);
+			function  run() {
+				if (i < length) {
+					if (j < length) {
+						if (data[i] > data[j]) {
+							swap(i, j);
+							render();
+						}
+						j++;
+					} else {
+						i++;
+						j = i + 1;
+					}
+				} else {
+					clearInterval(time);
+					return ;
+				}
+			}
+		}	
+		
+		/**
+		 * 交换数组中的两个数字
+		 */
+		function swap (index1, index2) {
+			var temp = 0;
+			temp = data[index1];
+			data[index1] = data[index2];
+			data[index2] = temp;
+		}
+		/**
+		 * 先用人家原生的排序算法，看一下效果，然后在自己实现
+		 */
+		data.sort();
+		function render () {
+			var chart = document.getElementById('chart');
+			var html = '';
+			for (var i = 0; i < data.length; i++) {
+				html += '<div style="background:'+getRandomColor()+';height:'+data[i]+'px;">'+data[i]+'</div>';
+			}
+			chart.innerHTML = html;
+		}
+		/**
+		 * 可视化的数据输入过程是每次排序交换之后重新渲染
+		 */
+		
+		 /**
+		  * 产生随机颜色的函数
+		  */
+		function getRandomColor (){
+		 	return  '#' +
+		 	   (function(color){
+		 	   	 return (color +=  '0123456789abcdef'[Math.floor(Math.random()*16)])
+		 	      && (color.length == 6) ?  color : arguments.callee(color);
+		 	   })('');
+	 	}
+
+	 	console.log(getRandomColor())
+	</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>二叉树的遍历</title>
+	<style>
+		html,
+		body {
+			height: 100%;
+			width: 100%;
+			position: relative;
+			text-align: center;
+		}
+		/*就是改变一下背景颜色*/
+		div {
+			float: left;
+			width: calc(50% - 22.5px);
+			height: calc(100% - 30px);
+			max-width: 700px;
+			max-height: 300px;
+			margin: 15px 0 0 15px;
+			border: 1px solid #000;
+			background: #fff;
+		}
+		.root {
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin: 50px auto 0;
+		}
+	</style>
+</head>
+<body>
+	<h1 id="head">实现二叉树的遍历</h1>
+	<button>先序遍历</button>
+	<button>中序遍历</button>
+	<button>后序遍历</button>
+	<label>间隔时间<input id="time" value="1000">ms</label>
+	<div class="root">
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+			<div>
+				<div></div>
+				<div></div>
+			</div>
+		</div>
+	</div>
+	<script>
+		// 按照二叉树的遍历顺序进行改变颜色就可以了
+		var root = document.querySelector('.root');
+		/**
+		 * 判断按钮点击事件，执行对应处理函数
+		 */
+		var button = document.getElementsByTagName('button');
+		//存储要变颜色的div
+		var arr = [];
+		button[0].addEventListener('click', function  () {
+			arr = []
+			preOrder(root);
+			changeColor(arr);
+		});
+		button[1].addEventListener('click', function  () {
+			arr = [];
+			inOrder(root);
+			changeColor (arr)
+		});
+		button[2].addEventListener('click', function  () {
+			arr = [];
+			postOrder(root);
+			changeColor (arr)
+		});
+		
+		
+		/**
+		 * 改变颜色
+		 */
+		function changeColor (divList) {
+			var length = divList.length;
+			var i = 0;
+			divList[i++].style.backgroundColor = "blue";
+			interval = setInterval(function  () {
+				//还没有遍历完
+				if (i < length) {
+					divList[i - 1].style.backgroundColor = "#fff";
+					divList[i++].style.backgroundColor = "blue";
+				} 
+				//遍历完之后
+				else {
+					clearInterval(interval);
+					divList[i - 1].style.backgroundColor = "#fff";
+				}
+			},document.getElementById('time').value);
+		}
+		/**
+		 * 先序遍历，改变对应颜色
+		 */
+		function  preOrder(node) {
+			if (node) {
+				arr.push(node);
+				preOrder(getFistchild(node));
+				preOrder(getLastchild(node));
+			}
+		}
+		/**
+		 * 中序遍历
+		 *
+		 * @method     inOrder
+		 * @param      {<type>}  node    {要遍历的节点}
+		 */
+		function  inOrder(node) {
+			alert(node)
+			if (node) {
+				inOrder(getFistchild(node));
+				arr.push(node);
+				inOrder(getLastchild(node));
+			}
+		}
+		/**
+		 * 后序遍历
+		 *
+		 * @method     postOrder
+		 */
+		function postOrder (node) {
+			if (node) {
+				postOrder(getFistchild(node));
+				postOrder(getLastchild(node));
+				arr.push(node);
+			}
+		}
+		/**
+		 * 返回所有的不是空白节点的元素
+		 */
+		function getFistchild (node) {
+			var x = node.firstChild;
+			if (x) {
+				while (x.nodeType != 1) {
+					x = x.nextSibling;
+				} 
+				return x;
+			}
+			return null;
+		}
+		function getLastchild (node) {
+			var x = node.lastChild;
+			if (x) {
+				while (x.nodeType != 1) {
+					x = x.previousSibling;
+				}
+				return x;
+			}
+			return null;
+ 		}
+	
+	</script>
+</body>
+</html>

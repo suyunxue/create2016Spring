@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单排序算法</title>
+	<style>
+ 		.divNum{
+ 			margin: 10px 5px;
+ 			padding:10px;
+ 			background-color: #ccc;
+			float: left;
+			border-radius: 5px;
+			text-align: center;
+			width:50px;
+ 		}
+	</style>
+</head>
+<body>
+	<div>
+		<textarea name="" id="" cols="30" rows="10" placeholder="请输入汉字、英文或数字，可使用逗号、顿号、空格、回车作为间隔"></textarea>
+		<span id="btns">
+			<button id="btn1">左侧入</button>
+			<button id="btn2">右侧入</button>
+			<button id="btn3">左侧出</button>
+			<button id="btn4">右侧出</button>
+		</span>
+		<input type='text' id="requireInput"/>
+		<button id="require">查询</button>
+	</div>
+	<div id="container">
+		
+	</div>
+	<script>
+	/*将大的container视为一个对象，他有很多小的div*/
+		function Divbox(){
+			this.child = [];
+			this.html = '';
+		};
+		Divbox.prototype = {
+			constructor : Divbox,
+			rightIn : function(num){
+				this.child.push(num);
+				this.paint();
+			},
+			leftOut : function(){
+				this.child.shift();
+				this.paint();
+			},
+			rightOut : function(){
+				this.child.pop();
+				this.paint();
+			},
+			deleteNum : function(site){
+				this.child.splice(site,1);
+				//console.log(this.child);
+				this.paint();
+			},
+			paint : function(){
+				var _this = this;
+				_this.html='';
+				/*在数组执行forEach时，this指向的是每一个数组中的项，不是DivBox,所以需要提前保存this*/
+				this.child.forEach(function(item,index,arrar){
+					_this.html += '<div class="divNum" id="'+index+'">'+item+'</div>';
+				})
+			},
+			leftIn : function(num){
+				this.child.unshift(num);
+				console.log(this.child);
+				this.paint();
+			},
+		};
+		var Divbox1 = new Divbox();
+		var inputArr = [];//将输入的数据分割后的数组定位全局变量，以便查询时使用;
+		var text = document.getElementsByTagName('textarea')[0];
+		var container = document.getElementById('container');
+		var btns = document.querySelector('#btns');
+		var require = document.getElementById('require');
+		//查询按钮点击
+		require.onclick = function(){
+			var inputValue = document.getElementById('requireInput').value;
+			var reg = new RegExp(inputValue);//判断生成的div中是否包含有输入的值
+			for(var i=0;i<container.childNodes.length;i++){
+				if(reg.test(container.childNodes[i].innerHTML)){//如果查询值存在在动态生成的div中，则改变其背景颜色
+					console.log(inputArr[i]);
+					container.childNodes[i].style.backgroundColor = 'red';
+				}
+			}
+		}
+
+		function empty(){
+			//console.log(Divbox1.child);
+			container.innerHTML = '';
+			container.innerHTML += Divbox1.html;
+			text.value = '';
+		}
+		btns.onclick = function(e){
+			    	e?event:window.event;
+					var target = e.target||event.srcElement;
+					inputArr = text.value.split(/[\n\r\t\s,，、;；。]+/g);//用正则将输入的内容分割
+					switch(target.id){
+						case 'btn1' : for(var i=0,len=inputArr.length;i<len;i++){
+									 	  Divbox1.leftIn(inputArr[i]);   //渲染内容
+										  empty();
+									   }break;
+						case 'btn2' : for(var i=inputArr.length-1;i>-1;i--){
+									 	  Divbox1.rightIn(inputArr[i]);   //渲染内容
+										  empty();
+									   }break;
+						case 'btn3' : Divbox1.leftOut();
+									  empty();break;
+						case 'btn4' : Divbox1.rightOut();
+									  empty();break;
+			}
+		}
+		container.onclick = function(e){
+			e?event:window.event;
+			var target = e.target||event.srcElement;
+			var _index = target.id;
+			Divbox1.child.splice(_index,1);
+			container.removeChild(container.childNodes[_index]);
+			for(var i=0;i<container.childNodes.length;i++){
+				container.childNodes[i].id = i;
+			}
+		}
+		
+
+	</script>
+</body>
+</html>
