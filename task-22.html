@@ -59,12 +59,15 @@
 		</div>
 	</div>
 	<script>
+
 		// 按照二叉树的遍历顺序进行改变颜色就可以了
 		var root = document.querySelector('.root');
+
 		/**
 		 * 判断按钮点击事件，执行对应处理函数
 		 */
 		var button = document.getElementsByTagName('button');
+		
 		//存储要变颜色的div
 		var arr = [];
 		button[0].addEventListener('click', function  () {
@@ -104,6 +107,7 @@
 				}
 			},document.getElementById('time').value);
 		}
+
 		/**
 		 * 先序遍历，改变对应颜色
 		 */
@@ -114,6 +118,7 @@
 				preOrder(getLastchild(node));
 			}
 		}
+
 		/**
 		 * 中序遍历
 		 *
@@ -128,6 +133,7 @@
 				inOrder(getLastchild(node));
 			}
 		}
+
 		/**
 		 * 后序遍历
 		 *
@@ -140,6 +146,7 @@
 				arr.push(node);
 			}
 		}
+
 		/**
 		 * 返回所有的不是空白节点的元素
 		 */

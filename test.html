@@ -2,28 +2,22 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>task-17</title>
+	<title>test</title>
 	<style >
-		.box {
-			width: 200px;
-			height: 200px;
-			background: #333;
-		}
-		.hover {
-			width: 200px;
-			height: 200px;
-			border: 2px solid red;
+		.div>div {
+			border: 1px solid red;
+			font: italic small-caps bold 12px/1.5em ;
 		}
 	</style>
-</head>
-<body>
-	<div class="box" draggable="true"></div>
-	<script type="text/javascript">
-		var foo = [];
-		foo[100] = 100;
-		for (var i in foo) {
-			console.log(i)
-		}
+	<script>
+	function checkLeave () {
+		event.returnValue = "确定";
+	}
+
 	</script>
+</head>
+<body onbeforeunload = "checkLeave()">
+	
+	
 </body>
 </html>

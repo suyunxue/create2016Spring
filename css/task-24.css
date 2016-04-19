@@ -1,0 +1,14 @@
+.body {
+	height: 300px;
+}
+div {
+	display: flex;
+	flex: 1;
+	margin: 10px 1px 10px  10px;
+	border: 1px solid #f00;
+	background: #fff;
+}
+.wrap,
+.wrap div {
+	border: 0;
+}

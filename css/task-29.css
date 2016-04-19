@@ -1,0 +1,40 @@
+.box {
+	text-align: center;
+}
+label {
+	display: inline-block;
+	margin-top: 1px;
+	font: 30px "Microsoft YaHei";
+	line-height: 30px;
+}
+input {
+	width: 300px;
+	height: 37px;
+	font-size: 18px;
+	vertical-align: middle;
+	border-radius: 5px;
+	outline: none;
+}
+.box a {
+	display: inline-block;
+	padding: 10px 20px;
+	font: 20px "Microsoft YaHei";;
+	text-decoration: none;
+	color: #fff;
+	border-radius: 5px;
+	background: #2f79ba;
+}
+.box p {
+	margin: 0;
+	font: 20px "Microsoft YaHei";
+	color: #afafaf;
+}
+
+.error {
+	border: 2px solid red;
+}
+
+
+.right {
+	border: 2px solid #97d285;
+}

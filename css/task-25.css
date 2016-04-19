@@ -1,0 +1,25 @@
+.root {
+	width: 18%;
+	margin: 0 auto;
+}
+div {
+	margin: 10px 0 10px 10px;
+	padding: 10px;
+	border: 1px solid  #000;
+	background: #fff;
+}
+
+i {
+	display: inline-block;
+	margin: 5px;
+	margin-top: 5px;
+	padding-right: 6px;
+	border: 1px solid #000;
+	cursor: pointer;
+	background: #fff;
+}
+
+.oper {
+	text-align: center;
+	border: none;
+}
