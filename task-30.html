@@ -3,23 +3,41 @@
 <head>
 	<meta charset="UTF-8">
 	<title>task-30</title>
+	<link rel="stylesheet" type="text/css" href="css/task-30.css">
+	<style>
+	</style>
 </head>
 <body>
 	<form>
-		<label>名称</label>
-		<input>
-		<label>密码</label>
-		<input type="password">
-		<label>密码确认</label>
-		<input type="password">
-		<label>邮箱</label>
-		<input>
-		<label>手机</label>
-		<input>
-		<br>
-		<input type="submit" value="提交">
+		<div>
+			<label>名称</label>
+			<input id="name">
+			<p></p>
+		</div>
+		<div>
+			<label>密码</label>
+			<input type="password" id="password1">
+		</div>
+		<p></p>
+		<div>
+			<label>密码确认</label>
+			<input type="password" id="password2">
+		</div>
+		<p></p>
+		<div>
+			<label>邮箱</label>
+			<input type="email" id="email">
+		</div>
+		<p></p>
+		<div>
+			<label>手机</label>
+			<input id="phone">
+		</div>
+		<p></p>
+		<input class="submit" type="submit" value="提交" >
 	 </form>
 
+<script src="js/util.js"></script>
 <script src="js/task-30.js"></script>
 </body>
 </html>
