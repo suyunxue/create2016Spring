@@ -28,3 +28,7 @@ input {
 	outline: none;
 	border: 1px solid #63afed;
 }
+
+p {
+	margin-left: 80px;
+}

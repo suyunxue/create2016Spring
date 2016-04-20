@@ -1,6 +1,6 @@
 (function (window, undefined) {
 	var inputEles = [$("#name"), $("#password1"), $("#password2"), $("#email"), $("#phone")],
-	    originTip = ["±ØÌî£¬³¤¶ÈÎª4-16¸ö×Ö·û","6µ½16Î»Êý×ÖºÍ×ÖÄ¸","ÖØ¸´ÊäÈëÃÜÂë","example@haha.com","ÇëÊäÈë11Î»ÊÖ»úºÅÂë"];
+	    originTip = ["å¿…å¡«ï¼Œé•¿åº¦ä¸º4-16ä¸ªå­—ç¬¦","6åˆ°16ä½æ•°å­—å’Œå­—æ¯","é‡å¤è¾“å…¥å¯†ç ","example@haha.com","è¯·è¾“å…¥11ä½æ‰‹æœºå·ç "];
 
 	var checkResult = {
 		right: false,
@@ -12,40 +12,40 @@
 
 		if (str.length === 0) {
 			checkResult.right = false;
-			checkResult.tip = "ÊäÈë²»ÄÜÎª¿Õ";
+			checkResult.tip = "è¾“å…¥ä¸èƒ½ä¸ºç©º";
 			return ;
 		}
 
-		//Ãû³Æ
+		//åç§°
 		if(ele === inputEles[0]) {
 			var len = str.replace(new RegExp("[\u4e00-\u9fa5]", "g"), "aa").length;	
 
 			if (len >= 4 && len <= 16) {
 				checkResult.right = true;
-				checkResult.tip = "Ãû³Æ¿ÉÓÃ";
+				checkResult.tip = "åç§°å¯ç”¨";
 			} else {
 				checkResult.right = false;
-				checkResult.tip = "Çë¼ì²éÃû³Æ×Ö·ûÊý";
+				checkResult.tip = "è¯·æ£€æŸ¥åç§°å­—ç¬¦æ•°";
 			}
 		}
 
 		if (ele === inputEles[1]) {
 			if (str.match(/^\w{6, 16}$/)) {
 				checkResult.right = true;
-				checkResult.tip = "ÃÜÂë¸ñÊ½ÕýÈ·";
+				checkResult.tip = "å¯†ç æ ¼å¼æ­£ç¡®";
 			} else {
 				checkResult.right = false;
-				checkResult.tip = "ÇëÊäÈë6µ½16Î»×Ö·ûÇÒÖ»ÄÜÎªÊý×ÖºÍ×ÖÄ¸";
+				checkResult.tip = "è¯·è¾“å…¥6åˆ°16ä½å­—ç¬¦ä¸”åªèƒ½ä¸ºæ•°å­—å’Œå­—æ¯";
 			}
 		}
 
 		if (ele === inputEles[2]) {
 			if (str === inputEles[1].value.trim()) {
 				checkResult.right = true;
-				checkResult.tip = "ÃÜÂëÕýÈ·";
+				checkResult.tip = "å¯†ç æ­£ç¡®";
 			} else {
 				checkResult.right = false;
-				checkResult.tip = "Á½´ÎÃÜÂëÊäÈëÒªÏàÍ¬";
+				checkResult.tip = "ä¸¤æ¬¡å¯†ç è¾“å…¥è¦ç›¸åŒ";
 			}
 		}
 
@@ -53,20 +53,20 @@
 			var reg = new RegExp("^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$", "i");
 			if (str.match(reg)) {
 				checkResult.right = true;
-				checkResult.tip = "ÓÊÏä¿ÉÓÃ";
+				checkResult.tip = "é‚®ç®±å¯ç”¨";
 			} else {
 				checkResult.right = false;
-				checkResult.tip = "ÓÊÏä¸ñÊ½´íÎó";
+				checkResult.tip = "é‚®ç®±æ ¼å¼é”™è¯¯";
 			}
 		}
 
 		if (ele === inputEles[4]) {
 			if (str.match(/^1\d{10}$/)) {
 				checkResult.right = true;
-				checkResult.tip = "ºÅÂë¿ÉÓÃ";
+				checkResult.tip = "å·ç å¯ç”¨";
 			} else {
 				checkResult.right = false;
-				checkResult.tip = "ºÅÂë¸ñÊ½´íÎó";
+				checkResult.tip = "å·ç æ ¼å¼é”™è¯¯";
 			}
 		}
 	}
@@ -79,6 +79,9 @@
 				if (checkResult.right) {
 					e.target.style.border = "2px solid green";
 					p.style.color = "green";
+				} else {
+					e.target.style.border = "2px solid red";
+					p.style.color = "red";
 				}
 			})
 
@@ -91,7 +94,7 @@
 			})
 		}
 
-		$("#submit").addEventListener("click", function  () {
+		$(".submit").addEventListener("click", function  () {
 			var right = true;
 			for (var i = 0; i < inputEles.length; i++) {
 				var input = inputEles[i];
@@ -100,8 +103,8 @@
 				p.style.visibility = "visible";	
 				p.innerHTML = checkResult.tip;
 				if (checkResult.right) {
-					input.style.border = "2px solid green";
-					p.style.color = "green";
+					input.style.border = "2px solid #63afed";
+					p.style.color = "#63afed";
 				} else {
 					input.style.border = "2px solid red";
 					p.style.color = "red";
@@ -110,16 +113,11 @@
 			}
 
 			if (right) {
-				alert("Ìá½»³É¹¦");
+				alert("æäº¤æˆåŠŸ");
 			} else {
-				alert("Ìá½»Ê§°Ü£¬Çë¼ì²éÊäÈë");
+				alert("æäº¤å¤±è´¥ï¼Œè¯·æ£€æŸ¥è¾“å…¥");
 			}
+			
 		});
-		
-
-
-
-
-
 
 })(window, undefined);
