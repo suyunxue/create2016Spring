@@ -72,6 +72,7 @@
 	}
 
 		for (var i = 0; i < inputEles.length; i++) {
+			
 			inputEles[i].addEventListener("blur", function  (e) {
 				checkValue(e.target);
 				var p = e.target.parentNode.getElementsByTagName("p")[0];

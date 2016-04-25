@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task-31</title>
+	<link rel="stylesheet" type="text/css" href="css/task-31.css">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	<form>
+		<input type="radio" name="options">
+		<label>在校生</label>
+	</form>
+	<script src="js/util.js"></script>
+	<script src="js/task-31.js"></script>
+	<script type="text/javascript">
+	// 样例输入
+// 	<recipe>
+// <recipename>Ice Cream<preptime></recipename>5 m</preptime>
+// </recipe>
+	//判断xml文档
+	function isXML (str) {
+	 	var arr = [],
+	 		count = 0;
+	 	arr = str.split("");
+	 	for (var i = 0; i < arr.length; i++) {
+	 		if (arr[i] === "<") {
+	 			count++;
+	 		}
+	 		if (arr[i] === ">") {
+	 			count--;
+	 		}
+	 	}
+
+	 	if (count !== 0) {
+	 		console.log("Invalid");
+	 	} else {
+	 		console.log("right");
+	 	}
+	}
+
+	isXML("<recipe><recipe><recipename>Ice Cream<preptime></recipename>5 m</preptime></recipe>");
+
+
+	</script>
+
+</body>
+</html>

@@ -51,3 +51,19 @@ function displayRgb (a, b, c) {
 function getStyle (ele, attr) {
 	return window.getComputedStyle(ele, null).getPropertyValue(attr);
 }
+
+//封装一个获取特定类名的方法
+function getClass (claName, parent) {
+	var oParent = parent?document.getElementById(parent):document,
+		eles = [],
+		elemens = oParent.getElementsByTagName("*");
+
+	for (var i = 0; i < elemens.length; i++) {
+		if (elemens[i].getAttribute("claName") === claName) {
+			eles.push(elemens[i]);
+		}
+	}
+
+	return eles;
+}
+
