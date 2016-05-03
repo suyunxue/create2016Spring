@@ -10,8 +10,10 @@
 	 * ·Å´ó
 	 */
 
-	function Popuper (param) {
-		// return new Popuper.prototype.init(param);
+	function Popuper () {
+		this.config = {
+
+		};
 	}
 
 	Popuper.prototype = {

@@ -1,0 +1,32 @@
+.top {
+	display: inline-block;
+	margin-bottom: 6px;
+	border-left: 5px solid transparent;
+	border-top: 5px solid transparent;
+	border-right: 5px solid transparent; 
+	border-bottom: 5px solid red; 
+}
+
+.bottom {
+	display: inline-block;
+	margin-left: -10px;
+	margin-bottom: -6px;
+	border-left: 5px solid transparent;
+	border-top: 5px solid red;
+	border-right: 5px solid transparent; 
+	border-bottom: 5px solid transparent; 
+}
+
+table {
+	border-collapse: collapse;
+}
+table th,
+td {
+	padding: 10px;
+	text-align: center;
+	border: 1px solid #333;
+}
+
+table th {
+	background: #ccc;
+}
