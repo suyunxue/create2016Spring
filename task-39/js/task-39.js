@@ -169,31 +169,33 @@
 		}
 	};
 
-	
-	window.onscroll = function  () {
+	var rollPage = function  () {
 		var top = tab.offsetTop,
-		    scrollTop = document.body.scrollTop,
 		    title = tab.childNodes[0],
 		    tabHeight = tab.offsetHeight;
 
-		//冻结窗口
-		if (scrollTop >= top) {
-			title.className += " "+"fixed";
-		} else {
-			title.classList.remove('fixed');
-		}
+		window.onscroll = function  () {
+			var scrollTop = document.body.scrollTop;
+			//冻结窗口
+			if (scrollTop > top) {
+				title.className ="fixed";
+			} else {
+				title.className = "";
+			}
 
-		//当整个页面滚动出页面时,固定的第一行也消失	
-		if (scrollTop >= (tabHeight+top)) {
-			title.classList.remove('fixed');
+			//当整个页面滚动出页面时,固定的第一行也消失	
+			if (scrollTop > (tabHeight+top)) {
+				title.className = "";
+			}
 		}
-
 	}
-
+	    
+	
 	//程序执行
 	function init () {
 		addTh();
 		addTr();
+		rollPage();
 	}
 
 	init();
