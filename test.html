@@ -26,25 +26,17 @@
 	
 </head>
 <body>
-	<div class="test">
-		<div class="header"></div>
-		<div class="body"></div>
-	</div>
+	<table>
+		<thead>
+			<td>wu</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td>dsfa</td>
+			</tr>
+		</tbody>
+	</table>
 	<script type="text/javascript">
-		var header = document.querySelector(".header");
-		function frozenTop () {
-			window.onscroll = function  () {
-				var top = header.offsetTop,
-				    scrollTop = document.body.scrollTop;
-				console.log(top+":"+scrollTop)
-				if (scrollTop >= top) {
-					header.style.position = "fixed";
-					header.style.top = "10px";
-				} else {
-					header.style.position = "relative";
-				}
-			}
-		}
 		
 	</script>
 </body>
