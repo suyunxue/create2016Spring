@@ -1,0 +1,12 @@
+.input {
+	text-align: center;
+	font: normal normal 14px/1 FontAwesome;
+}
+
+.input>input {
+	width: 200px;
+	height: 30px;
+}
+.input:before {
+	content: "\f073";
+}

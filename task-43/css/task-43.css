@@ -1,0 +1,13 @@
+.box {
+	width: 300px;
+	height: 300px;
+	background: black url(https://ununsplash.imgix.net/photo-1415302199888-384f752645d0?q=75&fm=jpg&s=823bdcc1b7ad955f5180efd352561016);
+	background-size: cover;
+	margin: 28px auto;
+}
+
+.clipPolygon {
+	-webkit-clip-path: inset(25% 0 25% 0 round 0 25% 0 25%);
+	-o-clip-path: inset(25% 0 25% 0 round 0 25% 0 25%);
+	clip-path: inset(25% 0 25% 0 round 0 25% 0 25%);
+}

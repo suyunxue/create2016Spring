@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/task-43.css">
+	<style type="text/css">
+		
+	</style>
+</head>
+<body>
+	
+
+
+
+	<script type="text/javascript">
+		function clone (obj) {
+			var o;
+			if (typeof(obj) != "object" || obj === null) return obj;
+			if (obj instanceof Array) {
+				for (var i = 0; i < obj.length; i++) {
+					if (typeof(obj[i]) != "object" && obj[i] != null ) {
+						o[i] = clone(obj[i]);
+					} else {
+						o[i] = obj[i];
+					}
+				}
+			} else {
+				o = {};
+				for (var i in obj) {
+					if (typeof(obj[i] != "object" && obj[i] != null)) {
+						o[i] = clone(obj[i]);
+					} else {
+						o[i] = obj[i];
+					}
+				}
+			}
+		}
+
+
+
+		Object.prototype.clone = function  () {
+			var o = this.constructor === Array ? []:{};
+			for (var e in this) {
+				o[e] = typeof this[e] === "Object" ? this[e].clone() : this[e];
+			}
+			return o;
+		}
+
+		Object.prototype.clone = function  () {
+			//原型保持一致
+			var newObj = Object.create(Object.getPrototypeof(this));
+
+			//自身属性保持一致
+			var propNames = Object.getOwnPropertyNames(name);
+			//保持每个属性的特性是一致的
+			propNames.forEach(function item () {
+				var def = Object.getOwnPropertyDescriptor(this, item);
+				Object.defineProperty(newObj, item, des);
+			}, this);
+
+			return newObj;
+
+		}
+
+		function getBytes (str) {
+			var len = str.length;
+			var bytes = len;
+			for (var i = 0; i < len; i++) {
+				if (str.charCodeAt(i) > 255) {
+					bytes++;
+				}
+			}
+			return bytes;
+		}
+
+		
+
+
+	</script>
+</body>
+</html>
