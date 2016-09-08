@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>头部栏</title>
+    <style>
+        body {
+            background: #efefef;
+        }
+        .header {
+            color: #fff;
+            background: #fc6600;
+        }
+        .facility {
+            display: inline-block;
+            margin: 0 5% 0 10%;
+            padding: 10px 0;
+            font-size: 20px;
+        }
+        .question-list {
+            width: 80%;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 5px #ccc;
+            border-radius: 5px;
+        }
+        .question-table {
+            width: 80%;
+            margin: 20px auto;
+            text-align: left;
+            border-collapse: collapse;
+        }
+        .question-table th {
+            padding: 20px 5px;
+            font-size: 18px;
+        }
+        .table-body tr {
+            height: 3em;
+            border-bottom: 1px solid #ccc;
+        }
+        .table-body tr:last-child {
+            border: none;
+        }
+        .checkbox {
+            margin-right: 10px;
+        }
+        .new-question {
+            margin-left: 4em;
+            padding: 8px 10px;
+            font-size: 14px;
+            font-weight: 100;
+            color: #fff;
+            letter-spacing: 2px;
+            background: #fc6600;
+            cursor: pointer;
+        }
+        .operation-attribute,
+        .check-delete {
+            display: inline-block;
+            width: 4em;
+            margin-left: 5px;
+            padding: 5px;
+            text-align: center;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .question-table th:nth-child(4),
+        .question-table td:nth-child(4) {
+            text-align: right;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="facility">问卷管理</h1>
+        <span>我的问卷</span>
+    </header>
+    <div class="question-list">
+        <table class="question-table">
+            <thead>
+                <tr>
+                    <th>标题</th>
+                    <th>时间</th>
+                    <th>状态</th>
+                    <th>操作<span class="new-question">+新建问卷</span> </th>
+                </tr>
+            </thead>
+            <tbody class="table-body">
+                <tr>
+                    <td><input class="checkbox" type="checkbox"><span class="question-name">这是我的第一份问卷</span></td>
+                    <td>2016－04－12 20：46:52</td>
+                    <td>发布中</td>
+                    <td>
+                        <span class="operation-attribute">编辑</span>
+                        <span class="operation-attribute">删除</span>
+                        <span class="operation-attribute">查看数据</span>
+                    </td>
+                </tr><tr>
+                    <td><input class="checkbox" type="checkbox"><span class="question-name">这是我的第一份问卷</span></td>
+                    <td>2016－04－12 20：46:52</td>
+                    <td>发布中</td>
+                    <td>
+                        <span class="operation-attribute">编辑</span>
+                        <span class="operation-attribute">删除</span>
+                        <span class="operation-attribute">查看数据</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input class="checkbox" type="checkbox"><span class="question-name">全选</span><span class="check-delete">删除</span></td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

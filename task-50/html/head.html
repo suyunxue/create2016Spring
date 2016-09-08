@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>头部栏</title>
+    <style>
+        body {
+            background: #efefef;
+        }
+        .header {
+            color: #fff;
+            background: #fc6600;
+        }
+        .facility {
+            display: inline-block;
+            margin: 0 5% 0 10%;
+            padding: 10px 0;
+            font-size: 20px;
+        }
+        .back::before {
+            display: inline-block;
+            content: "";
+            width: 0.8em;
+            height: 0.8em;
+            border-top: 1px solid #333;
+            border-left: 1px solid #333;
+            transform: rotate(-45deg);
+        }
+
+        .question-data {
+            width: 70%;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background: #fff;
+        }
+        .back {
+            color: #333;
+            text-decoration: none;
+        }
+        .question-title h1 {
+            margin: 0;
+            margin-top: -1em;
+            font-size: 20px;
+            text-align: center;
+        }
+        .question-list {
+            margin: 2em 0;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="facility">问卷管理</h1>
+        <span>我的问卷</span>
+    </header>
+    <div class="question-data">
+        <a class="back" href="javascript:history.back();">
+            <span>返回</span>
+        </a>
+        <div class="question-title">
+            <h1>这里是标题</h1>
+            <div class="question-list">
+                <ul>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
