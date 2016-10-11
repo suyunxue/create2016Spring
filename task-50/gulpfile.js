@@ -7,8 +7,8 @@ var gulpWebpack = require('gulp-webpack');
 
 var src = {
     html: 'src/html/*.html',
-    style: 'src/style/index.less',
-    js: 'src/js/*'
+    style: 'style/index.less',
+    js: 'src/*'
 }
 
 var dist = {
@@ -24,7 +24,7 @@ gulp.task('less', function() {
             .pipe(gulp.dest(dist.style));
 })
 
-gulp.task('webpack', function() {//TODO
+gulp.task('webpack', function() {
     return gulp.src(src.style)
         .pipe(gulpWebpack(require('./webpack.config')))
         .pipe(gulp.dest(dist.root));
@@ -37,4 +37,9 @@ gulp.task('default', function() {
     gulp.watch(src.js, function  () {
         gulp.run('less', 'webpack');
     })
+
+    gulp.watch(src.style, function  () {
+        gulp.run('less', 'webpack');
+    })
+
 })

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问卷编辑页</title>
+    <style>
+        body {
+            background: #efefef;
+        }
+        .header {
+            color: #fff;
+            background: #fc6600;
+        }
+        .facility {
+            display: inline-block;
+            margin: 0 5% 0 10%;
+            padding: 10px 0;
+            font-size: 20px;
+        }
+
+        .edit-box {
+            width: 80%;
+            margin: 40px auto;
+            padding: 10px 20px;
+            box-shadow: 0 0 4px #ccc;
+            background-color: #fff;
+        }
+
+        .edit-title {
+            text-align: center;
+        }
+
+        .add-problem {
+            padding: 30px 0;
+            font-size: 1.5rem;
+            background-color: #eee;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+
+        .footer-save {
+            margin: 20px 0;
+        }
+
+        .end-date {
+            float: left;
+            margin: 0 30% 0 10%;
+        }
+
+        .problem-type {
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="facility">问卷管理</h1>
+        <span>我的问卷</span>
+    </header>
+    <section class="edit-box">
+        <h1 class="edit-title">这里是标题</h1>
+        <section class="edit-content">
+            <div class="proble-list">
+                
+            </div>
+            <div class="problem-type">
+                <button>单选</button>
+                <button>多选</button>
+                <button>文本题</button>
+            </div>            
+            <div class="add-problem">添加问题</div>
+        </section>
+        <div class="footer-save">
+            <div class="end-date">
+             <span>问卷截至日期</span>
+             <span class="calendar">2016-04-22</span>
+             </div>
+            <button>保存问卷</button>
+            <button>发布问卷</button>
+        </div>
+    </section>
+</body>
+</html>

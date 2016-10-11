@@ -5,6 +5,7 @@
     <title>头部栏</title>
     <style>
         body {
+            font-family: "Microsoft YaHei";
             background: #efefef;
         }
         .header {
@@ -17,6 +18,9 @@
             padding: 10px 0;
             font-size: 20px;
         }
+
+
+        
         .back::before {
             display: inline-block;
             content: "";
@@ -37,7 +41,7 @@
             color: #333;
             text-decoration: none;
         }
-        .question-title h1 {
+        .question-title {
             margin: 0;
             margin-top: -1em;
             font-size: 20px;
@@ -45,8 +49,38 @@
         }
         .question-list {
             margin: 2em 0;
+            padding: 0 1em;
+          
             border-top: 1px solid #ccc;
             border-bottom: 1px solid #ccc;
+        }
+        .question-list,
+        .question-list li{
+              list-style: none;
+        }
+
+        .question-list>li {
+            margin: 1em 0;
+            padding: 1em;
+            border: 1px solid #ccc;
+        }
+
+
+        .question-type{
+            font-size: 18px;
+            line-height: 2em;
+        }
+
+        .bottom-back {
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        .bottom-back a {
+            padding: 2px 10px;
+            color: #fff;
+            text-decoration: none;
+            background-color: #f07600;
         }
     </style>
 </head>
@@ -55,17 +89,42 @@
         <h1 class="facility">问卷管理</h1>
         <span>我的问卷</span>
     </header>
+
     <div class="question-data">
-        <a class="back" href="javascript:history.back();">
-            <span>返回</span>
+        <a class="back" href="javascript:history.back();">返回
         </a>
-        <div class="question-title">
-            <h1>这里是标题</h1>
-            <div class="question-list">
+        <h1 class="question-title">这里是标题</h1>
+        <ul class="question-list">
+            <li>
+                <span class="question-type">Q1 单选题</span>
                 <ul>
-                    <li></li>
+                    <li>选项一</li>
+                    <li>选项二</li>
                 </ul>
-            </div>
+            </li>
+            <li>
+                <span class="question-type">Q2 多选题</span>
+                <ul>
+                    <li>选项一</li>
+                    <li>选项二</li>
+                    <li>选项三</li>
+                    <li>选项四</li>
+                </ul>
+            </li>
+            <li>
+                <span class="question-type">Q3 单选题</span>
+                <ul>
+                    <li>选项一</li>
+                    <li>选项二</li>
+                </ul>
+            </li>
+            <li>
+                <span class="question-type">Q4 文本题</span>
+                <div></div>
+            </li>
+        </ul>
+        <div class="bottom-back">
+            <a href="javascript:history.back();">返回</a>
         </div>
     </div>
 </body>
