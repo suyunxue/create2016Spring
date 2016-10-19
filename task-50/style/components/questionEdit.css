@@ -1,0 +1,56 @@
+.edit-box {
+    width: 80%;
+    margin: 40px auto;
+    padding: 10px 20px;
+    box-shadow: 0 0 4px #ccc;
+    background-color: #fff;
+}
+
+.edit-title {
+    text-align: center;
+}
+
+.problem-list {
+    width: 80%;
+    margin: 0 auto;
+    list-style-type: none;
+}
+
+.add-problem {
+    padding: 30px 0;
+    font-size: 1.5rem;
+    background-color: #eee;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+.footer-save {
+    margin: 20px 0;
+}
+
+.end-date {
+    float: left;
+    margin: 0 30% 0 10%;
+}
+
+.problem-type {
+    padding: 10px;
+    text-align: center;
+}
+
+.problem-title {
+    padding: 5px;
+    text-align: left;
+    font-size: 18px;
+}
+
+.problem-option {
+    margin-left: 2em;
+    padding: 5px 0;
+    font-size: 18px;    
+}
+
+.problem-option input {
+    height: 30px;
+    vertical-align: middle;
+}

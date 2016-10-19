@@ -10,13 +10,18 @@ module.exports = {
         extensions: ['', '.js', '.jsx']
     },
     module: {
-        loaders: [{
+        loaders: [
+        {
             test: /\.js|jsx$/,
             exclude: /node_modules/,
             loader: 'babel',
             query: {
                 presets: ['es2015', 'stage-0', 'react']
             }
+        },
+        {
+            test: /\.css|less$/, 
+            loader: 'style!css'
         }]
     }
 }

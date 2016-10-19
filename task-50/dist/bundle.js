@@ -62,6 +62,18 @@
 
 	var _table2 = _interopRequireDefault(_table);
 
+	var _seeData = __webpack_require__(174);
+
+	var _seeData2 = _interopRequireDefault(_seeData);
+
+	var _newQuestion = __webpack_require__(179);
+
+	var _newQuestion2 = _interopRequireDefault(_newQuestion);
+
+	var _QuestionEdit = __webpack_require__(182);
+
+	var _QuestionEdit2 = _interopRequireDefault(_QuestionEdit);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -86,7 +98,7 @@
 					'div',
 					null,
 					_react2.default.createElement(_header2.default, null),
-					_react2.default.createElement(_table2.default, { data: this.props.data })
+					_react2.default.createElement(_QuestionEdit2.default, null)
 				);
 			}
 		}]);
@@ -100,6 +112,11 @@
 		state: '发布中，未发布，已结束',
 		data: [{
 			//这里面的数据就是每个题
+			question: '每个问题',
+			type: '单选题，多选题，文本题',
+			option: ['选项一', '选项二', '选项三'],
+			text: '如果是文本就是文本的内容,否则为空'
+		}, {
 			question: '每个问题',
 			type: '单选题，多选题，文本题',
 			option: ['选项一', '选项二', '选项三'],
@@ -21737,6 +21754,853 @@
 	}(_react.Component);
 
 	exports.default = Table;
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(175);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * 这一页就是纯数据展示，只需要把数据通过props传入就行了
+	 * 唯一有操作的不是操作数据就是一个返回，我通过了浏览器的history.back返回的
+	 * 如果不行就通过路由处理
+	 */
+	var SeeData = function (_Component) {
+		_inherits(SeeData, _Component);
+
+		function SeeData(props) {
+			_classCallCheck(this, SeeData);
+
+			//这里传的数据是要知道是访问哪个问卷,
+			//我可以使用数组下标就可以获取到对应的数据
+			//不过感觉应该是id比较好
+			// this.data = this.props.data;
+			var _this = _possibleConstructorReturn(this, (SeeData.__proto__ || Object.getPrototypeOf(SeeData)).call(this));
+
+			//里面就相当于是原来的那个构造函数模式写的那个
+
+
+			_this.title = '问卷的标题';
+			_this.data = [{
+				//这里面的数据就是每个题
+				problem: '每个问题',
+				type: '单选题，多选题，文本题',
+				option: ['选项一', '选项二', '选项三'],
+				text: '如果是文本就是文本的内容,否则为空'
+			}, {
+				problem: '每个问题',
+				type: '单选题，多选题，文本题',
+				option: ['选项一', '选项二', '选项三'],
+				text: '如果是文本就是文本的内容,否则为空'
+			}];
+
+			return _this;
+		}
+
+		_createClass(SeeData, [{
+			key: 'renderOption',
+			value: function renderOption() {
+				var option = ['选项一', '选项二', '选项三'];
+				return option.map(function (val, index, arr) {
+					return _react2.default.createElement(
+						'li',
+						{ key: index },
+						val
+					);
+				});
+			}
+		}, {
+			key: 'renderList',
+			value: function renderList() {
+				var data = this.data;
+				var that = this;
+				return data.map(function (val, index, arr) {
+					return _react2.default.createElement(
+						'li',
+						{ key: index },
+						_react2.default.createElement(
+							'span',
+							{ className: 'problem-type' },
+							'Q',
+							index,
+							' ',
+							val.problem
+						),
+						_react2.default.createElement(
+							'ul',
+							null,
+							that.renderOption()
+						)
+					);
+				});
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'problem-data' },
+					_react2.default.createElement(
+						'a',
+						{ className: 'back', href: 'javascript:history.back();' },
+						'\u8FD4\u56DE'
+					),
+					_react2.default.createElement(
+						'h1',
+						{ className: 'problem-title' },
+						this.title
+					),
+					_react2.default.createElement(
+						'ul',
+						{ className: 'problem-list' },
+						this.renderList()
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'bottom-back' },
+						_react2.default.createElement(
+							'a',
+							{ href: 'javascript:history.back();' },
+							'\u8FD4\u56DE'
+						)
+					)
+				);
+			}
+		}]);
+
+		return SeeData;
+	}(_react.Component);
+
+	exports.default = SeeData;
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(176);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(178)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./seeData.less", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./seeData.less");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(177)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\r\n.back::before {\r\n    display: inline-block;\r\n    content: \"\";\r\n    width: 0.8em;\r\n    height: 0.8em;\r\n    border-top: 1px solid #333;\r\n    border-left: 1px solid #333;\r\n    transform: rotate(-45deg);\r\n}\r\n\r\n.problem-data {\r\n    width: 70%;\r\n    margin: 20px auto;\r\n    padding: 10px 20px;\r\n    background: #fff;\r\n}\r\n.back {\r\n    color: #333;\r\n    text-decoration: none;\r\n}\r\n.problem-title {\r\n    margin: 0;\r\n    margin-top: -1em;\r\n    font-size: 20px;\r\n    text-align: center;\r\n}\r\n.problem-list {\r\n    margin: 2em 0;\r\n    padding: 0 1em;\r\n  \r\n    border-top: 1px solid #ccc;\r\n    border-bottom: 1px solid #ccc;\r\n}\r\n.problem-list,\r\n.problem-list li{\r\n      list-style: none;\r\n}\r\n\r\n.problem-list>li {\r\n    margin: 1em 0;\r\n    padding: 1em;\r\n    border: 1px solid #ccc;\r\n}\r\n\r\n\r\n.problem-type{\r\n    font-size: 18px;\r\n    line-height: 2em;\r\n}\r\n\r\n.bottom-back {\r\n    text-align: center;\r\n    margin: 20px auto;\r\n}\r\n\r\n.bottom-back a {\r\n    padding: 2px 10px;\r\n    color: #fff;\r\n    text-decoration: none;\r\n    background-color: #f07600;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 177 */
+/***/ function(module, exports) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	// css base code, injected by the css-loader
+	module.exports = function() {
+		var list = [];
+
+		// return the list of modules as css string
+		list.toString = function toString() {
+			var result = [];
+			for(var i = 0; i < this.length; i++) {
+				var item = this[i];
+				if(item[2]) {
+					result.push("@media " + item[2] + "{" + item[1] + "}");
+				} else {
+					result.push(item[1]);
+				}
+			}
+			return result.join("");
+		};
+
+		// import a list of modules into the list
+		list.i = function(modules, mediaQuery) {
+			if(typeof modules === "string")
+				modules = [[null, modules, ""]];
+			var alreadyImportedModules = {};
+			for(var i = 0; i < this.length; i++) {
+				var id = this[i][0];
+				if(typeof id === "number")
+					alreadyImportedModules[id] = true;
+			}
+			for(i = 0; i < modules.length; i++) {
+				var item = modules[i];
+				// skip already imported module
+				// this implementation is not 100% perfect for weird media query combinations
+				//  when a module is imported multiple times with different media queries.
+				//  I hope this will never occur (Hey this way we have smaller bundles)
+				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+					if(mediaQuery && !item[2]) {
+						item[2] = mediaQuery;
+					} else if(mediaQuery) {
+						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+					}
+					list.push(item);
+				}
+			}
+		};
+		return list;
+	};
+
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/*
+		MIT License http://www.opensource.org/licenses/mit-license.php
+		Author Tobias Koppers @sokra
+	*/
+	var stylesInDom = {},
+		memoize = function(fn) {
+			var memo;
+			return function () {
+				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+				return memo;
+			};
+		},
+		isOldIE = memoize(function() {
+			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+		}),
+		getHeadElement = memoize(function () {
+			return document.head || document.getElementsByTagName("head")[0];
+		}),
+		singletonElement = null,
+		singletonCounter = 0,
+		styleElementsInsertedAtTop = [];
+
+	module.exports = function(list, options) {
+		if(false) {
+			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+		}
+
+		options = options || {};
+		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+		// tags it will allow on a page
+		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+		// By default, add <style> tags to the bottom of <head>.
+		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+		var styles = listToStyles(list);
+		addStylesToDom(styles, options);
+
+		return function update(newList) {
+			var mayRemove = [];
+			for(var i = 0; i < styles.length; i++) {
+				var item = styles[i];
+				var domStyle = stylesInDom[item.id];
+				domStyle.refs--;
+				mayRemove.push(domStyle);
+			}
+			if(newList) {
+				var newStyles = listToStyles(newList);
+				addStylesToDom(newStyles, options);
+			}
+			for(var i = 0; i < mayRemove.length; i++) {
+				var domStyle = mayRemove[i];
+				if(domStyle.refs === 0) {
+					for(var j = 0; j < domStyle.parts.length; j++)
+						domStyle.parts[j]();
+					delete stylesInDom[domStyle.id];
+				}
+			}
+		};
+	}
+
+	function addStylesToDom(styles, options) {
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			if(domStyle) {
+				domStyle.refs++;
+				for(var j = 0; j < domStyle.parts.length; j++) {
+					domStyle.parts[j](item.parts[j]);
+				}
+				for(; j < item.parts.length; j++) {
+					domStyle.parts.push(addStyle(item.parts[j], options));
+				}
+			} else {
+				var parts = [];
+				for(var j = 0; j < item.parts.length; j++) {
+					parts.push(addStyle(item.parts[j], options));
+				}
+				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+			}
+		}
+	}
+
+	function listToStyles(list) {
+		var styles = [];
+		var newStyles = {};
+		for(var i = 0; i < list.length; i++) {
+			var item = list[i];
+			var id = item[0];
+			var css = item[1];
+			var media = item[2];
+			var sourceMap = item[3];
+			var part = {css: css, media: media, sourceMap: sourceMap};
+			if(!newStyles[id])
+				styles.push(newStyles[id] = {id: id, parts: [part]});
+			else
+				newStyles[id].parts.push(part);
+		}
+		return styles;
+	}
+
+	function insertStyleElement(options, styleElement) {
+		var head = getHeadElement();
+		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+		if (options.insertAt === "top") {
+			if(!lastStyleElementInsertedAtTop) {
+				head.insertBefore(styleElement, head.firstChild);
+			} else if(lastStyleElementInsertedAtTop.nextSibling) {
+				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+			} else {
+				head.appendChild(styleElement);
+			}
+			styleElementsInsertedAtTop.push(styleElement);
+		} else if (options.insertAt === "bottom") {
+			head.appendChild(styleElement);
+		} else {
+			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+		}
+	}
+
+	function removeStyleElement(styleElement) {
+		styleElement.parentNode.removeChild(styleElement);
+		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+		if(idx >= 0) {
+			styleElementsInsertedAtTop.splice(idx, 1);
+		}
+	}
+
+	function createStyleElement(options) {
+		var styleElement = document.createElement("style");
+		styleElement.type = "text/css";
+		insertStyleElement(options, styleElement);
+		return styleElement;
+	}
+
+	function createLinkElement(options) {
+		var linkElement = document.createElement("link");
+		linkElement.rel = "stylesheet";
+		insertStyleElement(options, linkElement);
+		return linkElement;
+	}
+
+	function addStyle(obj, options) {
+		var styleElement, update, remove;
+
+		if (options.singleton) {
+			var styleIndex = singletonCounter++;
+			styleElement = singletonElement || (singletonElement = createStyleElement(options));
+			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+		} else if(obj.sourceMap &&
+			typeof URL === "function" &&
+			typeof URL.createObjectURL === "function" &&
+			typeof URL.revokeObjectURL === "function" &&
+			typeof Blob === "function" &&
+			typeof btoa === "function") {
+			styleElement = createLinkElement(options);
+			update = updateLink.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+				if(styleElement.href)
+					URL.revokeObjectURL(styleElement.href);
+			};
+		} else {
+			styleElement = createStyleElement(options);
+			update = applyToTag.bind(null, styleElement);
+			remove = function() {
+				removeStyleElement(styleElement);
+			};
+		}
+
+		update(obj);
+
+		return function updateStyle(newObj) {
+			if(newObj) {
+				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+					return;
+				update(obj = newObj);
+			} else {
+				remove();
+			}
+		};
+	}
+
+	var replaceText = (function () {
+		var textStore = [];
+
+		return function (index, replacement) {
+			textStore[index] = replacement;
+			return textStore.filter(Boolean).join('\n');
+		};
+	})();
+
+	function applyToSingletonTag(styleElement, index, remove, obj) {
+		var css = remove ? "" : obj.css;
+
+		if (styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = replaceText(index, css);
+		} else {
+			var cssNode = document.createTextNode(css);
+			var childNodes = styleElement.childNodes;
+			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+			if (childNodes.length) {
+				styleElement.insertBefore(cssNode, childNodes[index]);
+			} else {
+				styleElement.appendChild(cssNode);
+			}
+		}
+	}
+
+	function applyToTag(styleElement, obj) {
+		var css = obj.css;
+		var media = obj.media;
+
+		if(media) {
+			styleElement.setAttribute("media", media)
+		}
+
+		if(styleElement.styleSheet) {
+			styleElement.styleSheet.cssText = css;
+		} else {
+			while(styleElement.firstChild) {
+				styleElement.removeChild(styleElement.firstChild);
+			}
+			styleElement.appendChild(document.createTextNode(css));
+		}
+	}
+
+	function updateLink(linkElement, obj) {
+		var css = obj.css;
+		var sourceMap = obj.sourceMap;
+
+		if(sourceMap) {
+			// http://stackoverflow.com/a/26603875
+			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+		}
+
+		var blob = new Blob([css], { type: "text/css" });
+
+		var oldSrc = linkElement.href;
+
+		linkElement.href = URL.createObjectURL(blob);
+
+		if(oldSrc)
+			URL.revokeObjectURL(oldSrc);
+	}
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(180);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	/**
+	 * 这一页就是那个如果没有问卷的话就新建一个问卷的
+	 * 不牵扯到数据的问题，所以不需要props和dispaction的分发
+	 * 只需要做一个点击然后跳转的处理，这个使用路由就行
+	 */
+
+	var NewQustion = function (_Component) {
+	  _inherits(NewQustion, _Component);
+
+	  function NewQustion() {
+	    _classCallCheck(this, NewQustion);
+
+	    return _possibleConstructorReturn(this, (NewQustion.__proto__ || Object.getPrototypeOf(NewQustion)).call(this));
+	  }
+
+	  _createClass(NewQustion, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'section',
+	        { className: 'new-box' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'new-question' },
+	          '\u65B0\u5EFA\u95EE\u5377'
+	        )
+	      );
+	    }
+	  }]);
+
+	  return NewQustion;
+	}(_react.Component);
+
+	exports.default = NewQustion;
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(181);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(178)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./newQuestion.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./newQuestion.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(177)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".new-box {\r\n    position: relative;\r\n    width: 80%;\r\n    height: 200px;\r\n    margin: 40px auto;\r\n    box-shadow: 0 0 5px 3px #ccc;\r\n    background-color: #fff;\r\n}\r\n\r\n.new-question {\r\n    position: absolute;\r\n    left: 50%;\r\n    top: 50%;\r\n    width: 120px;\r\n    height: 40px;\r\n    margin-left: -60px;\r\n    margin-top: -20px;\r\n    color: #fff;\r\n    font-family: \"Microsoft YaHei\";\r\n    text-align: center;\r\n    line-height: 40px;\r\n    background-color: #f07600;\r\n}", ""]);
+
+	// exports
+
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(183);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var QuestionEdit = function (_Component) {
+		_inherits(QuestionEdit, _Component);
+
+		//初始化组件属性和状态
+		function QuestionEdit(props) {
+			_classCallCheck(this, QuestionEdit);
+
+			var _this = _possibleConstructorReturn(this, (QuestionEdit.__proto__ || Object.getPrototypeOf(QuestionEdit)).call(this, props));
+
+			_this.state = {
+				typeShow: false,
+				data: {
+					title: '这是里标题',
+					time: '',
+					state: '1',
+					data: [{
+						question: '',
+						type: '1',
+						options: ['选项一', '选项二'],
+						selected: [false, false],
+						text: '文本的内容'
+					}]
+
+				}
+			};
+			return _this;
+		}
+
+		/*
+	 state = {
+	 	typeShow: false,
+	 	data: {
+	 title: '问卷的标题',
+	 time: '问卷创建的时间',
+	 state: '发布中，未发布，已结束',
+	 data: [{ 
+	 //这里面的数据就是每个题
+	 question: '每个问题',
+	 type: '单选题，多选题，文本题',
+	 options: ['选项一', '选项二', '选项三'],
+	 selected: ['false', 'false'],
+	 text: '如果是文本就是文本的内容'
+	 }],
+	 },
+	 }
+	 state：1：发布中 2：未发布 3：已结束
+	 type: 1：单选题 2多选题 3文本题
+	 */
+
+		_createClass(QuestionEdit, [{
+			key: 'renderAddProblem',
+			value: function renderAddProblem() {
+				//这里是点击添加问题出现的 
+				//应该是右一个状态控制的，就是点击添加问题然后
+				return _react2.default.createElement(
+					'div',
+					{ className: 'problem-type' },
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.handleSingle.bind(this) },
+						'\u5355\u9009'
+					)
+				);
+			}
+		}, {
+			key: 'handleSingle',
+			value: function handleSingle() {
+				var data = this.state.data.data.concat({ type: '1',
+					options: ['选项一', '选项二'],
+					selected: [false, false]
+				});
+				this.setState({ typeShow: false, data: { data: data } });
+				console.log(this.state);
+			}
+
+			// handleMultiselect(){
+			// 	let data = this.state.data.data.concat({type: '2', 
+			// 									   options: ['选项一', '选项二', '选项三'],
+			// 									   selected: [false, false, false]
+			// 									});
+			// 	this.setState({typeShow: false, data:{data: {data: data}}});
+			// }
+
+			// handleText(){
+			// 	let data = this.state.data.data.concat({type: '3', 
+			// 									   text: '文本'
+			// 									});
+			// 	this.setState({typeShow: false, data:{data: {data: data}}});
+			// }
+
+			//遍历数据进行渲染
+
+		}, {
+			key: 'renderProblemList',
+			value: function renderProblemList() {
+				var type = { '1': '单选题', '2': '多选题', '3': '文本题' };
+				var data = this.state.data.data;
+				console.log(data);
+				console.log(data instanceof Array);
+				return data.map(function (val, index, arr) {
+					return _react2.default.createElement(
+						'li',
+						{ key: index },
+						_react2.default.createElement(
+							'div',
+							{ className: 'problem-title' },
+							'Q',
+							index,
+							type[val.type]
+						),
+						val.options.map(function (v, i) {
+							return _react2.default.createElement(
+								'div',
+								{ className: 'problem-option', key: i },
+								_react2.default.createElement('input', { type: 'radio', name: 'single' }),
+								_react2.default.createElement('input', { defaultValue: v })
+							);
+						})
+					);
+				});
+			}
+
+			//显示选择按钮
+
+		}, {
+			key: 'addProblem',
+			value: function addProblem() {
+				this.setState({ typeShow: true });
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var typeShow = this.state.typeShow ? this.renderAddProblem() : '';
+				return _react2.default.createElement(
+					'section',
+					{ className: 'edit-box' },
+					_react2.default.createElement(
+						'h1',
+						{ className: 'edit-title' },
+						'\u8FD9\u91CC\u662F\u6807\u9898'
+					),
+					_react2.default.createElement(
+						'section',
+						{ className: 'edit-content' },
+						_react2.default.createElement(
+							'ul',
+							{ className: 'problem-list' },
+							this.renderProblemList()
+						),
+						typeShow,
+						_react2.default.createElement(
+							'div',
+							{ className: 'add-problem', onClick: this.addProblem.bind(this) },
+							'\u6DFB\u52A0\u95EE\u9898'
+						)
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'footer-save' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'end-date' },
+							_react2.default.createElement(
+								'span',
+								null,
+								'\u95EE\u5377\u622A\u81F3\u65E5\u671F'
+							),
+							_react2.default.createElement(
+								'span',
+								{ className: 'calendar' },
+								'2016-04-22'
+							)
+						),
+						_react2.default.createElement(
+							'button',
+							null,
+							'\u4FDD\u5B58\u95EE\u5377'
+						),
+						_react2.default.createElement(
+							'button',
+							null,
+							'\u53D1\u5E03\u95EE\u5377'
+						)
+					)
+				);
+			}
+		}]);
+
+		return QuestionEdit;
+	}(_react.Component);
+
+	exports.default = QuestionEdit;
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(184);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(178)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../node_modules/css-loader/index.js!./questionEdit.css", function() {
+				var newContent = require("!!./../../node_modules/css-loader/index.js!./questionEdit.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(177)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".edit-box {\r\n    width: 80%;\r\n    margin: 40px auto;\r\n    padding: 10px 20px;\r\n    box-shadow: 0 0 4px #ccc;\r\n    background-color: #fff;\r\n}\r\n\r\n.edit-title {\r\n    text-align: center;\r\n}\r\n\r\n.problem-list {\r\n    width: 80%;\r\n    margin: 0 auto;\r\n    list-style-type: none;\r\n}\r\n\r\n.add-problem {\r\n    padding: 30px 0;\r\n    font-size: 1.5rem;\r\n    background-color: #eee;\r\n    text-align: center;\r\n    border: 1px solid #ccc;\r\n}\r\n\r\n.footer-save {\r\n    margin: 20px 0;\r\n}\r\n\r\n.end-date {\r\n    float: left;\r\n    margin: 0 30% 0 10%;\r\n}\r\n\r\n.problem-type {\r\n    padding: 10px;\r\n    text-align: center;\r\n}\r\n\r\n.problem-title {\r\n    padding: 5px;\r\n    text-align: left;\r\n    font-size: 18px;\r\n}\r\n\r\n.problem-option {\r\n    margin-left: 2em;\r\n    padding: 5px 0;\r\n    font-size: 18px;    \r\n}\r\n\r\n.problem-option input {\r\n    height: 30px;\r\n    vertical-align: middle;\r\n}\r\n", ""]);
+
+	// exports
+
 
 /***/ }
 /******/ ]);

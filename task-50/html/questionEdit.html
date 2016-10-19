@@ -30,6 +30,12 @@
             text-align: center;
         }
 
+        .problem-list {
+            width: 80%;
+            margin: 0 auto;
+            list-style-type: none;
+        }
+
         .add-problem {
             padding: 30px 0;
             font-size: 1.5rem;
@@ -51,6 +57,23 @@
             padding: 10px;
             text-align: center;
         }
+
+        .problem-title {
+            padding: 5px;
+            font-size: 18px;
+        }
+        
+        .problem-option {
+            margin-left: 2em;
+            padding: 5px 0;
+            font-size: 18px;    
+        }
+
+        .problem-option input {
+            height: 30px;
+            vertical-align: middle;
+        }
+
     </style>
 </head>
 <body>
@@ -61,9 +84,37 @@
     <section class="edit-box">
         <h1 class="edit-title">这里是标题</h1>
         <section class="edit-content">
-            <div class="proble-list">
-                
-            </div>
+        
+            <ul class="problem-list">
+                <li>
+                    <div class="problem-title">Q1单选题</div>
+                    <div class="problem-option">
+                        <input type="radio"  name="single"><input type="text" value="选项一">
+                    </div>
+                    <div class="problem-option">
+                        <input type="radio"  name="single"><input type="text" value="选项二">
+                    </div>
+                </li>
+                 <li>
+                    <div class="problem-title">Q2多选题</div>
+                    <div class="problem-option">
+                        <input type="checkbox" ><input type="text" value="选项一">
+                    </div>
+                    <div class="problem-option">
+                        <input type="checkbox" ><input type="text" name="选项二">
+                    </div>
+                    <div class="problem-option">
+                        <input type="checkbox" ><input type="text" name="选项三">
+                    </div>
+                </li>
+                 <li>
+                    <div class="problem-title">Q3文本题</div>
+                    <textarea class="problem-option">
+                        
+                    </textarea>
+                </li>
+            </ul>
+
             <div class="problem-type">
                 <button>单选</button>
                 <button>多选</button>
