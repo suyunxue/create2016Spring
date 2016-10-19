@@ -22391,7 +22391,6 @@
 						selected: [false, false],
 						text: '文本的内容'
 					}]
-
 				}
 			};
 			return _this;
@@ -22418,9 +22417,32 @@
 	 type: 1：单选题 2多选题 3文本题
 	 */
 
+		//给相应问题添加选项
+
+
 		_createClass(QuestionEdit, [{
+			key: 'addOption',
+			value: function addOption(index) {
+				return function () {
+					//就是添加数据
+					var options = this.state.data.data[index].options.concat('新选项');
+					var data = this.state.data.data;
+					data[index].options = options;
+
+					this.setState({ data: { data: data } });
+					console.log(this.state.data);
+				};
+			}
+
+			//删除问题特定的选项
+
+		}, {
+			key: 'removeOption',
+			value: function removeOption(index) {}
+		}, {
 			key: 'renderAddProblem',
 			value: function renderAddProblem() {
+
 				//这里是点击添加问题出现的 
 				//应该是右一个状态控制的，就是点击添加问题然后
 				return _react2.default.createElement(
@@ -22429,7 +22451,17 @@
 					_react2.default.createElement(
 						'button',
 						{ onClick: this.handleSingle.bind(this) },
-						'\u5355\u9009'
+						' \u5355\u9009\u9898 '
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.handleMultiselect.bind(this) },
+						' \u591A\u9009\u9898 '
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.handleText.bind(this) },
+						' \u6587\u672C\u9898 '
 					)
 				);
 			}
@@ -22441,23 +22473,25 @@
 					selected: [false, false]
 				});
 				this.setState({ typeShow: false, data: { data: data } });
-				console.log(this.state);
 			}
+		}, {
+			key: 'handleMultiselect',
+			value: function handleMultiselect() {
+				var data = this.state.data.data.concat({ type: '2',
+					options: ['选项一', '选项二', '选项三'],
+					selected: [false, false, false]
+				});
+				this.setState({ typeShow: false, data: { data: data } });
+			}
+		}, {
+			key: 'handleText',
+			value: function handleText() {
+				var data = this.state.data.data.concat({ type: '3',
+					text: '文本'
+				});
 
-			// handleMultiselect(){
-			// 	let data = this.state.data.data.concat({type: '2', 
-			// 									   options: ['选项一', '选项二', '选项三'],
-			// 									   selected: [false, false, false]
-			// 									});
-			// 	this.setState({typeShow: false, data:{data: {data: data}}});
-			// }
-
-			// handleText(){
-			// 	let data = this.state.data.data.concat({type: '3', 
-			// 									   text: '文本'
-			// 									});
-			// 	this.setState({typeShow: false, data:{data: {data: data}}});
-			// }
+				this.setState({ typeShow: false, data: { data: data } });
+			}
 
 			//遍历数据进行渲染
 
@@ -22466,28 +22500,67 @@
 			value: function renderProblemList() {
 				var type = { '1': '单选题', '2': '多选题', '3': '文本题' };
 				var data = this.state.data.data;
-				console.log(data);
-				console.log(data instanceof Array);
+				var _self = this;
 				return data.map(function (val, index, arr) {
-					return _react2.default.createElement(
-						'li',
-						{ key: index },
-						_react2.default.createElement(
-							'div',
-							{ className: 'problem-title' },
-							'Q',
-							index,
-							type[val.type]
-						),
-						val.options.map(function (v, i) {
-							return _react2.default.createElement(
+					if (val.type == '1') {
+						return _react2.default.createElement(
+							'li',
+							{ key: index },
+							_react2.default.createElement(
 								'div',
-								{ className: 'problem-option', key: i },
-								_react2.default.createElement('input', { type: 'radio', name: 'single' }),
-								_react2.default.createElement('input', { defaultValue: v })
-							);
-						})
-					);
+								{ className: 'problem-title' },
+								'Q',
+								index + 1,
+								type[val.type]
+							),
+							_react2.default.createElement(
+								'span',
+								{ onClick: _self.addOption(index).bind(_self) },
+								'+'
+							),
+							val.options.map(function (v, i) {
+								return _react2.default.createElement(
+									'div',
+									{ className: 'problem-option', key: i },
+									_react2.default.createElement('input', { type: 'radio', name: 'single' }),
+									_react2.default.createElement('input', { defaultValue: v })
+								);
+							})
+						);
+					} else if (val.type == '2') {
+						return _react2.default.createElement(
+							'li',
+							{ key: index },
+							_react2.default.createElement(
+								'div',
+								{ className: 'problem-title' },
+								'Q',
+								index + 1,
+								type[val.type]
+							),
+							val.options.map(function (v, i) {
+								return _react2.default.createElement(
+									'div',
+									{ className: 'problem-option', key: i },
+									_react2.default.createElement('input', { type: 'checkbox', name: 'single' }),
+									_react2.default.createElement('input', { defaultValue: v })
+								);
+							})
+						);
+					} else if (val.type == '3') {
+						return _react2.default.createElement(
+							'li',
+							{ key: index },
+							_react2.default.createElement(
+								'div',
+								{ className: 'problem-title' },
+								'Q',
+								index + 1,
+								type[val.type]
+							),
+							_react2.default.createElement('textarea', { placeholder: '\u8BF7\u586B\u5199\u6587\u672C\u5185\u5BB9' })
+						);
+					}
 				});
 			}
 
