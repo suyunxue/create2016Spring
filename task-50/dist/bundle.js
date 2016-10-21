@@ -22384,13 +22384,7 @@
 					title: '这是里标题',
 					time: '',
 					state: '1',
-					data: [{
-						question: '',
-						type: '1',
-						options: ['选项一', '选项二'],
-						selected: [false, false],
-						text: '文本的内容'
-					}]
+					data: []
 				}
 			};
 			return _this;
@@ -22428,13 +22422,69 @@
 					var options = this.state.data.data[index].options.concat('新选项');
 					var data = this.state.data.data;
 					data[index].options = options;
+					data[index].selected.push(false);
 
 					this.setState({ data: { data: data } });
 					console.log(this.state.data);
 				};
 			}
+		}, {
+			key: 'saveTitle',
+			value: function saveTitle(event) {
+				var temp = this.state.data;
+				temp.title = event.target.value;
+				this.setState({ data: temp });
+				console.log(this.state.data);
+			}
+		}, {
+			key: 'saveQuestionTitle',
+			value: function saveQuestionTitle(index) {
+				return function (event) {
+					var temp = this.state.data.data;
+					temp[index].question = event.target.value;
+					this.setState({ data: { data: temp } });
+					console.log(this.state);
+				};
+			}
+
+			/**
+	   * 把state里面的data数据取出来，然后保存options
+	   * @param  {[type]} index 问题的下标
+	   * @param  i 问题选项的下标
+	   * @param cont 问题的内容
+	   * @return {[type]}       [description]
+	   */
+
+		}, {
+			key: 'saveOptionsData',
+			value: function saveOptionsData(index, i) {
+
+				//复制一份data的数据
+				//在这个基础上做修改
+				return function (event) {
+					var temp = this.state.data.data;
+					var val = event.target.value;
+					temp[index].options.splice(i, 1, val);
+					this.setState({ data: temp });
+					console.log(this.state);
+				};
+			}
+
+			//保存文本数据
+
+		}, {
+			key: 'saveText',
+			value: function saveText(index) {
+				return function (event) {
+					var temp = this.state.data.data;
+					temp[index].text = event.target.value;
+					this.setState({ data: { data: temp } });
+					console.log(this.state);
+				};
+			}
 
 			//删除问题特定的选项
+			//未实现
 
 		}, {
 			key: 'removeOption',
@@ -22501,67 +22551,85 @@
 				var type = { '1': '单选题', '2': '多选题', '3': '文本题' };
 				var data = this.state.data.data;
 				var _self = this;
-				return data.map(function (val, index, arr) {
-					if (val.type == '1') {
-						return _react2.default.createElement(
-							'li',
-							{ key: index },
-							_react2.default.createElement(
-								'div',
-								{ className: 'problem-title' },
-								'Q',
-								index + 1,
-								type[val.type]
-							),
-							_react2.default.createElement(
-								'span',
-								{ onClick: _self.addOption(index).bind(_self) },
-								'+'
-							),
-							val.options.map(function (v, i) {
-								return _react2.default.createElement(
+				if (data.length < 1) {
+					return _react2.default.createElement('div', null);
+				} else {
+					return data.map(function (val, index, arr) {
+						if (val.type == '1') {
+							var serial = 'Q' + (index + 1);
+							var question = type[val.type];
+							return _react2.default.createElement(
+								'li',
+								{ key: index },
+								_react2.default.createElement(
+									'span',
+									null,
+									serial
+								),
+								_react2.default.createElement('input', {
+									className: 'problem-title',
+									defaultValue: question,
+									onChange: _self.saveQuestionTitle(index).bind(_self)
+								}),
+								val.options.map(function (v, i) {
+									return _react2.default.createElement(
+										'div',
+										{ className: 'problem-option', key: i },
+										_react2.default.createElement('input', { type: 'radio', name: 'single' }),
+										_react2.default.createElement('input', {
+											defaultValue: v,
+											onChange: _self.saveOptionsData(index, i).bind(_self)
+										})
+									);
+								})
+							);
+						} else if (val.type == '2') {
+							var _serial = 'Q' + (index + 1);
+							var _question = type[val.type];
+							return _react2.default.createElement(
+								'li',
+								{ key: index },
+								_react2.default.createElement(
+									'span',
+									null,
+									_serial
+								),
+								_react2.default.createElement('input', {
+									className: 'problem-title',
+									defaultValue: _question,
+									onChange: _self.saveQuestionTitle(index).bind(_self)
+								}),
+								val.options.map(function (v, i) {
+									return _react2.default.createElement(
+										'div',
+										{ className: 'problem-option', key: i },
+										_react2.default.createElement('input', { type: 'checkbox' }),
+										_react2.default.createElement('input', {
+											defaultValue: v,
+											onChange: _self.saveOptionsData(index, i).bind(_self)
+										})
+									);
+								})
+							);
+						} else if (val.type == '3') {
+							return _react2.default.createElement(
+								'li',
+								{ key: index },
+								_react2.default.createElement(
 									'div',
-									{ className: 'problem-option', key: i },
-									_react2.default.createElement('input', { type: 'radio', name: 'single' }),
-									_react2.default.createElement('input', { defaultValue: v })
-								);
-							})
-						);
-					} else if (val.type == '2') {
-						return _react2.default.createElement(
-							'li',
-							{ key: index },
-							_react2.default.createElement(
-								'div',
-								{ className: 'problem-title' },
-								'Q',
-								index + 1,
-								type[val.type]
-							),
-							val.options.map(function (v, i) {
-								return _react2.default.createElement(
-									'div',
-									{ className: 'problem-option', key: i },
-									_react2.default.createElement('input', { type: 'checkbox', name: 'single' }),
-									_react2.default.createElement('input', { defaultValue: v })
-								);
-							})
-						);
-					} else if (val.type == '3') {
-						return _react2.default.createElement(
-							'li',
-							{ key: index },
-							_react2.default.createElement(
-								'div',
-								{ className: 'problem-title' },
-								'Q',
-								index + 1,
-								type[val.type]
-							),
-							_react2.default.createElement('textarea', { placeholder: '\u8BF7\u586B\u5199\u6587\u672C\u5185\u5BB9' })
-						);
-					}
-				});
+									{ className: 'problem-title' },
+									'Q',
+									index + 1,
+									type[val.type]
+								),
+								_react2.default.createElement('textarea', {
+									onChange: _self.saveText(index).bind(_self),
+									placeholder: '\u8BF7\u586B\u5199\u6587\u672C\u5185\u5BB9'
+								})
+							);
+						}
+					});
+				}
 			}
 
 			//显示选择按钮
@@ -22578,11 +22646,11 @@
 				return _react2.default.createElement(
 					'section',
 					{ className: 'edit-box' },
-					_react2.default.createElement(
-						'h1',
-						{ className: 'edit-title' },
-						'\u8FD9\u91CC\u662F\u6807\u9898'
-					),
+					_react2.default.createElement('input', {
+						className: 'edit-title',
+						defaultValue: '\u8FD9\u91CC\u662F\u6807\u9898',
+						onChange: this.saveTitle.bind(this)
+					}),
 					_react2.default.createElement(
 						'section',
 						{ className: 'edit-content' },

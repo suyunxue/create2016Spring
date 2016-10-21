@@ -15,13 +15,7 @@ class  QuestionEdit extends Component{
 				title: '这是里标题',
 				time: '',
 				state: '1',   
-				data: [{
-					question: '',
-					type: '1',
-					options: ['选项一', '选项二'],
-					selected: [false, false],
-					text: '文本的内容'
-				}]
+				data: []
 			}
         };
     }
@@ -47,6 +41,8 @@ class  QuestionEdit extends Component{
         type: 1：单选题 2多选题 3文本题
         */
        
+
+       
     //给相应问题添加选项
    	addOption(index){
    		return function(){
@@ -54,16 +50,63 @@ class  QuestionEdit extends Component{
    			var options = this.state.data.data[index].options.concat('新选项');	
    			var data = this.state.data.data;
    			data[index].options = options;
+   			data[index].selected.push(false);
 
    			this.setState({data: {data: data}});
-   			console.log(this.state.data)
+   			console.log(this.state.data);	
+   		}
+   	}
+
+   	saveTitle(event){
+   		let temp = this.state.data;
+   		temp.title = event.target.value;
+   		this.setState({data: temp});
+   		console.log(this.state.data);
+   	}
+
+   	saveQuestionTitle(index){
+   		return function(event){
+   			let temp = this.state.data.data;
+   			temp[index].question = event.target.value;
+   			this.setState({data: {data: temp}});
+   			console.log(this.state);
+   		}
+   	}
+
+   	/**
+   	 * 把state里面的data数据取出来，然后保存options
+   	 * @param  {[type]} index 问题的下标
+   	 * @param  i 问题选项的下标
+   	 * @param cont 问题的内容
+   	 * @return {[type]}       [description]
+   	 */
+   	saveOptionsData(index, i){
+
+   		//复制一份data的数据
+   		//在这个基础上做修改
+   		return function(event){
+   			let temp = this.state.data.data;
+   			let val = event.target.value;
+   			temp[index].options.splice(i, 1, val);
+   			this.setState({data: temp});
+   			console.log(this.state);
+   		}
+   	}
+
+   	//保存文本数据
+   	saveText(index){
+   		return function(event){
+   			let temp = this.state.data.data;
+   			temp[index].text = event.target.value;
+   			this.setState({data: {data: temp}});
+   			console.log(this.state)
    		}
    	}
 
    	//删除问题特定的选项
+   	//未实现
    	removeOption(index){
-
-   	}
+   	}	
 
 	renderAddProblem(){
 
@@ -107,40 +150,67 @@ class  QuestionEdit extends Component{
 		var type = {'1': '单选题', '2': '多选题', '3': '文本题'}
 		var data = this.state.data.data;
 		var _self = this;
-		return data.map(function(val, index, arr){
-			if(val.type == '1'){
-				 return <li  key={index}>
-   							<div className="problem-title">Q{index+1}{type[val.type]}</div>
-   							<span onClick={_self.addOption(index).bind(_self)}>+</span>
-								{   val.options.map(function(v, i){
-									    return <div className="problem-option" key={i}>
-										         <input type="radio" name="single" />
-										         <input defaultValue={v}/>
-									           </div>
+		if(data.length < 1){
+			return <div></div>
+		}else {
+			return data.map(function(val, index, arr){
+				if(val.type == '1'){
+					let serial = 'Q' + (index + 1);
+					let question = type[val.type];
+					 return <li  key={index}>
+					 				<span>{serial}</span>
+					 				<input 
+					 				       className="problem-title"  
+					 				       defaultValue={question} 
+					 				       onChange={_self.saveQuestionTitle(index).bind(_self)}
+					 				/>
+									{   val.options.map(function(v, i){
+										    return <div className="problem-option" key={i}>
+											            <input type="radio" name="single" />
+											            <input 
+											                defaultValue={v}  
+											                onChange={_self.saveOptionsData(index, i).bind(_self)} 
+											            />
+										           </div>
 
-							     	})
+								     	})
+								    }
+							</li>
+				}else if(val.type == '2'){
+					let serial = 'Q' + (index + 1);
+					let question = type[val.type];
+					return <li  key={index}>
+								<span>{serial}</span>
+				 				<input 
+				 				       className="problem-title"  
+				 				       defaultValue={question} 
+				 				       onChange={_self.saveQuestionTitle(index).bind(_self)}
+				 				/>
+								{   val.options.map(function(v, i){
+						     			return <div className="problem-option" key={i}>
+						     				     <input type="checkbox" />
+						     				     <input 
+						     				         defaultValue={v}
+						     				         onChange={_self.saveOptionsData(index, i).bind(_self)}
+						     				      />
+						     			       </div>
+						     	    })
 							    }
-						</li>
-			}else if(val.type == '2'){
-				return <li  key={index}>
-							<div className="problem-title">Q{index+1}{type[val.type]}</div>
-							{   val.options.map(function(v, i){
-					     			return <div className="problem-option" key={i}>
-					     				     <input type="checkbox" name="single" />
-					     				     <input defaultValue={v}/>
-					     			       </div>
-					     	    })
-						    }
-						</li>
-			}else if(val.type == '3'){
-				return <li  key={index}>
-							<div className="problem-title">Q{index+1}{type[val.type]}</div>
-							{  
-							   <textarea placeholder="请填写文本内容"></textarea>
-						    }
-						</li>
-			}		
-		})
+							</li>
+				}else if(val.type == '3'){
+					return <li  key={index}>
+								<div className="problem-title">Q{index+1}{type[val.type]}</div>
+								{  
+								   <textarea
+								   	   onChange={_self.saveText(index).bind(_self)}
+								       placeholder="请填写文本内容"
+								    >
+								   </textarea>
+							    }
+							</li>
+				}		
+			})			
+		}
 	}
 
 	//显示选择按钮
@@ -151,7 +221,11 @@ class  QuestionEdit extends Component{
 	render(){
 		let typeShow = this.state.typeShow ?  this.renderAddProblem() : '';
 		return (<section className="edit-box">
-			    <h1 className="edit-title">这里是标题</h1>
+			    <input 
+			        className="edit-title"
+			        defaultValue='这里是标题' 
+			        onChange={this.saveTitle.bind(this)}
+			    />
 			    <section className="edit-content">
 				    <ul className="problem-list">
 				    	{this.renderProblemList()}     

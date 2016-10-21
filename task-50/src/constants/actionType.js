@@ -7,4 +7,7 @@ const DELETEQUESTION = 'DELETEQUESTION'; //删除其中一个问卷
 
 const DELETEAllQUESTION = 'DELETEAllQUESTION';  //删除所有的问卷
 
-const SAVEQUESTION = 'SAVEQUESTION'; //编辑问卷完毕之后要保存的数据
+const SAVEQUESTION = 'SAVEQUESTION'; //编辑问卷完毕之后要保存的数据,未发布
+
+const RELEASEQUESION = 'RELEASEQUESION'; //发布问卷
+
