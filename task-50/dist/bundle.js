@@ -46,96 +46,33 @@
 
 	'use strict';
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
 
 	var _reactDom = __webpack_require__(34);
 
-	var _header = __webpack_require__(172);
+	var _redux = __webpack_require__(172);
 
-	var _header2 = _interopRequireDefault(_header);
+	var _reactRedux = __webpack_require__(186);
 
-	var _table = __webpack_require__(173);
+	var _App = __webpack_require__(199);
 
-	var _table2 = _interopRequireDefault(_table);
+	var _App2 = _interopRequireDefault(_App);
 
-	var _seeData = __webpack_require__(174);
+	var _reducer = __webpack_require__(220);
 
-	var _seeData2 = _interopRequireDefault(_seeData);
-
-	var _newQuestion = __webpack_require__(179);
-
-	var _newQuestion2 = _interopRequireDefault(_newQuestion);
-
-	var _QuestionEdit = __webpack_require__(182);
-
-	var _QuestionEdit2 = _interopRequireDefault(_QuestionEdit);
+	var _reducer2 = _interopRequireDefault(_reducer);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var store = (0, _redux.createStore)(_reducer2.default);
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var App = function (_React$Component) {
-		_inherits(App, _React$Component);
-
-		function App() {
-			_classCallCheck(this, App);
-
-			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-		}
-
-		_createClass(App, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(_header2.default, null),
-					_react2.default.createElement(_QuestionEdit2.default, null)
-				);
-			}
-		}]);
-
-		return App;
-	}(_react2.default.Component);
-
-	var data = [{
-		title: '问卷的标题',
-		time: '问卷创建的时间',
-		state: '发布中，未发布，已结束',
-		data: [{
-			//这里面的数据就是每个题
-			question: '每个问题',
-			type: '单选题，多选题，文本题',
-			option: ['选项一', '选项二', '选项三'],
-			text: '如果是文本就是文本的内容,否则为空'
-		}, {
-			question: '每个问题',
-			type: '单选题，多选题，文本题',
-			option: ['选项一', '选项二', '选项三'],
-			text: '如果是文本就是文本的内容,否则为空'
-		}]
-	}, {
-		title: '问卷的标题',
-		time: '问卷创建的时间',
-		state: '发布中，未发布，已结束',
-		data: [{
-			//这里面的数据就是每个题
-			question: '每个问题',
-			type: '单选题，多选题，文本题',
-			option: ['选项一', '选项二', '选项三'],
-			text: '如果是文本就是文本的内容'
-		}]
-	}];
-
-	(0, _reactDom.render)(_react2.default.createElement(App, { data: data }), document.getElementById('app'));
+	(0, _reactDom.render)(_react2.default.createElement(
+		_reactRedux.Provider,
+		{ store: store },
+		_react2.default.createElement(_App2.default, null)
+	), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21508,6 +21445,1930 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+	exports.compose = exports.applyMiddleware = exports.bindActionCreators = exports.combineReducers = exports.createStore = undefined;
+
+	var _createStore = __webpack_require__(173);
+
+	var _createStore2 = _interopRequireDefault(_createStore);
+
+	var _combineReducers = __webpack_require__(181);
+
+	var _combineReducers2 = _interopRequireDefault(_combineReducers);
+
+	var _bindActionCreators = __webpack_require__(183);
+
+	var _bindActionCreators2 = _interopRequireDefault(_bindActionCreators);
+
+	var _applyMiddleware = __webpack_require__(184);
+
+	var _applyMiddleware2 = _interopRequireDefault(_applyMiddleware);
+
+	var _compose = __webpack_require__(185);
+
+	var _compose2 = _interopRequireDefault(_compose);
+
+	var _warning = __webpack_require__(182);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	/*
+	* This is a dummy function to check if the function name has been altered by minification.
+	* If the function has been minified and NODE_ENV !== 'production', warn the user.
+	*/
+	function isCrushed() {}
+
+	if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' && isCrushed.name !== 'isCrushed') {
+	  (0, _warning2['default'])('You are currently using minified code outside of NODE_ENV === \'production\'. ' + 'This means that you are running a slower development build of Redux. ' + 'You can use loose-envify (https://github.com/zertosh/loose-envify) for browserify ' + 'or DefinePlugin for webpack (http://stackoverflow.com/questions/30030031) ' + 'to ensure you have the correct code for your production build.');
+	}
+
+	exports.createStore = _createStore2['default'];
+	exports.combineReducers = _combineReducers2['default'];
+	exports.bindActionCreators = _bindActionCreators2['default'];
+	exports.applyMiddleware = _applyMiddleware2['default'];
+	exports.compose = _compose2['default'];
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 173 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports.ActionTypes = undefined;
+	exports['default'] = createStore;
+
+	var _isPlainObject = __webpack_require__(174);
+
+	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+
+	var _symbolObservable = __webpack_require__(178);
+
+	var _symbolObservable2 = _interopRequireDefault(_symbolObservable);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	/**
+	 * These are private action types reserved by Redux.
+	 * For any unknown actions, you must return the current state.
+	 * If the current state is undefined, you must return the initial state.
+	 * Do not reference these action types directly in your code.
+	 */
+	var ActionTypes = exports.ActionTypes = {
+	  INIT: '@@redux/INIT'
+	};
+
+	/**
+	 * Creates a Redux store that holds the state tree.
+	 * The only way to change the data in the store is to call `dispatch()` on it.
+	 *
+	 * There should only be a single store in your app. To specify how different
+	 * parts of the state tree respond to actions, you may combine several reducers
+	 * into a single reducer function by using `combineReducers`.
+	 *
+	 * @param {Function} reducer A function that returns the next state tree, given
+	 * the current state tree and the action to handle.
+	 *
+	 * @param {any} [preloadedState] The initial state. You may optionally specify it
+	 * to hydrate the state from the server in universal apps, or to restore a
+	 * previously serialized user session.
+	 * If you use `combineReducers` to produce the root reducer function, this must be
+	 * an object with the same shape as `combineReducers` keys.
+	 *
+	 * @param {Function} enhancer The store enhancer. You may optionally specify it
+	 * to enhance the store with third-party capabilities such as middleware,
+	 * time travel, persistence, etc. The only store enhancer that ships with Redux
+	 * is `applyMiddleware()`.
+	 *
+	 * @returns {Store} A Redux store that lets you read the state, dispatch actions
+	 * and subscribe to changes.
+	 */
+	function createStore(reducer, preloadedState, enhancer) {
+	  var _ref2;
+
+	  if (typeof preloadedState === 'function' && typeof enhancer === 'undefined') {
+	    enhancer = preloadedState;
+	    preloadedState = undefined;
+	  }
+
+	  if (typeof enhancer !== 'undefined') {
+	    if (typeof enhancer !== 'function') {
+	      throw new Error('Expected the enhancer to be a function.');
+	    }
+
+	    return enhancer(createStore)(reducer, preloadedState);
+	  }
+
+	  if (typeof reducer !== 'function') {
+	    throw new Error('Expected the reducer to be a function.');
+	  }
+
+	  var currentReducer = reducer;
+	  var currentState = preloadedState;
+	  var currentListeners = [];
+	  var nextListeners = currentListeners;
+	  var isDispatching = false;
+
+	  function ensureCanMutateNextListeners() {
+	    if (nextListeners === currentListeners) {
+	      nextListeners = currentListeners.slice();
+	    }
+	  }
+
+	  /**
+	   * Reads the state tree managed by the store.
+	   *
+	   * @returns {any} The current state tree of your application.
+	   */
+	  function getState() {
+	    return currentState;
+	  }
+
+	  /**
+	   * Adds a change listener. It will be called any time an action is dispatched,
+	   * and some part of the state tree may potentially have changed. You may then
+	   * call `getState()` to read the current state tree inside the callback.
+	   *
+	   * You may call `dispatch()` from a change listener, with the following
+	   * caveats:
+	   *
+	   * 1. The subscriptions are snapshotted just before every `dispatch()` call.
+	   * If you subscribe or unsubscribe while the listeners are being invoked, this
+	   * will not have any effect on the `dispatch()` that is currently in progress.
+	   * However, the next `dispatch()` call, whether nested or not, will use a more
+	   * recent snapshot of the subscription list.
+	   *
+	   * 2. The listener should not expect to see all state changes, as the state
+	   * might have been updated multiple times during a nested `dispatch()` before
+	   * the listener is called. It is, however, guaranteed that all subscribers
+	   * registered before the `dispatch()` started will be called with the latest
+	   * state by the time it exits.
+	   *
+	   * @param {Function} listener A callback to be invoked on every dispatch.
+	   * @returns {Function} A function to remove this change listener.
+	   */
+	  function subscribe(listener) {
+	    if (typeof listener !== 'function') {
+	      throw new Error('Expected listener to be a function.');
+	    }
+
+	    var isSubscribed = true;
+
+	    ensureCanMutateNextListeners();
+	    nextListeners.push(listener);
+
+	    return function unsubscribe() {
+	      if (!isSubscribed) {
+	        return;
+	      }
+
+	      isSubscribed = false;
+
+	      ensureCanMutateNextListeners();
+	      var index = nextListeners.indexOf(listener);
+	      nextListeners.splice(index, 1);
+	    };
+	  }
+
+	  /**
+	   * Dispatches an action. It is the only way to trigger a state change.
+	   *
+	   * The `reducer` function, used to create the store, will be called with the
+	   * current state tree and the given `action`. Its return value will
+	   * be considered the **next** state of the tree, and the change listeners
+	   * will be notified.
+	   *
+	   * The base implementation only supports plain object actions. If you want to
+	   * dispatch a Promise, an Observable, a thunk, or something else, you need to
+	   * wrap your store creating function into the corresponding middleware. For
+	   * example, see the documentation for the `redux-thunk` package. Even the
+	   * middleware will eventually dispatch plain object actions using this method.
+	   *
+	   * @param {Object} action A plain object representing “what changed”. It is
+	   * a good idea to keep actions serializable so you can record and replay user
+	   * sessions, or use the time travelling `redux-devtools`. An action must have
+	   * a `type` property which may not be `undefined`. It is a good idea to use
+	   * string constants for action types.
+	   *
+	   * @returns {Object} For convenience, the same action object you dispatched.
+	   *
+	   * Note that, if you use a custom middleware, it may wrap `dispatch()` to
+	   * return something else (for example, a Promise you can await).
+	   */
+	  function dispatch(action) {
+	    if (!(0, _isPlainObject2['default'])(action)) {
+	      throw new Error('Actions must be plain objects. ' + 'Use custom middleware for async actions.');
+	    }
+
+	    if (typeof action.type === 'undefined') {
+	      throw new Error('Actions may not have an undefined "type" property. ' + 'Have you misspelled a constant?');
+	    }
+
+	    if (isDispatching) {
+	      throw new Error('Reducers may not dispatch actions.');
+	    }
+
+	    try {
+	      isDispatching = true;
+	      currentState = currentReducer(currentState, action);
+	    } finally {
+	      isDispatching = false;
+	    }
+
+	    var listeners = currentListeners = nextListeners;
+	    for (var i = 0; i < listeners.length; i++) {
+	      listeners[i]();
+	    }
+
+	    return action;
+	  }
+
+	  /**
+	   * Replaces the reducer currently used by the store to calculate the state.
+	   *
+	   * You might need this if your app implements code splitting and you want to
+	   * load some of the reducers dynamically. You might also need this if you
+	   * implement a hot reloading mechanism for Redux.
+	   *
+	   * @param {Function} nextReducer The reducer for the store to use instead.
+	   * @returns {void}
+	   */
+	  function replaceReducer(nextReducer) {
+	    if (typeof nextReducer !== 'function') {
+	      throw new Error('Expected the nextReducer to be a function.');
+	    }
+
+	    currentReducer = nextReducer;
+	    dispatch({ type: ActionTypes.INIT });
+	  }
+
+	  /**
+	   * Interoperability point for observable/reactive libraries.
+	   * @returns {observable} A minimal observable of state changes.
+	   * For more information, see the observable proposal:
+	   * https://github.com/zenparsing/es-observable
+	   */
+	  function observable() {
+	    var _ref;
+
+	    var outerSubscribe = subscribe;
+	    return _ref = {
+	      /**
+	       * The minimal observable subscription method.
+	       * @param {Object} observer Any object that can be used as an observer.
+	       * The observer object should have a `next` method.
+	       * @returns {subscription} An object with an `unsubscribe` method that can
+	       * be used to unsubscribe the observable from the store, and prevent further
+	       * emission of values from the observable.
+	       */
+	      subscribe: function subscribe(observer) {
+	        if (typeof observer !== 'object') {
+	          throw new TypeError('Expected the observer to be an object.');
+	        }
+
+	        function observeState() {
+	          if (observer.next) {
+	            observer.next(getState());
+	          }
+	        }
+
+	        observeState();
+	        var unsubscribe = outerSubscribe(observeState);
+	        return { unsubscribe: unsubscribe };
+	      }
+	    }, _ref[_symbolObservable2['default']] = function () {
+	      return this;
+	    }, _ref;
+	  }
+
+	  // When a store is created, an "INIT" action is dispatched so that every
+	  // reducer returns their initial state. This effectively populates
+	  // the initial state tree.
+	  dispatch({ type: ActionTypes.INIT });
+
+	  return _ref2 = {
+	    dispatch: dispatch,
+	    subscribe: subscribe,
+	    getState: getState,
+	    replaceReducer: replaceReducer
+	  }, _ref2[_symbolObservable2['default']] = observable, _ref2;
+	}
+
+/***/ },
+/* 174 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getPrototype = __webpack_require__(175),
+	    isObjectLike = __webpack_require__(177);
+
+	/** `Object#toString` result references. */
+	var objectTag = '[object Object]';
+
+	/** Used for built-in method references. */
+	var funcProto = Function.prototype,
+	    objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = funcProto.toString;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Used to infer the `Object` constructor. */
+	var objectCtorString = funcToString.call(Object);
+
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objectToString = objectProto.toString;
+
+	/**
+	 * Checks if `value` is a plain object, that is, an object created by the
+	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.8.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 * }
+	 *
+	 * _.isPlainObject(new Foo);
+	 * // => false
+	 *
+	 * _.isPlainObject([1, 2, 3]);
+	 * // => false
+	 *
+	 * _.isPlainObject({ 'x': 0, 'y': 0 });
+	 * // => true
+	 *
+	 * _.isPlainObject(Object.create(null));
+	 * // => true
+	 */
+	function isPlainObject(value) {
+	  if (!isObjectLike(value) || objectToString.call(value) != objectTag) {
+	    return false;
+	  }
+	  var proto = getPrototype(value);
+	  if (proto === null) {
+	    return true;
+	  }
+	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+	  return (typeof Ctor == 'function' &&
+	    Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
+	}
+
+	module.exports = isPlainObject;
+
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var overArg = __webpack_require__(176);
+
+	/** Built-in value references. */
+	var getPrototype = overArg(Object.getPrototypeOf, Object);
+
+	module.exports = getPrototype;
+
+
+/***/ },
+/* 176 */
+/***/ function(module, exports) {
+
+	/**
+	 * Creates a unary function that invokes `func` with its argument transformed.
+	 *
+	 * @private
+	 * @param {Function} func The function to wrap.
+	 * @param {Function} transform The argument transform.
+	 * @returns {Function} Returns the new function.
+	 */
+	function overArg(func, transform) {
+	  return function(arg) {
+	    return func(transform(arg));
+	  };
+	}
+
+	module.exports = overArg;
+
+
+/***/ },
+/* 177 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return value != null && typeof value == 'object';
+	}
+
+	module.exports = isObjectLike;
+
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(179);
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _ponyfill = __webpack_require__(180);
+
+	var _ponyfill2 = _interopRequireDefault(_ponyfill);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	var root = undefined; /* global window */
+
+	if (typeof global !== 'undefined') {
+		root = global;
+	} else if (typeof window !== 'undefined') {
+		root = window;
+	}
+
+	var result = (0, _ponyfill2['default'])(root);
+	exports['default'] = result;
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 180 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports['default'] = symbolObservablePonyfill;
+	function symbolObservablePonyfill(root) {
+		var result;
+		var _Symbol = root.Symbol;
+
+		if (typeof _Symbol === 'function') {
+			if (_Symbol.observable) {
+				result = _Symbol.observable;
+			} else {
+				result = _Symbol('observable');
+				_Symbol.observable = result;
+			}
+		} else {
+			result = '@@observable';
+		}
+
+		return result;
+	};
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+	exports['default'] = combineReducers;
+
+	var _createStore = __webpack_require__(173);
+
+	var _isPlainObject = __webpack_require__(174);
+
+	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+
+	var _warning = __webpack_require__(182);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	function getUndefinedStateErrorMessage(key, action) {
+	  var actionType = action && action.type;
+	  var actionName = actionType && '"' + actionType.toString() + '"' || 'an action';
+
+	  return 'Given action ' + actionName + ', reducer "' + key + '" returned undefined. ' + 'To ignore an action, you must explicitly return the previous state.';
+	}
+
+	function getUnexpectedStateShapeWarningMessage(inputState, reducers, action, unexpectedKeyCache) {
+	  var reducerKeys = Object.keys(reducers);
+	  var argumentName = action && action.type === _createStore.ActionTypes.INIT ? 'preloadedState argument passed to createStore' : 'previous state received by the reducer';
+
+	  if (reducerKeys.length === 0) {
+	    return 'Store does not have a valid reducer. Make sure the argument passed ' + 'to combineReducers is an object whose values are reducers.';
+	  }
+
+	  if (!(0, _isPlainObject2['default'])(inputState)) {
+	    return 'The ' + argumentName + ' has unexpected type of "' + {}.toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] + '". Expected argument to be an object with the following ' + ('keys: "' + reducerKeys.join('", "') + '"');
+	  }
+
+	  var unexpectedKeys = Object.keys(inputState).filter(function (key) {
+	    return !reducers.hasOwnProperty(key) && !unexpectedKeyCache[key];
+	  });
+
+	  unexpectedKeys.forEach(function (key) {
+	    unexpectedKeyCache[key] = true;
+	  });
+
+	  if (unexpectedKeys.length > 0) {
+	    return 'Unexpected ' + (unexpectedKeys.length > 1 ? 'keys' : 'key') + ' ' + ('"' + unexpectedKeys.join('", "') + '" found in ' + argumentName + '. ') + 'Expected to find one of the known reducer keys instead: ' + ('"' + reducerKeys.join('", "') + '". Unexpected keys will be ignored.');
+	  }
+	}
+
+	function assertReducerSanity(reducers) {
+	  Object.keys(reducers).forEach(function (key) {
+	    var reducer = reducers[key];
+	    var initialState = reducer(undefined, { type: _createStore.ActionTypes.INIT });
+
+	    if (typeof initialState === 'undefined') {
+	      throw new Error('Reducer "' + key + '" returned undefined during initialization. ' + 'If the state passed to the reducer is undefined, you must ' + 'explicitly return the initial state. The initial state may ' + 'not be undefined.');
+	    }
+
+	    var type = '@@redux/PROBE_UNKNOWN_ACTION_' + Math.random().toString(36).substring(7).split('').join('.');
+	    if (typeof reducer(undefined, { type: type }) === 'undefined') {
+	      throw new Error('Reducer "' + key + '" returned undefined when probed with a random type. ' + ('Don\'t try to handle ' + _createStore.ActionTypes.INIT + ' or other actions in "redux/*" ') + 'namespace. They are considered private. Instead, you must return the ' + 'current state for any unknown actions, unless it is undefined, ' + 'in which case you must return the initial state, regardless of the ' + 'action type. The initial state may not be undefined.');
+	    }
+	  });
+	}
+
+	/**
+	 * Turns an object whose values are different reducer functions, into a single
+	 * reducer function. It will call every child reducer, and gather their results
+	 * into a single state object, whose keys correspond to the keys of the passed
+	 * reducer functions.
+	 *
+	 * @param {Object} reducers An object whose values correspond to different
+	 * reducer functions that need to be combined into one. One handy way to obtain
+	 * it is to use ES6 `import * as reducers` syntax. The reducers may never return
+	 * undefined for any action. Instead, they should return their initial state
+	 * if the state passed to them was undefined, and the current state for any
+	 * unrecognized action.
+	 *
+	 * @returns {Function} A reducer function that invokes every reducer inside the
+	 * passed object, and builds a state object with the same shape.
+	 */
+	function combineReducers(reducers) {
+	  var reducerKeys = Object.keys(reducers);
+	  var finalReducers = {};
+	  for (var i = 0; i < reducerKeys.length; i++) {
+	    var key = reducerKeys[i];
+
+	    if (process.env.NODE_ENV !== 'production') {
+	      if (typeof reducers[key] === 'undefined') {
+	        (0, _warning2['default'])('No reducer provided for key "' + key + '"');
+	      }
+	    }
+
+	    if (typeof reducers[key] === 'function') {
+	      finalReducers[key] = reducers[key];
+	    }
+	  }
+	  var finalReducerKeys = Object.keys(finalReducers);
+
+	  if (process.env.NODE_ENV !== 'production') {
+	    var unexpectedKeyCache = {};
+	  }
+
+	  var sanityError;
+	  try {
+	    assertReducerSanity(finalReducers);
+	  } catch (e) {
+	    sanityError = e;
+	  }
+
+	  return function combination() {
+	    var state = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    var action = arguments[1];
+
+	    if (sanityError) {
+	      throw sanityError;
+	    }
+
+	    if (process.env.NODE_ENV !== 'production') {
+	      var warningMessage = getUnexpectedStateShapeWarningMessage(state, finalReducers, action, unexpectedKeyCache);
+	      if (warningMessage) {
+	        (0, _warning2['default'])(warningMessage);
+	      }
+	    }
+
+	    var hasChanged = false;
+	    var nextState = {};
+	    for (var i = 0; i < finalReducerKeys.length; i++) {
+	      var key = finalReducerKeys[i];
+	      var reducer = finalReducers[key];
+	      var previousStateForKey = state[key];
+	      var nextStateForKey = reducer(previousStateForKey, action);
+	      if (typeof nextStateForKey === 'undefined') {
+	        var errorMessage = getUndefinedStateErrorMessage(key, action);
+	        throw new Error(errorMessage);
+	      }
+	      nextState[key] = nextStateForKey;
+	      hasChanged = hasChanged || nextStateForKey !== previousStateForKey;
+	    }
+	    return hasChanged ? nextState : state;
+	  };
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 182 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports['default'] = warning;
+	/**
+	 * Prints a warning in the console if it exists.
+	 *
+	 * @param {String} message The warning message.
+	 * @returns {void}
+	 */
+	function warning(message) {
+	  /* eslint-disable no-console */
+	  if (typeof console !== 'undefined' && typeof console.error === 'function') {
+	    console.error(message);
+	  }
+	  /* eslint-enable no-console */
+	  try {
+	    // This error was thrown as a convenience so that if you enable
+	    // "break on all exceptions" in your console,
+	    // it would pause the execution at this line.
+	    throw new Error(message);
+	    /* eslint-disable no-empty */
+	  } catch (e) {}
+	  /* eslint-enable no-empty */
+	}
+
+/***/ },
+/* 183 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports['default'] = bindActionCreators;
+	function bindActionCreator(actionCreator, dispatch) {
+	  return function () {
+	    return dispatch(actionCreator.apply(undefined, arguments));
+	  };
+	}
+
+	/**
+	 * Turns an object whose values are action creators, into an object with the
+	 * same keys, but with every function wrapped into a `dispatch` call so they
+	 * may be invoked directly. This is just a convenience method, as you can call
+	 * `store.dispatch(MyActionCreators.doSomething())` yourself just fine.
+	 *
+	 * For convenience, you can also pass a single function as the first argument,
+	 * and get a function in return.
+	 *
+	 * @param {Function|Object} actionCreators An object whose values are action
+	 * creator functions. One handy way to obtain it is to use ES6 `import * as`
+	 * syntax. You may also pass a single function.
+	 *
+	 * @param {Function} dispatch The `dispatch` function available on your Redux
+	 * store.
+	 *
+	 * @returns {Function|Object} The object mimicking the original object, but with
+	 * every action creator wrapped into the `dispatch` call. If you passed a
+	 * function as `actionCreators`, the return value will also be a single
+	 * function.
+	 */
+	function bindActionCreators(actionCreators, dispatch) {
+	  if (typeof actionCreators === 'function') {
+	    return bindActionCreator(actionCreators, dispatch);
+	  }
+
+	  if (typeof actionCreators !== 'object' || actionCreators === null) {
+	    throw new Error('bindActionCreators expected an object or a function, instead received ' + (actionCreators === null ? 'null' : typeof actionCreators) + '. ' + 'Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?');
+	  }
+
+	  var keys = Object.keys(actionCreators);
+	  var boundActionCreators = {};
+	  for (var i = 0; i < keys.length; i++) {
+	    var key = keys[i];
+	    var actionCreator = actionCreators[key];
+	    if (typeof actionCreator === 'function') {
+	      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch);
+	    }
+	  }
+	  return boundActionCreators;
+	}
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports['default'] = applyMiddleware;
+
+	var _compose = __webpack_require__(185);
+
+	var _compose2 = _interopRequireDefault(_compose);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+	/**
+	 * Creates a store enhancer that applies middleware to the dispatch method
+	 * of the Redux store. This is handy for a variety of tasks, such as expressing
+	 * asynchronous actions in a concise manner, or logging every action payload.
+	 *
+	 * See `redux-thunk` package as an example of the Redux middleware.
+	 *
+	 * Because middleware is potentially asynchronous, this should be the first
+	 * store enhancer in the composition chain.
+	 *
+	 * Note that each middleware will be given the `dispatch` and `getState` functions
+	 * as named arguments.
+	 *
+	 * @param {...Function} middlewares The middleware chain to be applied.
+	 * @returns {Function} A store enhancer applying the middleware.
+	 */
+	function applyMiddleware() {
+	  for (var _len = arguments.length, middlewares = Array(_len), _key = 0; _key < _len; _key++) {
+	    middlewares[_key] = arguments[_key];
+	  }
+
+	  return function (createStore) {
+	    return function (reducer, preloadedState, enhancer) {
+	      var store = createStore(reducer, preloadedState, enhancer);
+	      var _dispatch = store.dispatch;
+	      var chain = [];
+
+	      var middlewareAPI = {
+	        getState: store.getState,
+	        dispatch: function dispatch(action) {
+	          return _dispatch(action);
+	        }
+	      };
+	      chain = middlewares.map(function (middleware) {
+	        return middleware(middlewareAPI);
+	      });
+	      _dispatch = _compose2['default'].apply(undefined, chain)(store.dispatch);
+
+	      return _extends({}, store, {
+	        dispatch: _dispatch
+	      });
+	    };
+	  };
+	}
+
+/***/ },
+/* 185 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	exports.__esModule = true;
+	exports["default"] = compose;
+	/**
+	 * Composes single-argument functions from right to left. The rightmost
+	 * function can take multiple arguments as it provides the signature for
+	 * the resulting composite function.
+	 *
+	 * @param {...Function} funcs The functions to compose.
+	 * @returns {Function} A function obtained by composing the argument functions
+	 * from right to left. For example, compose(f, g, h) is identical to doing
+	 * (...args) => f(g(h(...args))).
+	 */
+
+	function compose() {
+	  for (var _len = arguments.length, funcs = Array(_len), _key = 0; _key < _len; _key++) {
+	    funcs[_key] = arguments[_key];
+	  }
+
+	  if (funcs.length === 0) {
+	    return function (arg) {
+	      return arg;
+	    };
+	  }
+
+	  if (funcs.length === 1) {
+	    return funcs[0];
+	  }
+
+	  var last = funcs[funcs.length - 1];
+	  var rest = funcs.slice(0, -1);
+	  return function () {
+	    return rest.reduceRight(function (composed, f) {
+	      return f(composed);
+	    }, last.apply(undefined, arguments));
+	  };
+	}
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports.connect = exports.Provider = undefined;
+
+	var _Provider = __webpack_require__(187);
+
+	var _Provider2 = _interopRequireDefault(_Provider);
+
+	var _connect = __webpack_require__(190);
+
+	var _connect2 = _interopRequireDefault(_connect);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	exports.Provider = _Provider2["default"];
+	exports.connect = _connect2["default"];
+
+/***/ },
+/* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	exports.__esModule = true;
+	exports["default"] = undefined;
+
+	var _react = __webpack_require__(1);
+
+	var _storeShape = __webpack_require__(188);
+
+	var _storeShape2 = _interopRequireDefault(_storeShape);
+
+	var _warning = __webpack_require__(189);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var didWarnAboutReceivingStore = false;
+	function warnAboutReceivingStore() {
+	  if (didWarnAboutReceivingStore) {
+	    return;
+	  }
+	  didWarnAboutReceivingStore = true;
+
+	  (0, _warning2["default"])('<Provider> does not support changing `store` on the fly. ' + 'It is most likely that you see this error because you updated to ' + 'Redux 2.x and React Redux 2.x which no longer hot reload reducers ' + 'automatically. See https://github.com/reactjs/react-redux/releases/' + 'tag/v2.0.0 for the migration instructions.');
+	}
+
+	var Provider = function (_Component) {
+	  _inherits(Provider, _Component);
+
+	  Provider.prototype.getChildContext = function getChildContext() {
+	    return { store: this.store };
+	  };
+
+	  function Provider(props, context) {
+	    _classCallCheck(this, Provider);
+
+	    var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+
+	    _this.store = props.store;
+	    return _this;
+	  }
+
+	  Provider.prototype.render = function render() {
+	    var children = this.props.children;
+
+	    return _react.Children.only(children);
+	  };
+
+	  return Provider;
+	}(_react.Component);
+
+	exports["default"] = Provider;
+
+	if (process.env.NODE_ENV !== 'production') {
+	  Provider.prototype.componentWillReceiveProps = function (nextProps) {
+	    var store = this.store;
+	    var nextStore = nextProps.store;
+
+	    if (store !== nextStore) {
+	      warnAboutReceivingStore();
+	    }
+	  };
+	}
+
+	Provider.propTypes = {
+	  store: _storeShape2["default"].isRequired,
+	  children: _react.PropTypes.element.isRequired
+	};
+	Provider.childContextTypes = {
+	  store: _storeShape2["default"].isRequired
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+
+	var _react = __webpack_require__(1);
+
+	exports["default"] = _react.PropTypes.shape({
+	  subscribe: _react.PropTypes.func.isRequired,
+	  dispatch: _react.PropTypes.func.isRequired,
+	  getState: _react.PropTypes.func.isRequired
+	});
+
+/***/ },
+/* 189 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports["default"] = warning;
+	/**
+	 * Prints a warning in the console if it exists.
+	 *
+	 * @param {String} message The warning message.
+	 * @returns {void}
+	 */
+	function warning(message) {
+	  /* eslint-disable no-console */
+	  if (typeof console !== 'undefined' && typeof console.error === 'function') {
+	    console.error(message);
+	  }
+	  /* eslint-enable no-console */
+	  try {
+	    // This error was thrown as a convenience so that you can use this stack
+	    // to find the callsite that caused this warning to fire.
+	    throw new Error(message);
+	    /* eslint-disable no-empty */
+	  } catch (e) {}
+	  /* eslint-enable no-empty */
+	}
+
+/***/ },
+/* 190 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	exports.__esModule = true;
+	exports["default"] = connect;
+
+	var _react = __webpack_require__(1);
+
+	var _storeShape = __webpack_require__(188);
+
+	var _storeShape2 = _interopRequireDefault(_storeShape);
+
+	var _shallowEqual = __webpack_require__(191);
+
+	var _shallowEqual2 = _interopRequireDefault(_shallowEqual);
+
+	var _wrapActionCreators = __webpack_require__(192);
+
+	var _wrapActionCreators2 = _interopRequireDefault(_wrapActionCreators);
+
+	var _warning = __webpack_require__(189);
+
+	var _warning2 = _interopRequireDefault(_warning);
+
+	var _isPlainObject = __webpack_require__(193);
+
+	var _isPlainObject2 = _interopRequireDefault(_isPlainObject);
+
+	var _hoistNonReactStatics = __webpack_require__(197);
+
+	var _hoistNonReactStatics2 = _interopRequireDefault(_hoistNonReactStatics);
+
+	var _invariant = __webpack_require__(198);
+
+	var _invariant2 = _interopRequireDefault(_invariant);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var defaultMapStateToProps = function defaultMapStateToProps(state) {
+	  return {};
+	}; // eslint-disable-line no-unused-vars
+	var defaultMapDispatchToProps = function defaultMapDispatchToProps(dispatch) {
+	  return { dispatch: dispatch };
+	};
+	var defaultMergeProps = function defaultMergeProps(stateProps, dispatchProps, parentProps) {
+	  return _extends({}, parentProps, stateProps, dispatchProps);
+	};
+
+	function getDisplayName(WrappedComponent) {
+	  return WrappedComponent.displayName || WrappedComponent.name || 'Component';
+	}
+
+	var errorObject = { value: null };
+	function tryCatch(fn, ctx) {
+	  try {
+	    return fn.apply(ctx);
+	  } catch (e) {
+	    errorObject.value = e;
+	    return errorObject;
+	  }
+	}
+
+	// Helps track hot reloading.
+	var nextVersion = 0;
+
+	function connect(mapStateToProps, mapDispatchToProps, mergeProps) {
+	  var options = arguments.length <= 3 || arguments[3] === undefined ? {} : arguments[3];
+
+	  var shouldSubscribe = Boolean(mapStateToProps);
+	  var mapState = mapStateToProps || defaultMapStateToProps;
+
+	  var mapDispatch = undefined;
+	  if (typeof mapDispatchToProps === 'function') {
+	    mapDispatch = mapDispatchToProps;
+	  } else if (!mapDispatchToProps) {
+	    mapDispatch = defaultMapDispatchToProps;
+	  } else {
+	    mapDispatch = (0, _wrapActionCreators2["default"])(mapDispatchToProps);
+	  }
+
+	  var finalMergeProps = mergeProps || defaultMergeProps;
+	  var _options$pure = options.pure;
+	  var pure = _options$pure === undefined ? true : _options$pure;
+	  var _options$withRef = options.withRef;
+	  var withRef = _options$withRef === undefined ? false : _options$withRef;
+
+	  var checkMergedEquals = pure && finalMergeProps !== defaultMergeProps;
+
+	  // Helps track hot reloading.
+	  var version = nextVersion++;
+
+	  return function wrapWithConnect(WrappedComponent) {
+	    var connectDisplayName = 'Connect(' + getDisplayName(WrappedComponent) + ')';
+
+	    function checkStateShape(props, methodName) {
+	      if (!(0, _isPlainObject2["default"])(props)) {
+	        (0, _warning2["default"])(methodName + '() in ' + connectDisplayName + ' must return a plain object. ' + ('Instead received ' + props + '.'));
+	      }
+	    }
+
+	    function computeMergedProps(stateProps, dispatchProps, parentProps) {
+	      var mergedProps = finalMergeProps(stateProps, dispatchProps, parentProps);
+	      if (process.env.NODE_ENV !== 'production') {
+	        checkStateShape(mergedProps, 'mergeProps');
+	      }
+	      return mergedProps;
+	    }
+
+	    var Connect = function (_Component) {
+	      _inherits(Connect, _Component);
+
+	      Connect.prototype.shouldComponentUpdate = function shouldComponentUpdate() {
+	        return !pure || this.haveOwnPropsChanged || this.hasStoreStateChanged;
+	      };
+
+	      function Connect(props, context) {
+	        _classCallCheck(this, Connect);
+
+	        var _this = _possibleConstructorReturn(this, _Component.call(this, props, context));
+
+	        _this.version = version;
+	        _this.store = props.store || context.store;
+
+	        (0, _invariant2["default"])(_this.store, 'Could not find "store" in either the context or ' + ('props of "' + connectDisplayName + '". ') + 'Either wrap the root component in a <Provider>, ' + ('or explicitly pass "store" as a prop to "' + connectDisplayName + '".'));
+
+	        var storeState = _this.store.getState();
+	        _this.state = { storeState: storeState };
+	        _this.clearCache();
+	        return _this;
+	      }
+
+	      Connect.prototype.computeStateProps = function computeStateProps(store, props) {
+	        if (!this.finalMapStateToProps) {
+	          return this.configureFinalMapState(store, props);
+	        }
+
+	        var state = store.getState();
+	        var stateProps = this.doStatePropsDependOnOwnProps ? this.finalMapStateToProps(state, props) : this.finalMapStateToProps(state);
+
+	        if (process.env.NODE_ENV !== 'production') {
+	          checkStateShape(stateProps, 'mapStateToProps');
+	        }
+	        return stateProps;
+	      };
+
+	      Connect.prototype.configureFinalMapState = function configureFinalMapState(store, props) {
+	        var mappedState = mapState(store.getState(), props);
+	        var isFactory = typeof mappedState === 'function';
+
+	        this.finalMapStateToProps = isFactory ? mappedState : mapState;
+	        this.doStatePropsDependOnOwnProps = this.finalMapStateToProps.length !== 1;
+
+	        if (isFactory) {
+	          return this.computeStateProps(store, props);
+	        }
+
+	        if (process.env.NODE_ENV !== 'production') {
+	          checkStateShape(mappedState, 'mapStateToProps');
+	        }
+	        return mappedState;
+	      };
+
+	      Connect.prototype.computeDispatchProps = function computeDispatchProps(store, props) {
+	        if (!this.finalMapDispatchToProps) {
+	          return this.configureFinalMapDispatch(store, props);
+	        }
+
+	        var dispatch = store.dispatch;
+
+	        var dispatchProps = this.doDispatchPropsDependOnOwnProps ? this.finalMapDispatchToProps(dispatch, props) : this.finalMapDispatchToProps(dispatch);
+
+	        if (process.env.NODE_ENV !== 'production') {
+	          checkStateShape(dispatchProps, 'mapDispatchToProps');
+	        }
+	        return dispatchProps;
+	      };
+
+	      Connect.prototype.configureFinalMapDispatch = function configureFinalMapDispatch(store, props) {
+	        var mappedDispatch = mapDispatch(store.dispatch, props);
+	        var isFactory = typeof mappedDispatch === 'function';
+
+	        this.finalMapDispatchToProps = isFactory ? mappedDispatch : mapDispatch;
+	        this.doDispatchPropsDependOnOwnProps = this.finalMapDispatchToProps.length !== 1;
+
+	        if (isFactory) {
+	          return this.computeDispatchProps(store, props);
+	        }
+
+	        if (process.env.NODE_ENV !== 'production') {
+	          checkStateShape(mappedDispatch, 'mapDispatchToProps');
+	        }
+	        return mappedDispatch;
+	      };
+
+	      Connect.prototype.updateStatePropsIfNeeded = function updateStatePropsIfNeeded() {
+	        var nextStateProps = this.computeStateProps(this.store, this.props);
+	        if (this.stateProps && (0, _shallowEqual2["default"])(nextStateProps, this.stateProps)) {
+	          return false;
+	        }
+
+	        this.stateProps = nextStateProps;
+	        return true;
+	      };
+
+	      Connect.prototype.updateDispatchPropsIfNeeded = function updateDispatchPropsIfNeeded() {
+	        var nextDispatchProps = this.computeDispatchProps(this.store, this.props);
+	        if (this.dispatchProps && (0, _shallowEqual2["default"])(nextDispatchProps, this.dispatchProps)) {
+	          return false;
+	        }
+
+	        this.dispatchProps = nextDispatchProps;
+	        return true;
+	      };
+
+	      Connect.prototype.updateMergedPropsIfNeeded = function updateMergedPropsIfNeeded() {
+	        var nextMergedProps = computeMergedProps(this.stateProps, this.dispatchProps, this.props);
+	        if (this.mergedProps && checkMergedEquals && (0, _shallowEqual2["default"])(nextMergedProps, this.mergedProps)) {
+	          return false;
+	        }
+
+	        this.mergedProps = nextMergedProps;
+	        return true;
+	      };
+
+	      Connect.prototype.isSubscribed = function isSubscribed() {
+	        return typeof this.unsubscribe === 'function';
+	      };
+
+	      Connect.prototype.trySubscribe = function trySubscribe() {
+	        if (shouldSubscribe && !this.unsubscribe) {
+	          this.unsubscribe = this.store.subscribe(this.handleChange.bind(this));
+	          this.handleChange();
+	        }
+	      };
+
+	      Connect.prototype.tryUnsubscribe = function tryUnsubscribe() {
+	        if (this.unsubscribe) {
+	          this.unsubscribe();
+	          this.unsubscribe = null;
+	        }
+	      };
+
+	      Connect.prototype.componentDidMount = function componentDidMount() {
+	        this.trySubscribe();
+	      };
+
+	      Connect.prototype.componentWillReceiveProps = function componentWillReceiveProps(nextProps) {
+	        if (!pure || !(0, _shallowEqual2["default"])(nextProps, this.props)) {
+	          this.haveOwnPropsChanged = true;
+	        }
+	      };
+
+	      Connect.prototype.componentWillUnmount = function componentWillUnmount() {
+	        this.tryUnsubscribe();
+	        this.clearCache();
+	      };
+
+	      Connect.prototype.clearCache = function clearCache() {
+	        this.dispatchProps = null;
+	        this.stateProps = null;
+	        this.mergedProps = null;
+	        this.haveOwnPropsChanged = true;
+	        this.hasStoreStateChanged = true;
+	        this.haveStatePropsBeenPrecalculated = false;
+	        this.statePropsPrecalculationError = null;
+	        this.renderedElement = null;
+	        this.finalMapDispatchToProps = null;
+	        this.finalMapStateToProps = null;
+	      };
+
+	      Connect.prototype.handleChange = function handleChange() {
+	        if (!this.unsubscribe) {
+	          return;
+	        }
+
+	        var storeState = this.store.getState();
+	        var prevStoreState = this.state.storeState;
+	        if (pure && prevStoreState === storeState) {
+	          return;
+	        }
+
+	        if (pure && !this.doStatePropsDependOnOwnProps) {
+	          var haveStatePropsChanged = tryCatch(this.updateStatePropsIfNeeded, this);
+	          if (!haveStatePropsChanged) {
+	            return;
+	          }
+	          if (haveStatePropsChanged === errorObject) {
+	            this.statePropsPrecalculationError = errorObject.value;
+	          }
+	          this.haveStatePropsBeenPrecalculated = true;
+	        }
+
+	        this.hasStoreStateChanged = true;
+	        this.setState({ storeState: storeState });
+	      };
+
+	      Connect.prototype.getWrappedInstance = function getWrappedInstance() {
+	        (0, _invariant2["default"])(withRef, 'To access the wrapped instance, you need to specify ' + '{ withRef: true } as the fourth argument of the connect() call.');
+
+	        return this.refs.wrappedInstance;
+	      };
+
+	      Connect.prototype.render = function render() {
+	        var haveOwnPropsChanged = this.haveOwnPropsChanged;
+	        var hasStoreStateChanged = this.hasStoreStateChanged;
+	        var haveStatePropsBeenPrecalculated = this.haveStatePropsBeenPrecalculated;
+	        var statePropsPrecalculationError = this.statePropsPrecalculationError;
+	        var renderedElement = this.renderedElement;
+
+	        this.haveOwnPropsChanged = false;
+	        this.hasStoreStateChanged = false;
+	        this.haveStatePropsBeenPrecalculated = false;
+	        this.statePropsPrecalculationError = null;
+
+	        if (statePropsPrecalculationError) {
+	          throw statePropsPrecalculationError;
+	        }
+
+	        var shouldUpdateStateProps = true;
+	        var shouldUpdateDispatchProps = true;
+	        if (pure && renderedElement) {
+	          shouldUpdateStateProps = hasStoreStateChanged || haveOwnPropsChanged && this.doStatePropsDependOnOwnProps;
+	          shouldUpdateDispatchProps = haveOwnPropsChanged && this.doDispatchPropsDependOnOwnProps;
+	        }
+
+	        var haveStatePropsChanged = false;
+	        var haveDispatchPropsChanged = false;
+	        if (haveStatePropsBeenPrecalculated) {
+	          haveStatePropsChanged = true;
+	        } else if (shouldUpdateStateProps) {
+	          haveStatePropsChanged = this.updateStatePropsIfNeeded();
+	        }
+	        if (shouldUpdateDispatchProps) {
+	          haveDispatchPropsChanged = this.updateDispatchPropsIfNeeded();
+	        }
+
+	        var haveMergedPropsChanged = true;
+	        if (haveStatePropsChanged || haveDispatchPropsChanged || haveOwnPropsChanged) {
+	          haveMergedPropsChanged = this.updateMergedPropsIfNeeded();
+	        } else {
+	          haveMergedPropsChanged = false;
+	        }
+
+	        if (!haveMergedPropsChanged && renderedElement) {
+	          return renderedElement;
+	        }
+
+	        if (withRef) {
+	          this.renderedElement = (0, _react.createElement)(WrappedComponent, _extends({}, this.mergedProps, {
+	            ref: 'wrappedInstance'
+	          }));
+	        } else {
+	          this.renderedElement = (0, _react.createElement)(WrappedComponent, this.mergedProps);
+	        }
+
+	        return this.renderedElement;
+	      };
+
+	      return Connect;
+	    }(_react.Component);
+
+	    Connect.displayName = connectDisplayName;
+	    Connect.WrappedComponent = WrappedComponent;
+	    Connect.contextTypes = {
+	      store: _storeShape2["default"]
+	    };
+	    Connect.propTypes = {
+	      store: _storeShape2["default"]
+	    };
+
+	    if (process.env.NODE_ENV !== 'production') {
+	      Connect.prototype.componentWillUpdate = function componentWillUpdate() {
+	        if (this.version === version) {
+	          return;
+	        }
+
+	        // We are hot reloading!
+	        this.version = version;
+	        this.trySubscribe();
+	        this.clearCache();
+	      };
+	    }
+
+	    return (0, _hoistNonReactStatics2["default"])(Connect, WrappedComponent);
+	  };
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 191 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	exports.__esModule = true;
+	exports["default"] = shallowEqual;
+	function shallowEqual(objA, objB) {
+	  if (objA === objB) {
+	    return true;
+	  }
+
+	  var keysA = Object.keys(objA);
+	  var keysB = Object.keys(objB);
+
+	  if (keysA.length !== keysB.length) {
+	    return false;
+	  }
+
+	  // Test for A's keys different from B.
+	  var hasOwn = Object.prototype.hasOwnProperty;
+	  for (var i = 0; i < keysA.length; i++) {
+	    if (!hasOwn.call(objB, keysA[i]) || objA[keysA[i]] !== objB[keysA[i]]) {
+	      return false;
+	    }
+	  }
+
+	  return true;
+	}
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	exports["default"] = wrapActionCreators;
+
+	var _redux = __webpack_require__(172);
+
+	function wrapActionCreators(actionCreators) {
+	  return function (dispatch) {
+	    return (0, _redux.bindActionCreators)(actionCreators, dispatch);
+	  };
+	}
+
+/***/ },
+/* 193 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var getPrototype = __webpack_require__(194),
+	    isObjectLike = __webpack_require__(196);
+
+	/** `Object#toString` result references. */
+	var objectTag = '[object Object]';
+
+	/** Used for built-in method references. */
+	var funcProto = Function.prototype,
+	    objectProto = Object.prototype;
+
+	/** Used to resolve the decompiled source of functions. */
+	var funcToString = funcProto.toString;
+
+	/** Used to check objects for own properties. */
+	var hasOwnProperty = objectProto.hasOwnProperty;
+
+	/** Used to infer the `Object` constructor. */
+	var objectCtorString = funcToString.call(Object);
+
+	/**
+	 * Used to resolve the
+	 * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+	 * of values.
+	 */
+	var objectToString = objectProto.toString;
+
+	/**
+	 * Checks if `value` is a plain object, that is, an object created by the
+	 * `Object` constructor or one with a `[[Prototype]]` of `null`.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 0.8.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is a plain object, else `false`.
+	 * @example
+	 *
+	 * function Foo() {
+	 *   this.a = 1;
+	 * }
+	 *
+	 * _.isPlainObject(new Foo);
+	 * // => false
+	 *
+	 * _.isPlainObject([1, 2, 3]);
+	 * // => false
+	 *
+	 * _.isPlainObject({ 'x': 0, 'y': 0 });
+	 * // => true
+	 *
+	 * _.isPlainObject(Object.create(null));
+	 * // => true
+	 */
+	function isPlainObject(value) {
+	  if (!isObjectLike(value) || objectToString.call(value) != objectTag) {
+	    return false;
+	  }
+	  var proto = getPrototype(value);
+	  if (proto === null) {
+	    return true;
+	  }
+	  var Ctor = hasOwnProperty.call(proto, 'constructor') && proto.constructor;
+	  return (typeof Ctor == 'function' &&
+	    Ctor instanceof Ctor && funcToString.call(Ctor) == objectCtorString);
+	}
+
+	module.exports = isPlainObject;
+
+
+/***/ },
+/* 194 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var overArg = __webpack_require__(195);
+
+	/** Built-in value references. */
+	var getPrototype = overArg(Object.getPrototypeOf, Object);
+
+	module.exports = getPrototype;
+
+
+/***/ },
+/* 195 */
+/***/ function(module, exports) {
+
+	/**
+	 * Creates a unary function that invokes `func` with its argument transformed.
+	 *
+	 * @private
+	 * @param {Function} func The function to wrap.
+	 * @param {Function} transform The argument transform.
+	 * @returns {Function} Returns the new function.
+	 */
+	function overArg(func, transform) {
+	  return function(arg) {
+	    return func(transform(arg));
+	  };
+	}
+
+	module.exports = overArg;
+
+
+/***/ },
+/* 196 */
+/***/ function(module, exports) {
+
+	/**
+	 * Checks if `value` is object-like. A value is object-like if it's not `null`
+	 * and has a `typeof` result of "object".
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Lang
+	 * @param {*} value The value to check.
+	 * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+	 * @example
+	 *
+	 * _.isObjectLike({});
+	 * // => true
+	 *
+	 * _.isObjectLike([1, 2, 3]);
+	 * // => true
+	 *
+	 * _.isObjectLike(_.noop);
+	 * // => false
+	 *
+	 * _.isObjectLike(null);
+	 * // => false
+	 */
+	function isObjectLike(value) {
+	  return value != null && typeof value == 'object';
+	}
+
+	module.exports = isObjectLike;
+
+
+/***/ },
+/* 197 */
+/***/ function(module, exports) {
+
+	/**
+	 * Copyright 2015, Yahoo! Inc.
+	 * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+	 */
+	'use strict';
+
+	var REACT_STATICS = {
+	    childContextTypes: true,
+	    contextTypes: true,
+	    defaultProps: true,
+	    displayName: true,
+	    getDefaultProps: true,
+	    mixins: true,
+	    propTypes: true,
+	    type: true
+	};
+
+	var KNOWN_STATICS = {
+	    name: true,
+	    length: true,
+	    prototype: true,
+	    caller: true,
+	    arguments: true,
+	    arity: true
+	};
+
+	var isGetOwnPropertySymbolsAvailable = typeof Object.getOwnPropertySymbols === 'function';
+
+	module.exports = function hoistNonReactStatics(targetComponent, sourceComponent, customStatics) {
+	    if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
+	        var keys = Object.getOwnPropertyNames(sourceComponent);
+
+	        /* istanbul ignore else */
+	        if (isGetOwnPropertySymbolsAvailable) {
+	            keys = keys.concat(Object.getOwnPropertySymbols(sourceComponent));
+	        }
+
+	        for (var i = 0; i < keys.length; ++i) {
+	            if (!REACT_STATICS[keys[i]] && !KNOWN_STATICS[keys[i]] && (!customStatics || !customStatics[keys[i]])) {
+	                try {
+	                    targetComponent[keys[i]] = sourceComponent[keys[i]];
+	                } catch (error) {
+
+	                }
+	            }
+	        }
+	    }
+
+	    return targetComponent;
+	};
+
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright 2013-2015, Facebook, Inc.
+	 * All rights reserved.
+	 *
+	 * This source code is licensed under the BSD-style license found in the
+	 * LICENSE file in the root directory of this source tree. An additional grant
+	 * of patent rights can be found in the PATENTS file in the same directory.
+	 */
+
+	'use strict';
+
+	/**
+	 * Use invariant() to assert state which your program assumes to be true.
+	 *
+	 * Provide sprintf-style format (only %s is supported) and arguments
+	 * to provide information about what broke and what you were
+	 * expecting.
+	 *
+	 * The invariant message will be stripped in production, but the invariant
+	 * will remain to ensure logic does not differ in production.
+	 */
+
+	var invariant = function(condition, format, a, b, c, d, e, f) {
+	  if (process.env.NODE_ENV !== 'production') {
+	    if (format === undefined) {
+	      throw new Error('invariant requires an error message argument');
+	    }
+	  }
+
+	  if (!condition) {
+	    var error;
+	    if (format === undefined) {
+	      error = new Error(
+	        'Minified exception occurred; use the non-minified dev environment ' +
+	        'for the full error message and additional helpful warnings.'
+	      );
+	    } else {
+	      var args = [a, b, c, d, e, f];
+	      var argIndex = 0;
+	      error = new Error(
+	        format.replace(/%s/g, function() { return args[argIndex++]; })
+	      );
+	      error.name = 'Invariant Violation';
+	    }
+
+	    error.framesToPop = 1; // we don't care about invariant's own frame
+	    throw error;
+	  }
+	};
+
+	module.exports = invariant;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(34);
+
+	var _questionList = __webpack_require__(200);
+
+	var _questionList2 = _interopRequireDefault(_questionList);
+
+	var _lookData = __webpack_require__(206);
+
+	var _lookData2 = _interopRequireDefault(_lookData);
+
+	var _newQuestionCon = __webpack_require__(212);
+
+	var _newQuestionCon2 = _interopRequireDefault(_newQuestionCon);
+
+	var _QuestionEditCon = __webpack_require__(216);
+
+	var _QuestionEditCon2 = _interopRequireDefault(_QuestionEditCon);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	//这个是路由层
+	var App = function (_Component) {
+		_inherits(App, _Component);
+
+		function App(props) {
+			_classCallCheck(this, App);
+
+			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+		}
+
+		_createClass(App, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(_QuestionEditCon2.default, null);
+			}
+		}]);
+
+		return App;
+	}(_react.Component);
+
+	exports.default = App;
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(34);
+
+	var _deleteQuestion = __webpack_require__(201);
+
+	var _reactRedux = __webpack_require__(186);
+
+	var _header = __webpack_require__(203);
+
+	var _header2 = _interopRequireDefault(_header);
+
+	var _table = __webpack_require__(204);
+
+	var _table2 = _interopRequireDefault(_table);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var QuestionList = function (_Component) {
+		_inherits(QuestionList, _Component);
+
+		function QuestionList(props) {
+			_classCallCheck(this, QuestionList);
+
+			return _possibleConstructorReturn(this, (QuestionList.__proto__ || Object.getPrototypeOf(QuestionList)).call(this, props));
+		}
+
+		_createClass(QuestionList, [{
+			key: 'render',
+			value: function render() {
+				var _props = this.props;
+				var dispatch = _props.dispatch;
+				var data = _props.data;
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_header2.default, null),
+					_react2.default.createElement(_table2.default, {
+						data: data,
+						handleDelete: function handleDelete(index) {
+							return dispatch((0, _deleteQuestion.deleteSingle)(index));
+						},
+						handleDeleteAll: function handleDeleteAll(selects) {
+							return dispatch((0, _deleteQuestion.deleteSelected)(selects));
+						}
+					})
+				);
+			}
+		}]);
+
+		return QuestionList;
+	}(_react.Component);
+
+	function select(state) {
+		return {
+			data: state
+		};
+	}
+
+	exports.default = (0, _reactRedux.connect)(select)(QuestionList);
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.deleteSingle = deleteSingle;
+	exports.deleteSelected = deleteSelected;
+	exports.saveQuestion = saveQuestion;
+
+	var _ActionTypes = __webpack_require__(202);
+
+	var types = _interopRequireWildcard(_ActionTypes);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function deleteSingle(index) {
+		return {
+			type: types.DELETEQUESTION,
+			index: index
+		};
+	}
+
+	function deleteSelected(selects) {
+		return {
+			type: types.DELETESELECTEDQUESTION,
+			selects: selects
+		};
+	}
+
+	function saveQuestion(data) {
+		return {
+			type: types.SAVEQUESTION,
+			data: data
+		};
+	}
+
+/***/ },
+/* 202 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	//首先要实现的action
+	//删除其中一个问卷
+	//删除所有的问卷
+
+	var DELETEQUESTION = exports.DELETEQUESTION = 'DELETEQUESTION'; //删除其中一个问卷
+
+	var DELETESELECTEDQUESTION = exports.DELETESELECTEDQUESTION = 'DELETESELECTEDQUESTION'; //删除选中的问卷
+
+	var SAVEQUESTION = exports.SAVEQUESTION = 'SAVEQUESTION'; //编辑问卷完毕之后要保存的数据,未发布
+
+	var RELEASEQUESION = exports.RELEASEQUESION = 'RELEASEQUESION'; //发布问卷
+
+/***/ },
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -21528,6 +23389,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	//问卷头
 	var Header = function (_React$Component) {
 	    _inherits(Header, _React$Component);
 
@@ -21563,7 +23425,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 173 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21578,6 +23440,12 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(34);
+
+	var _Confirm = __webpack_require__(205);
+
+	var _Confirm2 = _interopRequireDefault(_Confirm);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21586,13 +23454,28 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	// 问卷列表页
 	var Table = function (_Component) {
 		_inherits(Table, _Component);
 
-		function Table() {
+		function Table(props) {
 			_classCallCheck(this, Table);
 
-			return _possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).apply(this, arguments));
+			/**
+	   * slectAll: 全选状态
+	   * selects: 选择选项的下标
+	   * @type {Object}
+	   */
+			var _this = _possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).call(this, props));
+
+			_this.state = {
+				selectAll: false,
+				selects: []
+			};
+			_this.handleCheckAll = _this.handleCheckAll.bind(_this);
+			_this.selectHandle = _this.selectHandle.bind(_this);
+
+			return _this;
 		}
 
 		_createClass(Table, [{
@@ -21600,12 +23483,6 @@
 			value: function handleEdit() {
 				//编辑页面就是进入问卷编辑页，使用路由进行处理就行了
 				console.log('编辑页面就是进入问卷编辑页');
-			}
-		}, {
-			key: 'handleDelete',
-			value: function handleDelete() {
-				//删除当前问卷，需要在顶层一个回调，修改state，把这个问卷数据删掉
-				console.log('删除当前问卷');
 			}
 		}, {
 			key: 'seeData',
@@ -21616,22 +23493,33 @@
 		}, {
 			key: 'handleCheckAll',
 			value: function handleCheckAll() {
-				//选择全部的问卷，颜适那里就没做，我试着做一下
-				//把所有的问卷的选项都勾上
+				var checks = document.querySelectorAll('.checkbox');
+				var selects = [];
+				for (var i = 0; i < checks.length; i++) {
+					checks[i].checked = true;
+					selects.push(i);
+				}
+
+				this.setState({ selectAll: true, selects: selects });
 				console.log('实现选择全部的问卷');
 			}
 		}, {
-			key: 'handleDeleteAll',
-			value: function handleDeleteAll() {
-				//删除所有的问卷数据
-				//实现：给子组件传递一个action，然后从props调用回调函数删除数据
-				console.log('把所有的问卷数据都删除掉');
+			key: 'selectHandle',
+			value: function selectHandle(index) {
+				return function () {
+					var selects = this.state.selects;
+					if (selects.indexOf(index) === -1) {
+						selects.push(index);
+						this.setState({ selects: selects });
+					}
+				};
 			}
 		}, {
 			key: 'renderQuestion',
 			value: function renderQuestion() {
 				var data = this.props.data;
-				var that = this;
+				var _self = this;
+				console.log(data);
 				return data.map(function (value, index, arr) {
 					return _react2.default.createElement(
 						'tr',
@@ -21661,17 +23549,20 @@
 							null,
 							_react2.default.createElement(
 								'span',
-								{ className: 'operation-attribute', onClick: that.handleEdit },
+								{ className: 'operation-attribute' },
 								'\u7F16\u8F91'
 							),
 							_react2.default.createElement(
 								'span',
-								{ className: 'operation-attribute', onClick: that.handleDelete },
+								{ className: 'operation-attribute',
+									onClick: function onClick() {
+										return _self.props.handleDelete(index);
+									} },
 								'\u5220\u9664'
 							),
 							_react2.default.createElement(
 								'span',
-								{ className: 'operation-attribute', onClick: that.seeData },
+								{ className: 'operation-attribute' },
 								'\u67E5\u770B\u6570\u636E'
 							)
 						)
@@ -21681,6 +23572,8 @@
 		}, {
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
 				return _react2.default.createElement(
 					'div',
 					{ className: 'question-list' },
@@ -21716,8 +23609,7 @@
 										'span',
 										{ className: 'new-question' },
 										'+\u65B0\u5EFA\u95EE\u5377'
-									),
-									' '
+									)
 								)
 							)
 						),
@@ -21731,15 +23623,21 @@
 								_react2.default.createElement(
 									'td',
 									null,
-									_react2.default.createElement('input', { className: 'checkbox', type: 'checkbox' }),
+									_react2.default.createElement('input', { className: 'checkbox',
+										type: 'checkbox',
+										onClick: this.handleCheckAll
+									}),
 									_react2.default.createElement(
 										'span',
-										{ className: 'question-name', onClick: this.handleCheckAll },
+										{ className: 'question-name' },
 										'\u5168\u9009'
 									),
 									_react2.default.createElement(
 										'span',
-										{ className: 'check-delete', onClick: this.handleDeleteAll },
+										{ className: 'check-delete',
+											onClick: function onClick() {
+												return _this2.props.handleDeleteAll(_this2.state.selects);
+											} },
 										'\u5220\u9664'
 									)
 								)
@@ -21753,10 +23651,91 @@
 		return Table;
 	}(_react.Component);
 
+	Table.propTypes = {
+		handleDelete: _react.PropTypes.func.isRequired,
+		handleDeleteAll: _react.PropTypes.func.isRequired
+	};
+
 	exports.default = Table;
 
 /***/ },
-/* 174 */
+/* 205 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	/**
+	 * 此弹窗组件需要的config的参数有 
+	 *    title: 弹窗标题
+	 *    content: 弹窗里面要展示的内容   
+	 *    true: 点击确定之后的要执行的回调函数
+	 * @param {[type]} config [description]
+	 */
+	function Confirm(config) {
+		var config = config || {};
+		this.title = config.title || '提示';
+		this.content = config.content || '确定要删除吗？';
+
+		this.get = function (n) {
+			return config[n];
+		};
+
+		this.set = function (n, v) {
+			config[n] = v;
+		};
+
+		this.init();
+	}
+
+	Confirm.prototype = {
+		init: function init() {
+			this.show();
+			this.bindEvent();
+		},
+
+		createHtml: function createHtml() {
+			var html = document.createElement('div');
+			html.className = 'confirm';
+			html.innerHTML = '<div class="title">' + this.title + '</div>' + '<div class="content">' + this.content + '</div>' + '<div class="footer">' + '<button id="confirm">确定</button>' + '<button id="cancel">取消</button>' + '</div>';
+			return html;
+		},
+
+		bindEvent: function bindEvent() {
+			var confirm = document.getElementById('confirm');
+			var cancel = document.getElementById('cancel');
+			var that = this;
+
+			confirm.onclick = function () {
+				var cb = that.get(true);
+				cb && cb();
+				that.hide();
+			};
+
+			cancel.onclick = function () {
+				that.hide();
+			};
+		},
+
+		show: function show() {
+			var html = this.createHtml();
+			var body = document.getElementsByTagName('body')[0];
+			body.appendChild(html);
+		},
+
+		hide: function hide() {
+			var confirm = document.getElementsByClassName('confirm')[0];
+			var body = document.getElementsByTagName('body')[0];
+			body.removeChild(confirm);
+		}
+	};
+
+	exports.default = Confirm;
+
+/***/ },
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -21771,7 +23750,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(175);
+	var _reactDom = __webpack_require__(34);
+
+	var _reactRedux = __webpack_require__(186);
+
+	var _header = __webpack_require__(203);
+
+	var _header2 = _interopRequireDefault(_header);
+
+	var _seeData = __webpack_require__(207);
+
+	var _seeData2 = _interopRequireDefault(_seeData);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21781,6 +23770,77 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	//查看数据也页不需要修改数据，就不需要dispatch了
+	//也就是不需要reducer了
+	var LookData = function (_Component) {
+		_inherits(LookData, _Component);
+
+		function LookData() {
+			_classCallCheck(this, LookData);
+
+			return _possibleConstructorReturn(this, (LookData.__proto__ || Object.getPrototypeOf(LookData)).apply(this, arguments));
+		}
+
+		_createClass(LookData, [{
+			key: 'render',
+			value: function render() {
+				var _props = this.props;
+				var dispatch = _props.dispatch;
+				var data = _props.data;
+				var title = _props.title;
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_header2.default, null),
+					_react2.default.createElement(_seeData2.default, {
+						data: data,
+						title: title
+					})
+				);
+			}
+		}]);
+
+		return LookData;
+	}(_react.Component);
+
+	function select(state) {
+		return {
+			data: state[0].data,
+			title: state[0].title
+		};
+	}
+
+	exports.default = (0, _reactRedux.connect)(select)(LookData);
+
+/***/ },
+/* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(208);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// 查看数据页
+
 	/**
 	 * 这一页就是纯数据展示，只需要把数据通过props传入就行了
 	 * 唯一有操作的不是操作数据就是一个返回，我通过了浏览器的history.back返回的
@@ -21789,40 +23849,16 @@
 	var SeeData = function (_Component) {
 		_inherits(SeeData, _Component);
 
-		function SeeData(props) {
+		function SeeData() {
 			_classCallCheck(this, SeeData);
 
-			//这里传的数据是要知道是访问哪个问卷,
-			//我可以使用数组下标就可以获取到对应的数据
-			//不过感觉应该是id比较好
-			// this.data = this.props.data;
-			var _this = _possibleConstructorReturn(this, (SeeData.__proto__ || Object.getPrototypeOf(SeeData)).call(this));
-
-			//里面就相当于是原来的那个构造函数模式写的那个
-
-
-			_this.title = '问卷的标题';
-			_this.data = [{
-				//这里面的数据就是每个题
-				problem: '每个问题',
-				type: '单选题，多选题，文本题',
-				option: ['选项一', '选项二', '选项三'],
-				text: '如果是文本就是文本的内容,否则为空'
-			}, {
-				problem: '每个问题',
-				type: '单选题，多选题，文本题',
-				option: ['选项一', '选项二', '选项三'],
-				text: '如果是文本就是文本的内容,否则为空'
-			}];
-
-			return _this;
+			return _possibleConstructorReturn(this, (SeeData.__proto__ || Object.getPrototypeOf(SeeData)).apply(this, arguments));
 		}
 
 		_createClass(SeeData, [{
 			key: 'renderOption',
-			value: function renderOption() {
-				var option = ['选项一', '选项二', '选项三'];
-				return option.map(function (val, index, arr) {
+			value: function renderOption(options) {
+				return options.map(function (val, index, arr) {
 					return _react2.default.createElement(
 						'li',
 						{ key: index },
@@ -21833,7 +23869,7 @@
 		}, {
 			key: 'renderList',
 			value: function renderList() {
-				var data = this.data;
+				var data = this.props.data;
 				var that = this;
 				return data.map(function (val, index, arr) {
 					return _react2.default.createElement(
@@ -21845,12 +23881,12 @@
 							'Q',
 							index,
 							' ',
-							val.problem
+							val.question
 						),
 						_react2.default.createElement(
 							'ul',
 							null,
-							that.renderOption()
+							that.renderOption(val.options)
 						)
 					);
 				});
@@ -21869,7 +23905,7 @@
 					_react2.default.createElement(
 						'h1',
 						{ className: 'problem-title' },
-						this.title
+						this.props.title
 					),
 					_react2.default.createElement(
 						'ul',
@@ -21895,16 +23931,16 @@
 	exports.default = SeeData;
 
 /***/ },
-/* 175 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(176);
+	var content = __webpack_require__(209);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(178)(content, {});
+	var update = __webpack_require__(211)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -21921,10 +23957,10 @@
 	}
 
 /***/ },
-/* 176 */
+/* 209 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(177)();
+	exports = module.exports = __webpack_require__(210)();
 	// imports
 
 
@@ -21935,7 +23971,7 @@
 
 
 /***/ },
-/* 177 */
+/* 210 */
 /***/ function(module, exports) {
 
 	/*
@@ -21991,7 +24027,7 @@
 
 
 /***/ },
-/* 178 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -22243,13 +24279,13 @@
 
 
 /***/ },
-/* 179 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+		value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -22258,7 +24294,17 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(180);
+	var _reactDom = __webpack_require__(34);
+
+	var _reactRedux = __webpack_require__(186);
+
+	var _header = __webpack_require__(203);
+
+	var _header2 = _interopRequireDefault(_header);
+
+	var _newQuestion = __webpack_require__(213);
+
+	var _newQuestion2 = _interopRequireDefault(_newQuestion);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22268,52 +24314,106 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	/**
-	 * 这一页就是那个如果没有问卷的话就新建一个问卷的
-	 * 不牵扯到数据的问题，所以不需要props和dispaction的分发
-	 * 只需要做一个点击然后跳转的处理，这个使用路由就行
-	 */
+	//此容器只需要跳转就行了
+	var NewQuestionCon = function (_Component) {
+		_inherits(NewQuestionCon, _Component);
 
+		function NewQuestionCon() {
+			_classCallCheck(this, NewQuestionCon);
+
+			return _possibleConstructorReturn(this, (NewQuestionCon.__proto__ || Object.getPrototypeOf(NewQuestionCon)).apply(this, arguments));
+		}
+
+		_createClass(NewQuestionCon, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_header2.default, null),
+					_react2.default.createElement(_newQuestion2.default, null)
+				);
+			}
+		}]);
+
+		return NewQuestionCon;
+	}(_react.Component);
+
+	function select(state) {
+		return {
+			data: state
+		};
+	}
+
+	exports.default = (0, _reactRedux.connect)(select)(NewQuestionCon);
+
+/***/ },
+/* 213 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(214);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	//新建问卷页面
 	var NewQustion = function (_Component) {
-	  _inherits(NewQustion, _Component);
+		_inherits(NewQustion, _Component);
 
-	  function NewQustion() {
-	    _classCallCheck(this, NewQustion);
+		function NewQustion() {
+			_classCallCheck(this, NewQustion);
 
-	    return _possibleConstructorReturn(this, (NewQustion.__proto__ || Object.getPrototypeOf(NewQustion)).call(this));
-	  }
+			return _possibleConstructorReturn(this, (NewQustion.__proto__ || Object.getPrototypeOf(NewQustion)).call(this));
+		}
 
-	  _createClass(NewQustion, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'section',
-	        { className: 'new-box' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'new-question' },
-	          '\u65B0\u5EFA\u95EE\u5377'
-	        )
-	      );
-	    }
-	  }]);
+		_createClass(NewQustion, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'section',
+					{ className: 'new-box' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'new-question' },
+						'\u65B0\u5EFA\u95EE\u5377'
+					)
+				);
+			}
+		}]);
 
-	  return NewQustion;
+		return NewQustion;
 	}(_react.Component);
 
 	exports.default = NewQustion;
 
 /***/ },
-/* 180 */
+/* 214 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(181);
+	var content = __webpack_require__(215);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(178)(content, {});
+	var update = __webpack_require__(211)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22330,10 +24430,10 @@
 	}
 
 /***/ },
-/* 181 */
+/* 215 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(177)();
+	exports = module.exports = __webpack_require__(210)();
 	// imports
 
 
@@ -22344,7 +24444,7 @@
 
 
 /***/ },
-/* 182 */
+/* 216 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22359,7 +24459,19 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	__webpack_require__(183);
+	var _reactDom = __webpack_require__(34);
+
+	var _reactRedux = __webpack_require__(186);
+
+	var _deleteQuestion = __webpack_require__(201);
+
+	var _header = __webpack_require__(203);
+
+	var _header2 = _interopRequireDefault(_header);
+
+	var _questionEdit = __webpack_require__(217);
+
+	var _questionEdit2 = _interopRequireDefault(_questionEdit);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -22369,6 +24481,74 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+	var QuestionEditCon = function (_Component) {
+		_inherits(QuestionEditCon, _Component);
+
+		function QuestionEditCon() {
+			_classCallCheck(this, QuestionEditCon);
+
+			return _possibleConstructorReturn(this, (QuestionEditCon.__proto__ || Object.getPrototypeOf(QuestionEditCon)).apply(this, arguments));
+		}
+
+		_createClass(QuestionEditCon, [{
+			key: 'render',
+			value: function render() {
+				var _props = this.props;
+				var dispatch = _props.dispatch;
+				var data = _props.data;
+
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_header2.default, null),
+					_react2.default.createElement(_questionEdit2.default, {
+						data: data,
+						saveQuestion: function saveQuestion(data) {
+							return dispatch((0, _deleteQuestion.saveQuestion)(data));
+						}
+					})
+				);
+			}
+		}]);
+
+		return QuestionEditCon;
+	}(_react.Component);
+
+	function select(state) {
+		return {
+			data: state
+		};
+	}
+
+	exports.default = (0, _reactRedux.connect)(select)(QuestionEditCon);
+
+/***/ },
+/* 217 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	__webpack_require__(218);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	// 问卷编辑页
 	var QuestionEdit = function (_Component) {
 		_inherits(QuestionEdit, _Component);
 
@@ -22642,6 +24822,8 @@
 		}, {
 			key: 'render',
 			value: function render() {
+				var _this2 = this;
+
 				var typeShow = this.state.typeShow ? this.renderAddProblem() : '';
 				return _react2.default.createElement(
 					'section',
@@ -22685,7 +24867,11 @@
 						),
 						_react2.default.createElement(
 							'button',
-							null,
+							{
+								onClick: function onClick() {
+									return _this2.props.saveQuestion(_this2.state.data);
+								}
+							},
 							'\u4FDD\u5B58\u95EE\u5377'
 						),
 						_react2.default.createElement(
@@ -22704,16 +24890,16 @@
 	exports.default = QuestionEdit;
 
 /***/ },
-/* 183 */
+/* 218 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(184);
+	var content = __webpack_require__(219);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(178)(content, {});
+	var update = __webpack_require__(211)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -22730,10 +24916,10 @@
 	}
 
 /***/ },
-/* 184 */
+/* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(177)();
+	exports = module.exports = __webpack_require__(210)();
 	// imports
 
 
@@ -22742,6 +24928,76 @@
 
 	// exports
 
+
+/***/ },
+/* 220 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _redux = __webpack_require__(172);
+
+	var _ActionTypes = __webpack_require__(202);
+
+	var initialState = [{
+		title: '问卷的标题',
+		time: '问卷创建的时间',
+		state: 1,
+		data: [{
+			question: '每个问题',
+			type: 1,
+			options: ['选项一', '选项二'],
+			selected: [false, false],
+			text: '如果是文本就是文本的内容,否则为空'
+		}, {
+			question: '每个问题',
+			type: 2,
+			options: ['选项一', '选项二', '选项三'],
+			selected: [false, false, false],
+			text: '如果是文本就是文本的内容,否则为空'
+		}]
+	}, {
+		title: '问卷的标题',
+		time: '问卷创建的时间',
+		state: 2,
+		data: [{
+			//这里面的数据就是每个题
+			question: '每个问题',
+			type: 3,
+			options: ['选项一', '选项二', '选项三'],
+			text: '如果是文本就是文本的内容'
+		}]
+	}];
+
+	function deleteSingle() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+		var action = arguments[1];
+
+		switch (action.type) {
+			case _ActionTypes.DELETEQUESTION:
+				return state.filter(function (ele, index) {
+					return index !== action.index;
+				});
+			case _ActionTypes.DELETESELECTEDQUESTION:
+				return state.map(function (val, index) {
+					if (action.selects.indexOf(index) === -1) {
+						return val;
+					}
+				});
+			case _ActionTypes.SAVEQUESTION:
+				console.log('保存新的问卷数据，下面是新的data');
+				console.log(state.push(action.data));
+				return state.concat(action.data);
+			default:
+				return state;
+		}
+	}
+
+	exports.default = deleteSingle;
 
 /***/ }
 /******/ ]);

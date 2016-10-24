@@ -4,6 +4,8 @@ import {Component, PropTypes} from 'react'
 
 import '../../style/components/questionEdit.css'
 
+
+// 问卷编辑页
 class  QuestionEdit extends Component{
 
 	//初始化组件属性和状态
@@ -238,7 +240,9 @@ class  QuestionEdit extends Component{
 			         <span>问卷截至日期</span>
 			         <span className="calendar">2016-04-22</span>
 			         </div>
-			        <button>保存问卷</button>
+			        <button 
+						onClick={()=>this.props.saveQuestion(this.state.data)}
+			        >保存问卷</button>
 			        <button>发布问卷</button>
 			    </div>
 			</section>

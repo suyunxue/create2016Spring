@@ -56,16 +56,18 @@
 	</style>
 </head>
 <body>
-<textarea id="aaa"></textarea>
+
+<input id="aaa"  type="checkbox" />
+
 
 	<script>
-		var aaa = document.getElementById('aaa');
-		aaa.onclick = function(event){
-			console.log(event.target.value);
-		}
-		aaa.onchange = function (event) {
-			console.log(event.target.value);
-		}
+	window.onload = function () {
+		var boxes = document.getElementById('aaa');
+		boxes.checked = true;
+	}
+		
+		
+
 
 	</script>
 </body>
