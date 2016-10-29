@@ -11,9 +11,9 @@ class NewQustion extends Component {
 	}
 
 	render(){
-		return (<section className="new-box">
-        		    <div className="new-question">新建问卷</div>
-   			    </section>)
+		return <section className="new-box">
+        		    <div className="only-new-question">新建问卷</div>
+   			    </section>
 	}
 }
 

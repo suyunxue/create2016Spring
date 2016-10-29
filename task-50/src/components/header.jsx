@@ -1,4 +1,5 @@
 import React from 'react'
+import '../../style/components/header.css'
 
 
 //问卷头

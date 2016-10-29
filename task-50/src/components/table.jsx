@@ -3,6 +3,8 @@ import {Component, PropTypes} from 'react'
 import {render} from 'react-dom'
 import Confirm from '../lib/Confirm'
 
+import '../../style/components/table.css'
+
 
 // 问卷列表页
 class Table extends Component {

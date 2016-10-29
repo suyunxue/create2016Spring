@@ -1,7 +1,7 @@
 import React from 'react'
 import {Component} from 'react';
 
-import '../../style/components/seeData.less'
+import '../../style/components/seeData.css'
 
 // 查看数据页
 

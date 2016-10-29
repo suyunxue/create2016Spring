@@ -7,7 +7,7 @@
     background-color: #fff;
 }
 
-.new-question {
+.only-new-question {
     position: absolute;
     left: 50%;
     top: 50%;

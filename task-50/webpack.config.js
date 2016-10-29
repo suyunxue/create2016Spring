@@ -23,5 +23,9 @@ module.exports = {
             test: /\.css|less$/, 
             loader: 'style!css'
         }]
+    },
+    devSever: {
+        historyApiFallback: true
     }
+
 }

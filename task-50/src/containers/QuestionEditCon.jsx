@@ -10,6 +10,7 @@ import {deleteSingle,
 import Header from '../components/header'
 import QuestionEdit from '../components/questionEdit'
 
+import '../../style/components/seeData.css'
 
 class QuestionEditCon extends Component{
 	render(){
