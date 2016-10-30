@@ -9,3 +9,5 @@ export const DELETESELECTEDQUESTION = 'DELETESELECTEDQUESTION';  //删除选中�
 export const SAVEQUESTION = 'SAVEQUESTION'; //编辑问卷完毕之后要保存的数据,未发布
 
 export const RELEASEQUESION = 'RELEASEQUESION'; //发布问卷
+
+export const JUMP = 'JUMP';  //跳转查看数据页面

@@ -96,8 +96,8 @@
 					{ history: _reactRouter.hashHistory },
 					_react2.default.createElement(_reactRouter.Route, { path: '/', component: _App2.default }),
 					_react2.default.createElement(_reactRouter.Route, { path: '/questionList', component: _questionList2.default }),
-					_react2.default.createElement(_reactRouter.Route, { path: '/newQuestion', component: _newQuestionCon2.default }),
-					_react2.default.createElement(_reactRouter.Route, { path: '/questionEdit', component: _questionEditCon2.default }),
+					_react2.default.createElement(_reactRouter.Route, { path: '/newQuestionCon', component: _newQuestionCon2.default }),
+					_react2.default.createElement(_reactRouter.Route, { path: '/questionEditCon', component: _questionEditCon2.default }),
 					_react2.default.createElement(_reactRouter.Route, { path: '/lookData', component: _lookData2.default })
 			)
 	), document.getElementById('app'));
@@ -28887,7 +28887,7 @@
 			value: function render() {
 
 				//如果没有数据则显示新建问卷页面，否则显示问卷列表页
-				var state = this.props.state;
+				var data = this.props.data;
 
 
 				return _react2.default.createElement(
@@ -28903,7 +28903,7 @@
 
 	function select(state) {
 		return {
-			state: state
+			data: state.data
 		};
 	}
 
@@ -28974,6 +28974,9 @@
 						},
 						handleDeleteAll: function handleDeleteAll(selects) {
 							return dispatch((0, _deleteQuestion.deleteSelected)(selects));
+						},
+						jumpHandle: function jumpHandle(index) {
+							return dispatch((0, _deleteQuestion.jump)(index));
 						}
 					})
 				);
@@ -28985,7 +28988,7 @@
 
 	function select(state) {
 		return {
-			data: state
+			data: state.data
 		};
 	}
 
@@ -29003,6 +29006,7 @@
 	exports.deleteSingle = deleteSingle;
 	exports.deleteSelected = deleteSelected;
 	exports.saveQuestion = saveQuestion;
+	exports.jump = jump;
 
 	var _ActionTypes = __webpack_require__(265);
 
@@ -29031,6 +29035,13 @@
 		};
 	}
 
+	function jump(index) {
+		return {
+			type: types.JUMP,
+			index: index
+		};
+	}
+
 /***/ },
 /* 265 */
 /***/ function(module, exports) {
@@ -29051,6 +29062,8 @@
 	var SAVEQUESTION = exports.SAVEQUESTION = 'SAVEQUESTION'; //编辑问卷完毕之后要保存的数据,未发布
 
 	var RELEASEQUESION = exports.RELEASEQUESION = 'RELEASEQUESION'; //发布问卷
+
+	var JUMP = exports.JUMP = 'JUMP'; //跳转查看数据页面
 
 /***/ },
 /* 266 */
@@ -29483,6 +29496,8 @@
 
 	var _Confirm2 = _interopRequireDefault(_Confirm);
 
+	var _reactRouter = __webpack_require__(199);
+
 	__webpack_require__(273);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -29587,9 +29602,13 @@
 							'td',
 							null,
 							_react2.default.createElement(
-								'span',
-								{ className: 'operation-attribute' },
-								'\u7F16\u8F91'
+								_reactRouter.Link,
+								{ to: '/questionEditCon' },
+								_react2.default.createElement(
+									'span',
+									{ className: 'operation-attribute' },
+									'\u7F16\u8F91'
+								)
 							),
 							_react2.default.createElement(
 								'span',
@@ -29600,9 +29619,16 @@
 								'\u5220\u9664'
 							),
 							_react2.default.createElement(
-								'span',
-								{ className: 'operation-attribute' },
-								'\u67E5\u770B\u6570\u636E'
+								_reactRouter.Link,
+								{ to: '/lookData' },
+								_react2.default.createElement(
+									'span',
+									{ className: 'operation-attribute',
+										onClick: function onClick() {
+											return _self.props.jumpHandle(index);
+										} },
+									'\u67E5\u770B\u6570\u636E'
+								)
 							)
 						)
 					);
@@ -29645,9 +29671,13 @@
 									null,
 									'\u64CD\u4F5C',
 									_react2.default.createElement(
-										'span',
-										{ className: 'new-question' },
-										'+\u65B0\u5EFA\u95EE\u5377'
+										_reactRouter.Link,
+										{ to: '/questionEditCon' },
+										_react2.default.createElement(
+											'span',
+											{ className: 'new-question' },
+											'+\u65B0\u5EFA\u95EE\u5377'
+										)
 									)
 								)
 							)
@@ -29831,8 +29861,6 @@
 
 	var _reactDom = __webpack_require__(34);
 
-	var _reactRedux = __webpack_require__(186);
-
 	var _header = __webpack_require__(266);
 
 	var _header2 = _interopRequireDefault(_header);
@@ -29874,13 +29902,7 @@
 		return NewQuestionCon;
 	}(_react.Component);
 
-	function select(state) {
-		return {
-			data: state
-		};
-	}
-
-	exports.default = (0, _reactRedux.connect)(select)(NewQuestionCon);
+	exports.default = NewQuestionCon;
 
 /***/ },
 /* 276 */
@@ -29897,6 +29919,8 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(199);
 
 	__webpack_require__(277);
 
@@ -29925,9 +29949,13 @@
 					'section',
 					{ className: 'new-box' },
 					_react2.default.createElement(
-						'div',
-						{ className: 'only-new-question' },
-						'\u65B0\u5EFA\u95EE\u5377'
+						_reactRouter.Link,
+						{ to: '/questionEditCon' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'only-new-question' },
+							'\u65B0\u5EFA\u95EE\u5377'
+						)
 					)
 				);
 			}
@@ -30053,7 +30081,7 @@
 
 	function select(state) {
 		return {
-			data: state
+			data: state.data
 		};
 	}
 
@@ -30069,11 +30097,15 @@
 		value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRouter = __webpack_require__(199);
 
 	__webpack_require__(281);
 
@@ -30107,27 +30139,6 @@
 			return _this;
 		}
 
-		/*
-	 state = {
-	 	typeShow: false,
-	 	data: {
-	 title: '问卷的标题',
-	 time: '问卷创建的时间',
-	 state: '发布中，未发布，已结束',
-	 data: [{ 
-	 //这里面的数据就是每个题
-	 question: '每个问题',
-	 type: '单选题，多选题，文本题',
-	 options: ['选项一', '选项二', '选项三'],
-	 selected: ['false', 'false'],
-	 text: '如果是文本就是文本的内容'
-	 }],
-	 },
-	 }
-	 state：1：发布中 2：未发布 3：已结束
-	 type: 1：单选题 2多选题 3文本题
-	 */
-
 		//给相应问题添加选项
 
 
@@ -30141,17 +30152,14 @@
 					data[index].options = options;
 					data[index].selected.push(false);
 
-					this.setState({ data: { data: data } });
-					console.log(this.state.data);
+					this.setState({ data: _extends({}, this.state.data, { data: data }) });
 				};
 			}
 		}, {
 			key: 'saveTitle',
 			value: function saveTitle(event) {
-				var temp = this.state.data;
-				temp.title = event.target.value;
-				this.setState({ data: temp });
-				console.log(this.state.data);
+				var title = event.target.value;
+				this.setState({ data: _extends({}, this.state.data, { title: title }) });
 			}
 		}, {
 			key: 'saveQuestionTitle',
@@ -30159,8 +30167,7 @@
 				return function (event) {
 					var temp = this.state.data.data;
 					temp[index].question = event.target.value;
-					this.setState({ data: { data: temp } });
-					console.log(this.state);
+					this.setState({ data: _extends({}, this.state.data, { data: temp }) });
 				};
 			}
 
@@ -30182,8 +30189,7 @@
 					var temp = this.state.data.data;
 					var val = event.target.value;
 					temp[index].options.splice(i, 1, val);
-					this.setState({ data: temp });
-					console.log(this.state);
+					this.setState({ data: _extends({}, this.state.data, { data: temp }) });
 				};
 			}
 
@@ -30195,8 +30201,7 @@
 				return function (event) {
 					var temp = this.state.data.data;
 					temp[index].text = event.target.value;
-					this.setState({ data: { data: temp } });
-					console.log(this.state);
+					this.setState({ data: _extends({}, this.state.data, { data: temp }) });
 				};
 			}
 
@@ -30210,7 +30215,7 @@
 			key: 'renderAddProblem',
 			value: function renderAddProblem() {
 
-				//这里是点击添加问题出现的 
+				//这里是点击添加问题出现的
 				//应该是右一个状态控制的，就是点击添加问题然后
 				return _react2.default.createElement(
 					'div',
@@ -30239,7 +30244,7 @@
 					options: ['选项一', '选项二'],
 					selected: [false, false]
 				});
-				this.setState({ typeShow: false, data: { data: data } });
+				this.setState({ typeShow: false, data: _extends({}, this.state.data, { data: data }) });
 			}
 		}, {
 			key: 'handleMultiselect',
@@ -30248,7 +30253,7 @@
 					options: ['选项一', '选项二', '选项三'],
 					selected: [false, false, false]
 				});
-				this.setState({ typeShow: false, data: { data: data } });
+				this.setState({ typeShow: false, data: _extends({}, this.state.data, { data: data }) });
 			}
 		}, {
 			key: 'handleText',
@@ -30257,7 +30262,12 @@
 					text: '文本'
 				});
 
-				this.setState({ typeShow: false, data: { data: data } });
+				this.setState({ typeShow: false, data: _extends({}, this.state.data, { data: data }) });
+			}
+		}, {
+			key: 'test',
+			value: function test() {
+				console.log(this.state.data);
 			}
 
 			//遍历数据进行渲染
@@ -30362,6 +30372,7 @@
 				var _this2 = this;
 
 				var typeShow = this.state.typeShow ? this.renderAddProblem() : '';
+				console.log(this.state.data);
 				return _react2.default.createElement(
 					'section',
 					{ className: 'edit-box' },
@@ -30412,9 +30423,13 @@
 							'\u4FDD\u5B58\u95EE\u5377'
 						),
 						_react2.default.createElement(
-							'button',
-							null,
-							'\u53D1\u5E03\u95EE\u5377'
+							_reactRouter.Link,
+							{ to: '/questionList' },
+							_react2.default.createElement(
+								'button',
+								null,
+								'\u53D1\u5E03\u95EE\u5377'
+							)
 						)
 					)
 				);
@@ -30576,10 +30591,16 @@
 		return LookData;
 	}(_react.Component);
 
+	//查看数据页只需要的数据是标题和选项的数据
+
+
 	function select(state) {
+		console.log(state);
+		console.log(state.data[state.currentIndex].data);
+		console.log(state.data[state.currentIndex].title);
 		return {
-			data: state[0].data,
-			title: state[0].title
+			data: state.data[state.currentIndex].data,
+			title: state.data[state.currentIndex].title
 		};
 	}
 
@@ -30716,35 +30737,38 @@
 
 	var _ActionTypes = __webpack_require__(265);
 
-	var initialState = [{
-		title: '问卷的标题',
-		time: '问卷创建的时间',
-		state: 1,
+	var initialState = {
+		currentIndex: 0,
 		data: [{
-			question: '每个问题',
-			type: 1,
-			options: ['选项一', '选项二'],
-			selected: [false, false],
-			text: '如果是文本就是文本的内容,否则为空'
+			title: '问卷的标题',
+			time: '问卷创建的时间',
+			state: 1,
+			data: [{
+				question: '每个问题',
+				type: 1,
+				options: ['选项一', '选项二'],
+				selected: [false, false],
+				text: '如果是文本就是文本的内容,否则为空'
+			}, {
+				question: '每个问题',
+				type: 2,
+				options: ['选项一', '选项二', '选项三'],
+				selected: [false, false, false],
+				text: '如果是文本就是文本的内容,否则为空'
+			}]
 		}, {
-			question: '每个问题',
-			type: 2,
-			options: ['选项一', '选项二', '选项三'],
-			selected: [false, false, false],
-			text: '如果是文本就是文本的内容,否则为空'
+			title: '问卷的标题',
+			time: '问卷创建的时间',
+			state: 2,
+			data: [{
+				//这里面的数据就是每个题
+				question: '每个问题',
+				type: 3,
+				options: ['选项一', '选项二', '选项三'],
+				text: '如果是文本就是文本的内容'
+			}]
 		}]
-	}, {
-		title: '问卷的标题',
-		time: '问卷创建的时间',
-		state: 2,
-		data: [{
-			//这里面的数据就是每个题
-			question: '每个问题',
-			type: 3,
-			options: ['选项一', '选项二', '选项三'],
-			text: '如果是文本就是文本的内容'
-		}]
-	}];
+	};
 
 	function deleteSingle() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
@@ -30752,19 +30776,24 @@
 
 		switch (action.type) {
 			case _ActionTypes.DELETEQUESTION:
-				return state.filter(function (ele, index) {
-					return index !== action.index;
+				return Object.assign({}, state, {
+					data: state.data.filter(function (ele, index) {
+						return index !== action.index;
+					})
 				});
+
 			case _ActionTypes.DELETESELECTEDQUESTION:
-				return state.map(function (val, index) {
-					if (action.selects.indexOf(index) === -1) {
-						return val;
-					}
+				return Object.assign({}, state, { data: state.data.map(function (val, index) {
+						if (action.selects.indexOf(index) === -1) {
+							return val;
+						}
+					})
 				});
 			case _ActionTypes.SAVEQUESTION:
 				console.log('保存新的问卷数据，下面是新的data');
-				console.log(state.push(action.data));
-				return state.concat(action.data);
+				return Object.assign({}, state, { data: state.data.concat(action.data) });
+			case _ActionTypes.JUMP:
+				return Object.assign({}, state, { currentIndex: action.index });
 			default:
 				return state;
 		}

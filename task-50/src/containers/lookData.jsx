@@ -23,11 +23,14 @@ class LookData extends Component {
 }
 
 
-
+//查看数据页只需要的数据是标题和选项的数据
 function select(state) {
+	console.log(state)
+	console.log(state.data[state.currentIndex].data);
+	console.log(state.data[state.currentIndex].title);
 	return {
-		data: state[0].data,
-		title: state[0].title
+		data: state.data[state.currentIndex].data,
+		title: state.data[state.currentIndex].title
 	}
 }
 

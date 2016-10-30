@@ -34,8 +34,8 @@ render(
 	    <Router history={hashHistory}>
 	    	<Route path="/" component={App} />
 			<Route path="/questionList" component={QuestionList} />
-			<Route path="/newQuestion" component={NewQuestionCon} />
-			<Route path="/questionEdit" component={QuestionEditCon} />
+			<Route path="/newQuestionCon" component={NewQuestionCon} />
+			<Route path="/questionEditCon" component={QuestionEditCon} />
 			<Route path="/lookData" component={LookData} />
 	    </Router>
 	</Provider>,

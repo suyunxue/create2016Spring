@@ -28,7 +28,7 @@ class QuestionEditCon extends Component{
 
 function select(state) {
 	return {
-		data: state
+		data: state.data
 	}
 }
 

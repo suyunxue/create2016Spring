@@ -1,5 +1,6 @@
 import React from 'react'
 import {Component, PropTypes} from 'react'
+import {Link} from "react-router"
 
 
 import '../../style/components/questionEdit.css'
@@ -16,34 +17,11 @@ class  QuestionEdit extends Component{
 			data: {
 				title: '这是里标题',
 				time: '',
-				state: '1',   
+				state: '1',
 				data: []
 			}
         };
     }
-
-        /*
-        state = {
-        	typeShow: false,
-        	data: {
-				title: '问卷的标题',
-				time: '问卷创建的时间',
-				state: '发布中，未发布，已结束',
-				data: [{ 
-				    //这里面的数据就是每个题
-					question: '每个问题',
-					type: '单选题，多选题，文本题',
-					options: ['选项一', '选项二', '选项三'],
-					selected: ['false', 'false'],
-					text: '如果是文本就是文本的内容'
-				}],
-			},
-        }
-        state：1：发布中 2：未发布 3：已结束
-        type: 1：单选题 2多选题 3文本题
-        */
-       
-
        
     //给相应问题添加选项
    	addOption(index){
@@ -54,24 +32,20 @@ class  QuestionEdit extends Component{
    			data[index].options = options;
    			data[index].selected.push(false);
 
-   			this.setState({data: {data: data}});
-   			console.log(this.state.data);	
+   			this.setState({data: {...this.state.data, data: data}});
    		}
    	}
 
    	saveTitle(event){
-   		let temp = this.state.data;
-   		temp.title = event.target.value;
-   		this.setState({data: temp});
-   		console.log(this.state.data);
+   		let title = event.target.value;
+   		this.setState({data: {...this.state.data, title: title}});
    	}
 
    	saveQuestionTitle(index){
    		return function(event){
    			let temp = this.state.data.data;
    			temp[index].question = event.target.value;
-   			this.setState({data: {data: temp}});
-   			console.log(this.state);
+   			this.setState({data: {...this.state.data, data: temp}})
    		}
    	}
 
@@ -90,8 +64,7 @@ class  QuestionEdit extends Component{
    			let temp = this.state.data.data;
    			let val = event.target.value;
    			temp[index].options.splice(i, 1, val);
-   			this.setState({data: temp});
-   			console.log(this.state);
+   			this.setState({data: {...this.state.data, data:temp}});
    		}
    	}
 
@@ -100,8 +73,7 @@ class  QuestionEdit extends Component{
    		return function(event){
    			let temp = this.state.data.data;
    			temp[index].text = event.target.value;
-   			this.setState({data: {data: temp}});
-   			console.log(this.state)
+   			this.setState({data: {...this.state.data, data: temp}});
    		}
    	}
 
@@ -112,14 +84,14 @@ class  QuestionEdit extends Component{
 
 	renderAddProblem(){
 
-		//这里是点击添加问题出现的 
+		//这里是点击添加问题出现的
 		//应该是右一个状态控制的，就是点击添加问题然后
 		return (
 			<div className="problem-type">
 		        <button onClick={this.handleSingle.bind(this)}> 单选题 </button>
 		        <button onClick={this.handleMultiselect.bind(this)}> 多选题 </button>
 		        <button onClick={this.handleText.bind(this)}> 文本题 </button>
-			</div> 
+			</div>
 		)
 	}
 
@@ -128,7 +100,7 @@ class  QuestionEdit extends Component{
 										   options: ['选项一', '选项二'],
 										   selected: [false, false]
 										});
-		this.setState({typeShow: false, data: {data: data}});
+		this.setState({typeShow: false, data: {...this.state.data, data: data}});
 	}
 
 	handleMultiselect(){
@@ -136,7 +108,7 @@ class  QuestionEdit extends Component{
 										   options: ['选项一', '选项二', '选项三'],
 										   selected: [false, false, false]
 										});
-		this.setState({typeShow: false, data: {data: data}});
+		this.setState({typeShow: false, data: {...this.state.data, data: data}});
 	}
 
 	handleText(){
@@ -144,14 +116,18 @@ class  QuestionEdit extends Component{
 										        text: '文本'
 										    });
 
-		this.setState({typeShow: false, data: {data: data}});
+		this.setState({typeShow: false, data: {...this.state.data, data: data}});
+	}
+
+	test(){
+		console.log(this.state.data);
 	}
 
 	//遍历数据进行渲染
 	renderProblemList(){
-		var type = {'1': '单选题', '2': '多选题', '3': '文本题'}
-		var data = this.state.data.data;
-		var _self = this;
+		let type = {'1': '单选题', '2': '多选题', '3': '文本题'}
+		let data = this.state.data.data;
+		let _self = this;
 		if(data.length < 1){
 			return <div></div>
 		}else {
@@ -166,16 +142,16 @@ class  QuestionEdit extends Component{
 					 				       defaultValue={question} 
 					 				       onChange={_self.saveQuestionTitle(index).bind(_self)}
 					 				/>
-									{   val.options.map(function(v, i){
-										    return <div className="problem-option" key={i}>
-											            <input type="radio" name="single" />
-											            <input 
-											                defaultValue={v}  
-											                onChange={_self.saveOptionsData(index, i).bind(_self)} 
-											            />
-										           </div>
+								    {val.options.map(function(v, i){
+									    return <div className="problem-option" key={i}>
+										            <input type="radio" name="single" />
+										            <input 
+										                defaultValue={v}  
+										                onChange={_self.saveOptionsData(index, i).bind(_self)} 
+										            />
+									           </div>
 
-								     	})
+							     	})
 								    }
 							</li>
 				}else if(val.type == '2'){
@@ -222,7 +198,8 @@ class  QuestionEdit extends Component{
 
 	render(){
 		let typeShow = this.state.typeShow ?  this.renderAddProblem() : '';
-		return (<section className="edit-box">
+		console.log(this.state.data);
+		return <section className="edit-box">
 			    <input 
 			        className="edit-title"
 			        defaultValue='这里是标题' 
@@ -241,12 +218,13 @@ class  QuestionEdit extends Component{
 			         <span className="calendar">2016-04-22</span>
 			         </div>
 			        <button 
-						onClick={()=>this.props.saveQuestion(this.state.data)}
+			        	onClick={() => this.props.saveQuestion(this.state.data)}
 			        >保存问卷</button>
-			        <button>发布问卷</button>
+			        <Link to="/questionList">
+			        	<button>发布问卷</button>
+			        </Link>
 			    </div>
 			</section>
-		)
 	}
 
 }

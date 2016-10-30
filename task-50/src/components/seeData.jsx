@@ -39,7 +39,7 @@ class SeeData extends Component {
 		           </a>
 		           <h1 className="problem-title">{this.props.title}</h1>
        			   <ul className="problem-list">
-	                {this.renderList()}
+	                 {this.renderList()}
                    </ul>
         		  <div className="bottom-back">
                		<a href="javascript:history.back();">返回</a>

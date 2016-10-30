@@ -18,7 +18,7 @@ class App extends Component {
 	render(){
 		
 		//如果没有数据则显示新建问卷页面，否则显示问卷列表页
-		const {state} = this.props
+		const {data} = this.props
 
 		return <div>
 			<QuestionList/>
@@ -29,7 +29,7 @@ class App extends Component {
 
 function select(state) {
 	return {
-		state
+		data: state.data
 	}
 }
 

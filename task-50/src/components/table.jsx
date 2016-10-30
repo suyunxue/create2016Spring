@@ -3,6 +3,8 @@ import {Component, PropTypes} from 'react'
 import {render} from 'react-dom'
 import Confirm from '../lib/Confirm'
 
+import {Link} from 'react-router'
+
 import '../../style/components/table.css'
 
 
@@ -72,12 +74,20 @@ class Table extends Component {
 		                <td>{value.time}</td>
 		                <td>{value.state}</td>
 		                <td>
-		                    <span className="operation-attribute">编辑</span>
+			                <Link to="/questionEditCon">
+			                     <span className="operation-attribute">编辑</span>
+			                </Link>
+		                   
 		                    <span className="operation-attribute"
 		                          onClick={() => _self.props.handleDelete(index)}>
 		                          删除
 		                    </span>
-		                    <span className="operation-attribute">查看数据</span>
+		                    <Link to="/lookData">
+		                    	<span className="operation-attribute"
+		                    	      onClick={() => _self.props.jumpHandle(index)}>
+		                    	      查看数据
+		                    	</span>
+		                    </Link>
 		                </td>
 				 </tr>
 		})
@@ -92,7 +102,9 @@ class Table extends Component {
 	                    <th>时间</th>
 	                    <th>状态</th>
 	                    <th>操作
-	                        <span className="new-question">+新建问卷</span>
+	                        <Link to="/questionEditCon">
+	                        	<span className="new-question">+新建问卷</span>
+	                        </Link>
 	                    </th>
 	                </tr>
 	           	 </thead>

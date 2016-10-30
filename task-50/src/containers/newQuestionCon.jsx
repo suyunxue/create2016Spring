@@ -1,7 +1,6 @@
 import React from 'react'
 import {Component}  from 'react'
 import {render} from 'react-dom'
-import { connect } from 'react-redux'
 
 import Header from '../components/header'
 import NewQuestion from '../components/newQuestion'
@@ -17,11 +16,7 @@ class NewQuestionCon extends Component {
 	}
 }
 
-function select(state) {
-	return {
-		data: state
-	}
-}
 
-export default connect(select)(NewQuestionCon)
+
+export default NewQuestionCon
 

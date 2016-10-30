@@ -1,7 +1,7 @@
 import React from 'react'
 import {Component}  from 'react'
 import {render} from 'react-dom'
-import {deleteSingle, deleteSelected} from '../actions/deleteQuestion'
+import {deleteSingle, deleteSelected, jump} from '../actions/deleteQuestion'
 import { connect } from 'react-redux'
 
 import Header from '../components/header'
@@ -20,6 +20,7 @@ class QuestionList extends Component {
 					    data={data}
 					    handleDelete={(index) => dispatch(deleteSingle(index))}
 					    handleDeleteAll={(selects) => dispatch(deleteSelected(selects))}
+					    jumpHandle={(index) => dispatch(jump(index))}
 					/>
 				</div>)
 	}
@@ -28,7 +29,7 @@ class QuestionList extends Component {
 
 function select(state) {
 	return {
-		data: state
+		data: state.data
 	}
 }
 

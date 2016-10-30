@@ -24,4 +24,11 @@ export function saveQuestion(data){
 }
 
 
+export function jump(index){
+	return{
+		type: types.JUMP,
+		index: index
+	}
+}
+
 
